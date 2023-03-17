@@ -5,3 +5,7 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+:root{
+    --linear: linear-gradient(89.34deg, #6C4F43 0.52%, #F8B75B 95.87%);
+}

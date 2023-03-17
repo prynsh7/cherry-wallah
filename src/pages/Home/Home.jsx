@@ -1,7 +1,8 @@
 import React from 'react'
-import Navbar from '../Navbar'
-import Category from '../../components/Button/Category'
+import Navbar from '../../components/Navbar'
+import Category from '../../components/User/Category'
 import Footer from '../../components/Footer'
+import Button from '../../components/Button/Button'
 
 const Home = () => {
 
@@ -9,6 +10,7 @@ const Home = () => {
       <div>
         <Navbar/>
         <Category/>
+        <Button text={"Hello"}/>
         <Footer/>
       </div>
     )

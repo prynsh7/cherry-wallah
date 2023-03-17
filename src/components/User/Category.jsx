@@ -66,24 +66,24 @@ const Category = () => {
             <div>
                 <div className='flex justify-around'>
                     <div className='flex items-center gap-2 '>
-                        <div className='rounded-[50%] h-[5rem] w-[5rem] bg-Foundation/primary/primary-2 relative'>
-                            <img src={ship} alt="shipping icon" className='absolute top-3 left-3' />
+                        <div className='rounded-[50%] h-[5rem] w-[5rem] bg-Foundation/primary/primary-2 flex aspect-square justify-center items-center'>
+                            <img src={ship} alt="shipping icon" className=' w-[70%]' />
                         </div>
                         <div className='text-Small/Label/Large '>
                             Delivering since 2004, Completed 15 years in Online Delivery
                         </div>
                     </div>
                     <div className='flex items-center gap-2 '>
-                        <div className='rounded-[50%] h-[5rem] w-[5rem] bg-Foundation/primary/primary-2 relative'>
-                            <img src={smile} alt="shipping icon" className='absolute top-3 left-3' />
+                        <div className='rounded-[50%] h-[5rem] w-[5rem] bg-Foundation/primary/primary-2 flex aspect-square justify-center items-center'>
+                            <img src={smile} alt="shipping icon" className=' w-[70%]' />
                         </div>
                         <div className='text-Small/Label/Large ' >
                             Trusted by more than 1 million customers worldwide
                         </div>
                     </div>
                     <div className='flex items-center gap-2 '>
-                        <div className='rounded-[50%] h-[5rem] w-[5rem] bg-Foundation/primary/primary-2 relative'>
-                            <img src={cake} alt="shipping icon" className='absolute top-3 left-3' />
+                        <div className='rounded-[50%] h-[5rem] w-[5rem] bg-Foundation/primary/primary-2 flex aspect-square justify-center items-center'>
+                            <img src={cake} alt="shipping icon" className=' w-[70%]' />
                         </div>
                         <div className='text-Small/Label/Large '>
                             Partnered with more than 1000 cake shops and florists across India

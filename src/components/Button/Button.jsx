@@ -10,7 +10,8 @@ const Button = ({
   size,
   text,
   className,
-  onClick
+  onClick,
+  justify
 }) => {
 
   const typeStyle = type=='secondary'?
@@ -30,13 +31,13 @@ const Button = ({
   ?
   `text-Medium+/Label/Medium-Strong rounded-lg ${iconOnly && !trailingIcon &&!leadingIcon ?'p-3.5':'px-4 py-3.5'}`
   :
-  `Medium+/Label/Large-Strong  rounded-lg ${iconOnly && !trailingIcon &&!leadingIcon ?'p-4':'px-6 py-4'}`
+  `text-Medium+/Label/Large-Strong  rounded-lg ${iconOnly && !trailingIcon &&!leadingIcon ?'p-4':'px-6 py-4'}`
   
 
   return (
     <button 
     onClick={onClick}
-    className={`${typeStyle} ${sizeStyles} flex gap-2 items-center justify-center  ${className}`}>
+    className={`${typeStyle} ${sizeStyles} flex gap-2 items-center justify-${justify}  ${className}`}>
       {
         trailingIcon
         ?
@@ -70,6 +71,7 @@ Button.defaultProps = {
   iconOnly:false,
   trailingIcon:false,
   leadingIcon:false,
-  icon:<BsPlusLg/>
+  icon:<BsPlusLg/>,
+  justify:'center'
 }
 export default Button

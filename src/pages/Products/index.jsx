@@ -1,5 +1,4 @@
 import React from 'react'
-
 import cakeCat from '../../assets/images/category/cake-category.png'
 import ProductCard from '../../components/ProductCard'
 

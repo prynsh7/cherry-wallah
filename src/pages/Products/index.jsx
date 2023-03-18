@@ -1,5 +1,5 @@
 import React from 'react'
-import UserLayout from '../../components/User/Layout'
+
 import cakeCat from '../../assets/images/category/cake-category.png'
 import ProductCard from '../../components/ProductCard'
 
@@ -10,8 +10,8 @@ import Category from '../../components/Category'
 
 const Products = () => {
     return (
-        <UserLayout>
-            <div>
+        
+            <div className='container mx-auto px-[20px] py-[50px]'>
                 <h1>CAKES  (150 products) </h1>
 
                 <hr />
@@ -21,6 +21,7 @@ const Products = () => {
                     {
                         [...Array(8)].map((_, i) => (<Category item={
                             {
+                                "key" : i,
                                 "name": "Cake",
                                 "img": cakeCat
                             }
@@ -44,7 +45,7 @@ const Products = () => {
 
 
             </div>
-        </UserLayout>
+        
     )
 }
 

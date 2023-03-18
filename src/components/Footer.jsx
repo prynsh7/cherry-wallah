@@ -54,7 +54,7 @@ const Footer = () => {
 
                         <img src={instagram} alt="" />
                         <img src={twitter} alt="" />
-                        <i class="bi bi-youtube"></i>
+                        <i className="bi bi-youtube"></i>
                     </div>
                     <div className='capitalize text-Small/Title/Medium'>subscribe newsletter</div>
 

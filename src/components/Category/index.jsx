@@ -2,7 +2,7 @@ import React from 'react'
 
 const Category = ({ item }) => {
     return (
-        <div className='flex flex-col gap-[20px]  items-center'>
+        <div key={item?.key} className='flex flex-col gap-[20px]  items-center'>
             <div>
                 <img src={item?.img} className="w-[100px] h-[100px] contain" alt="" />
             </div>

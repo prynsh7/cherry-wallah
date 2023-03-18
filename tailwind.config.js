@@ -18,6 +18,9 @@ module.exports = {
         "primary-6":'#6C4F43',
         "secondary-6":'#F8B75B',
         "neutral-1":'#FFFFFF',
+        "neutral-3":'#F5F5F5',
+        "neutral-5":'#D9D9D9',
+        "neutral-8":'#595959',
         "linear":'var(--linear)',
       },
       backgroundImage: (theme) => ({

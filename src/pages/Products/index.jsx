@@ -1,5 +1,5 @@
 import React from 'react'
-import UserLayout from '../../components/User/Layout'
+import UserLayout from '../../components/Layout/UserLayout'
 import cakeCat from '../../assets/images/category/cake-category.png'
 import ProductCard from '../../components/ProductCard'
 

@@ -7,9 +7,9 @@ import user from '../assets/images/navbar-icons/User.png'
 import menu from '../assets/images/navbar-icons/menu.png'
 import search from '../assets/images/navbar-icons/input-search-icon.png'
 
-const Navbar = () => {
+const Navbar = ({multimenu=true}) => {
   return (
-    <div className='h-[150px]'>
+    <div className=''>
         <div className='bg-Foundation/primary/primary-6'>
              <div className='flex justify-between items-center px-[2.5rem]'>
                 <div className='h-[5rem] w-[11rem]'>
@@ -34,7 +34,11 @@ const Navbar = () => {
              </div>
        
         </div>
-        <div className='flex justify-center items-center p-4 text-Small/Label/Large-Strong text-Foundation/neutral/neutral-8'>
+        {
+         multimenu
+         ?
+         <>
+         <div className='flex justify-center items-center p-4 text-Small/Label/Large-Strong text-Foundation/neutral/neutral-8'>
              <select name="cakes" id="cakes" className='capitalize'>
                 <option value="">Cakes</option>
                 <option value="">Chocolate cake</option>
@@ -73,6 +77,11 @@ const Navbar = () => {
              </select>
         </div>
         <hr className='text-Foundation/neutral/neutral-5 opacity-50'/>
+         </>
+         :
+         null
+        }
+        
         </div>
   )
 }

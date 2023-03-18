@@ -7,6 +7,10 @@ export const ROUTES = {
 
 
     User:{
-        root:'/user'
+        root:'/user',
+        address:'/user/address',
+        password:'/user/password',
+        coupons:'/user/coupons',
+        loyaltyPoints:'/user/loyalty-points',
     }
 }

@@ -1,11 +1,11 @@
 import React from 'react'
-import companyLogo from '../assets/images/navbar-icons/company-logo.png'
-import location from '../assets/images/navbar-icons/location.png'
-import wallet from '../assets/images/navbar-icons/wallet.png'
-import cart from '../assets/images/navbar-icons/cart.png'
-import user from '../assets/images/navbar-icons/User.png'
-import menu from '../assets/images/navbar-icons/menu.png'
-import search from '../assets/images/navbar-icons/input-search-icon.png'
+import companyLogo from '../../assets/images/navbar-icons/company-logo.png'
+import location from '../../assets/images/navbar-icons/location.png'
+import wallet from '../../assets/images/navbar-icons/wallet.png'
+import cart from '../../assets/images/navbar-icons/cart.png'
+import user from '../../assets/images/navbar-icons/User.png'
+import menu from '../../assets/images/navbar-icons/menu.png'
+import search from '../../assets/images/navbar-icons/input-search-icon.png'
 
 const Navbar = ({multimenu=true}) => {
   return (

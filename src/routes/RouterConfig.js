@@ -4,7 +4,7 @@ export const ROUTES = {
     Produts: '/products',
     ProductDetail: '/products/:id',
 
-
+    Login: '/auth',
 
     User:{
         root:'/user',

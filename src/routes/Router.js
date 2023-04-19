@@ -15,6 +15,7 @@ import UserCoupons from '../pages/User/Coupons'
 import UserLoyaltyPoints from '../pages/User/LoyaltyPoints'
 import ProductPage from '../pages/ProductPage/ProductPage';
 import Category from '../components/User/Category';
+import Login from '../pages/Auth/Login';
 
 
 const Router = () => {
@@ -41,13 +42,17 @@ const Router = () => {
     <div>
       <Routes>
         <Route exact path={ROUTES.Home} element={<RouteWithRole Element={Home} />}>
-          
         <Route index element={<RouteWithRole Element={Category} />}></Route>
         <Route index path="" element={<RouteWithRole Element={Category} />}></Route>
         <Route exact path={ROUTES.Produts} element={<RouteWithRole Element={Products} />}></Route>
         <Route exact path={ROUTES.ProductDetail} element={<RouteWithRole Element={ProductPage} />}></Route>
           
         </Route>
+
+
+        <Route exact path={ROUTES.Login} element={<RouteWithRole Element={Login} />}></Route>
+
+
         <Route exact path={ROUTES.About} element={<RouteWithRole Element={About} />}></Route>
 
 

@@ -6,8 +6,10 @@ import cart from "../../assets/images/navbar-icons/cart.png";
 import user from "../../assets/images/navbar-icons/User.png";
 import menu from "../../assets/images/navbar-icons/menu.png";
 import search from "../../assets/images/navbar-icons/input-search-icon.png";
+import { useNavigate } from "react-router-dom";
 
 const NavbarLogin = ({ multimenu = true, auth = false }) => {
+   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(auth);
 
   return (

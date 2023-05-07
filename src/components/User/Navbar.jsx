@@ -4,7 +4,7 @@ import { AiOutlineUser, AiOutlineStar } from 'react-icons/ai'
 import { BiShoppingBag } from 'react-icons/bi'
 import { FiMapPin } from 'react-icons/fi'
 import { RiShieldStarLine } from 'react-icons/ri'
-import Button from '../Button/Button'
+// import Button from '../Button/Button'
 
 const Navbar = () => {
     const arr = [
@@ -39,7 +39,7 @@ const Navbar = () => {
             <div className='flex flex-col gap-5'>
                 {
                     arr?.map((i, key) => (
-                        <Button text={i.title} leadingIcon icon={i?.icon} className="w-full" justify={'start'} type={i.active?"primary":"tertiary"}/>
+                        {/* <Button text={i.title} leadingIcon icon={i?.icon} className="w-full" justify={'start'} type={i.active?"primary":"tertiary"}/> */}
                     ))
                 }
             </div>

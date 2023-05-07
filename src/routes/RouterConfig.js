@@ -4,8 +4,18 @@ export const ROUTES = {
     Produts: '/products',
     ProductDetail: '/products/:id',
 
-    Login: '/auth',
-
+    Login: '/auth/login',
+    Register: '/auth/signup',
+    UserRegister: '/auth/register',
+    DoctorRegister: '/auth/register-doctor',
+    Doctor: {
+        root: '/doctor',
+        patients: '/doctor/patients',
+        appointments: '/doctor/appointments',
+        chats: '/doctor/chats',
+        calender: '/doctor/calender',
+        settings: '/doctor/settings',
+    },
     User:{
         root:'/user',
         address:'/user/address',

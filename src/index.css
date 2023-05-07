@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@200;300;400;500;600;700;800;900&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css");
 
 @tailwind base;
@@ -7,6 +7,55 @@
 
 @layer base {
     :root {
-        font-family: 'Manrope';
+        font-family: 'Public Sans', sans-serif;
     }
+}
+
+
+/* Custom CSS */
+
+.ant-select-selector{
+    height: 100% !important;
+    display: flex;
+    align-items: center;
+}
+
+.ant-steps .ant-steps-item-process .ant-steps-item-icon{
+    background-color: #398378 ;
+    border: 0px;
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon{
+    background-color: #CFE1DF ;
+}
+
+.ant-steps .ant-steps-item-finish .ant-steps-item-icon >.ant-steps-icon {
+    color: #398378;
+}
+
+.ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-tail::after {
+    background-color: #398378;
+}
+
+
+/* Dotor Layout */
+
+.ant-layout .ant-layout-sider{
+    background-color: #EBF3F2;
+}
+
+.ant-menu-light .ant-menu-item-selected{
+    background-color: #398378;
+    color: #fff;
+}
+
+.ant-menu-item{
+    color: #8C8C8C;
+}
+.ant-menu-light.ant-menu-root.ant-menu-inline{
+    border-right: 0px;
+}
+
+.ant-menu-light.ant-menu-root.ant-menu-vertical{
+    border-right: 0px;
 }

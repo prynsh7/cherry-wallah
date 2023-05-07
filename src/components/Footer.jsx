@@ -1,8 +1,8 @@
 import React from 'react'
-import companyLogo from '../assets/images/navbar-icons/company-logo.png'
-import facebook from '../assets/images/footer/facebook.png'
-import instagram from '../assets/images/footer/instagram.png'
-import twitter from '../assets/images/footer/twitter.png'
+import companyLogo from '../assets/images/logo.png'
+// import facebook from '../assets/images/footer/facebook.png'
+// import instagram from '../assets/images/footer/instagram.png'
+// import twitter from '../assets/images/footer/twitter.png'
 
 
 const Footer = () => {
@@ -50,10 +50,10 @@ const Footer = () => {
                 <div className='flex flex-col  gap-y-[1.25rem] mt-[1.5rem]'>
                     <div className='flex gap-x-[8px]'>
 
-                        <img src={facebook} alt="" />
+                        {/* <img src={facebook} alt="" />
 
                         <img src={instagram} alt="" />
-                        <img src={twitter} alt="" />
+                        <img src={twitter} alt="" /> */}
                         <i className="bi bi-youtube"></i>
                     </div>
                     <div className='capitalize text-Small/Title/Medium'>subscribe newsletter</div>

@@ -9,3 +9,25 @@
 :root{
     --linear: linear-gradient(89.34deg, #6C4F43 0.52%, #F8B75B 95.87%);
 }
+
+
+
+.otp-group {
+    display: flex;
+    width: 100%;
+    max-width: 360px;
+    column-gap: 10px;
+  }
+  
+  .otp-input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+  }
+  

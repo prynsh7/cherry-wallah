@@ -11,13 +11,13 @@ import {
 import {AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai'
 const Accordian = () => {
   return (
-    <div className='min-h-[200px]'>
-      <Accordion allowToggle className={`rounded-xl`}>
-        <AccordionItem className=''>
+    <div className='min-h-[200px] max-w-[600px]'>
+      <Accordion allowToggle className={`rounded-xl p-[10px] `}>
+        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px]'>
           {({isExpanded})=>(
-            <div className={`${isExpanded?'bg-primary-1':''} p-[24px] rounded-[8px]`}>
+            <div className={`${isExpanded?'bg-primary-1':''} p-[12px] rounded-[8px]`}>
           <h2>
-            <AccordionButton className='mb-5 text-Small/Title/xSmall md:text-Medium+/Title/xSmall text-[#262626]'>
+            <AccordionButton className=' text-Small/Title/xSmall md:text-Medium+/Title/xSmall text-[#262626]'>
               <Box flex='1' textAlign='left'>
               What are ayurvedic treatments?
               </Box>
@@ -38,11 +38,11 @@ const Accordian = () => {
           </div>
           )}
         </AccordionItem>
-        <AccordionItem className=''>
+        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px]'>
           {({isExpanded})=>(
-            <div className={`${isExpanded?'bg-primary-1':''} p-[24px] rounded-[8px]`}>
+            <div className={`${isExpanded?'bg-primary-1':''} p-[12px] rounded-[8px]`}>
           <h2>
-            <AccordionButton className='mb-5 text-Small/Title/xSmall md:text-Medium+/Title/xSmall text-[#262626]'>
+            <AccordionButton className=' text-Small/Title/xSmall md:text-Medium+/Title/xSmall text-[#262626]'>
               <Box flex='1' textAlign='left'>
               Does Ayurvedic medicine have side effects?
               </Box>
@@ -60,11 +60,11 @@ const Accordian = () => {
           )}
         </AccordionItem>
 
-        <AccordionItem className=''>
+        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px]'>
           {({isExpanded})=>(
-            <div className={`${isExpanded?'bg-primary-1':''} p-[24px] rounded-[8px]`}>
+            <div className={`${isExpanded?'bg-primary-1':''} p-[12px] rounded-[8px]`}>
           <h2>
-            <AccordionButton className='mb-5 text-Small/Title/xSmall md:text-Medium+/Title/xSmall text-[#262626]'>
+            <AccordionButton className=' text-Small/Title/xSmall md:text-Medium+/Title/xSmall text-[#262626]'>
               <Box flex='1' textAlign='left'>
               Is there any Ayurvedic treatment for cancer?
               </Box>
@@ -82,11 +82,11 @@ const Accordian = () => {
           )}
         </AccordionItem>
 
-        <AccordionItem className=''>
+        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px]'>
           {({isExpanded})=>(
-            <div className={`${isExpanded?'bg-primary-1':''} p-[24px] rounded-[8px]`}>
+            <div className={`${isExpanded?'bg-primary-1':''} p-[12px] rounded-[8px]`}>
           <h2>
-            <AccordionButton className='mb-5 text-Small/Title/xSmall md:text-Medium+/Title/xSmall text-[#262626]'>
+            <AccordionButton className=' text-Small/Title/xSmall md:text-Medium+/Title/xSmall text-[#262626]'>
               <Box flex='1' textAlign='left'>
               Where does Ayurvedic medicine come from?
               </Box>

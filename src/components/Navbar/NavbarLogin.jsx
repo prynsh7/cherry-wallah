@@ -3,6 +3,7 @@ import companyLogo from "../../assets/images/logo.png";
 
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes/RouterConfig";
+import Button from "../Button/Button";
 
 const navOptions = [
   {
@@ -43,7 +44,11 @@ const NavbarLogin = ({ multimenu = true, auth = false }) => {
                 {
                   navOptions.map((i, key) => (
                     <li className="inline-block">
-                      <a href={i.link} className={(i.name === selected ? "text-primary-6" : "text-neutral-13") + " text-Medium+/Title/xxSmall"}>
+                      <a href="javascript:void(0)"
+                      onClick={() => {setSelected(i.name)
+                      navigate(i.link)
+                      }}
+                       className={(i.name === selected ? "text-primary-6" : "text-neutral-13") + " text-Medium+/Title/xxSmall"}>
                         {i.name}
                       </a>
                     </li>
@@ -64,22 +69,24 @@ const NavbarLogin = ({ multimenu = true, auth = false }) => {
             </div>
           ) : (
             <div className="btn__div flex gap-[10px]">
-              <button
-                className="hidden md:block py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-transparent text-primary-6 border-primary-6 rounded-[4px] border-[1px] "
+            
+              <Button
+                type="outlined"
+                className="w-[150px]"
                 onClick={() => {
                   navigate(ROUTES.Register);
                 }}
-              >
-                Register
-              </button>
-              <button
-                className="py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]"
+                label={"Register"}
+              />
+               
+               <Button
+                type="linear"
+                className="w-[150px]"
                 onClick={() => {
                   navigate(ROUTES.Login);
                 }}
-              >
-                Login
-              </button>
+                label={"Login"}
+              />
             </div>
           )}
         </div>

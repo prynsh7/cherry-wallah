@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Outlet, Route, Routes } from 'react-router-dom'
 
 import Home from '../pages/Home/Home';
 
@@ -18,14 +18,20 @@ import Chat from '../pages/Doctor/Chat/Chat';
 import Calender from '../pages/Doctor/Calender/Calender';
 import Settings from '../pages/Doctor/Settings/Settings';
 import About from '../pages/About/About';
+import Navbar from '../components/Navbar/Navbar';
+import Footer from '../components/Footer';
+import NavbarLogin from '../components/Navbar/NavbarLogin';
 
 
 const Router = () => {
 
-  const RouteWithRole = ({ Element }) => {
+  const RouteWithoutRole = () => {
     return (
       <>
-        <Element />
+
+        <NavbarLogin />
+        <Outlet />
+        <Footer />
       </>
     );
   }
@@ -34,7 +40,7 @@ const Router = () => {
     return (
       <>
         <UserLayout>
-          <Element />
+          <Outlet />
         </UserLayout>
       </>
     );
@@ -43,29 +49,32 @@ const Router = () => {
   return (
     <div>
       <Routes>
-        <Route exact path={ROUTES.Home} element={<RouteWithRole Element={Home} />}>
+        <Route exact path={ROUTES.Home} element={<RouteWithoutRole />}>
+          <Route index element={<Home />}></Route>
+          <Route exact path={ROUTES.About} element={<About />}></Route>
+          <Route path='*' element={<NotFound />} />
+
           {/* <Route index element={<RouteWithRole Element={Category} />}></Route>
         <Route index path="" element={<RouteWithRole Element={Category} />}></Route>
         <Route exact path={ROUTES.Produts} element={<RouteWithRole Element={Products} />}></Route>
         <Route exact path={ROUTES.ProductDetail} element={<RouteWithRole Element={ProductPage} />}></Route> */}
 
         </Route>
-        
-        <Route exact path={ROUTES.About} element={<RouteWithRole Element={About} />}></Route>
-        <Route exact path={ROUTES.Login} element={<RouteWithRole Element={Login} />}></Route>
-        <Route exact path={ROUTES.Register} element={<RouteWithRole Element={Register} />}></Route>
-        <Route exact path={ROUTES.UserRegister} element={<RouteWithRole Element={UserRegister} />}></Route>
-        <Route exact path={ROUTES.DoctorRegister} element={<RouteWithRole Element={RegisterDoctor} />}></Route>
+
+        <Route exact path={ROUTES.Login} element={<Login />}></Route>
+        <Route exact path={ROUTES.Register} element={<Register />}></Route>
+        <Route exact path={ROUTES.UserRegister} element={<UserRegister />}></Route>
+        <Route exact path={ROUTES.DoctorRegister} element={<RegisterDoctor />}></Route>
 
 
 
-        <Route exact path={ROUTES.Doctor.root} element={<RouteWithRole Element={DoctorLayout} />}>
-          <Route index path="" element={<RouteWithRole Element={DoctorHome} />}></Route>
-          <Route exact path={ROUTES.Doctor.patients} element={<RouteWithRole Element={Patients} />}></Route>
-          <Route exact path={ROUTES.Doctor.appointments} element={<RouteWithRole Element={Appointments} />}></Route>
-          <Route exact path={ROUTES.Doctor.chats} element={<RouteWithRole Element={Chat} />}></Route>
-          <Route exact path={ROUTES.Doctor.calender} element={<RouteWithRole Element={Calender} />}></Route>
-          <Route exact path={ROUTES.Doctor.settings} element={<RouteWithRole Element={Settings} />}></Route>
+        <Route exact path={ROUTES.Doctor.root} element={<DoctorLayout />}>
+          <Route index path="" element={<DoctorHome />}></Route>
+          <Route exact path={ROUTES.Doctor.patients} element={<Patients />}></Route>
+          <Route exact path={ROUTES.Doctor.appointments} element={<Appointments />}></Route>
+          <Route exact path={ROUTES.Doctor.chats} element={<Chat />}></Route>
+          <Route exact path={ROUTES.Doctor.calender} element={<Calender />}></Route>
+          <Route exact path={ROUTES.Doctor.settings} element={<Settings />}></Route>
 
           <Route path='*' element={<NotFound />} />
         </Route>

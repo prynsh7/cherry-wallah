@@ -23,11 +23,11 @@ const About = () => {
 
   return (
     <div className='About bg-neutral-4'>
-      <NavbarLogin multimenu={true} />
 
-      <div className="container mx-auto px-3">
 
-        <div className='grid grid-cols-12 gap-6'>
+      <div className="container mx-auto py-[60px]">
+
+        <div className='grid grid-cols-12 gap-6 mb-[45px]'>
           <div className='col-span-8 mt-8'>
             <h1 className='text-Medium+/Title/Medium font-bold text-neutral-8'>Our Vision</h1>
             <p className='mt-3.5 text-neutral-9 text-Medium+/Paragraph/Large'>Our vision for the Ayurveda online consultation platform is to create a seamless and accessible platform where individuals can connect with highly trained Ayurveda practitioners and receive personalized, authentic, and effective health solutions, promoting overall wellbeing and a balanced lifestyle. <br />
@@ -52,64 +52,65 @@ const About = () => {
           </div>
         </div>
 
-        <div className='text-center pt-16'>
-          <span className='text-Medium+/Title/Medium font-bold text-neutral-8'>Founder & Co-founder profile</span>
-          <p className='mt-1 text-neutral-9 text-Medium+/Paragraph/Medium-strong'>Lorem ipsum dolor sit amet consectetur adipiscing elit semper dalar elementum tempus hac tellus libero accumsan. </p>
-        </div>
-
-        <div className='pt-10 grid sm:grid-cols-3 gap-6 '>
-          <div className='grid-col-1'>
-            <div className='bg-neutral-2 w-[75%] h-[390px] p-8 rounded-[24px] flex flex-col justify-center items-center'>
-              <img className='mt-8 w-[95px] aspect-square rounded-full' src={founder} alt="" />
-              <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>John Carter</h2>
-              <span className='text-Small/Paragraph/Medium-Strong'>CEO & Co-Founder</span>
-              <p className='mt-1.5 text-center'>This platform has made Ayurveda accessible to me, and I couldn't be happier with the results. I've had a complete transformation in my health and well-being, and I owe it all to the doctors on this platform.</p>
-            <div className='mt-2 gap-4 flex mb-8'>
-              <div><button><img src={facebook} alt="" /></button></div>
-              <div><button><img src={twitter} alt="" /></button></div>
-              <div><button><img src={instagram} alt="" /></button></div>
-              <div><button><img src={linkdin} alt="" /></button></div>
-            </div>
-            </div> 
+        <div className='mt-[120px]'>
+          <div className='text-center'>
+            <span className='text-Medium+/Title/Medium font-bold text-neutral-8'>Founder & Co-founder profile</span>
+            <p className='mt-1 text-neutral-9 text-Medium+/Paragraph/Medium-strong'>Lorem ipsum dolor sit amet consectetur adipiscing elit semper dalar elementum tempus hac tellus libero accumsan. </p>
           </div>
 
-          <div className='grid-col-1'>
-            <div className='bg-neutral-2 w-[75%] h-[390px] p-8 rounded-[24px] flex flex-col justify-center items-center'>
-              <img className='mt-8 w-[95px] aspect-square rounded-full' src={founder} alt="" />
-              <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>John Carter</h2>
-              <span className='text-Small/Paragraph/Medium-Strong'>CEO & Co-Founder</span>
-              <p className='mt-1.5 text-center'>This platform has made Ayurveda accessible to me, and I couldn't be happier with the results. I've had a complete transformation in my health and well-being, and I owe it all to the doctors on this platform.</p>
-            <div className='mt-2 gap-4 flex mb-8'>
-              <div><button><img src={facebook} alt="" /></button></div>
-              <div><button><img src={twitter} alt="" /></button></div>
-              <div><button><img src={instagram} alt="" /></button></div>
-              <div><button><img src={linkdin} alt="" /></button></div>
+          <div className='pt-10 grid sm:grid-cols-3 gap-[20px] '>
+            <div className='grid-col-1 flex items-center justify-center'>
+              <div className='bg-neutral-2 w-[75%] h-[100%] p-8 rounded-[24px] flex flex-col justify-center items-center'>
+                <img className='mt-8 w-[95px] aspect-square rounded-full' src={founder} alt="" />
+                <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>John Carter</h2>
+                <span className='text-Small/Paragraph/Medium-Strong'>CEO & Co-Founder</span>
+                <p className='mt-1.5 text-center'>This platform has made Ayurveda accessible to me, and I couldn't be happier with the results. I've had a complete transformation in my health and well-being, and I owe it all to the doctors on this platform.</p>
+                <div className='mt-2 gap-4 flex mb-8'>
+                  <div><button><img src={facebook} alt="" /></button></div>
+                  <div><button><img src={twitter} alt="" /></button></div>
+                  <div><button><img src={instagram} alt="" /></button></div>
+                  <div><button><img src={linkdin} alt="" /></button></div>
+                </div>
+              </div>
             </div>
-            </div> 
-          </div>
 
-          <div className='grid-col-1'>
-            <div className='bg-neutral-2 w-[75%] h-[390px] p-8 rounded-[24px] flex flex-col justify-center items-center'>
-              <img className='mt-8 w-[95px] aspect-square rounded-full' src={founder} alt="" />
-              <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>John Carter</h2>
-              <span className='text-Small/Paragraph/Medium-Strong'>CEO & Co-Founder</span>
-              <p className='mt-1.5 text-center'>This platform has made Ayurveda accessible to me, and I couldn't be happier with the results. I've had a complete transformation in my health and well-being, and I owe it all to the doctors on this platform.</p>
-            <div className='mt-2 gap-4 flex mb-8'>
-              <div><button><img src={facebook} alt="" /></button></div>
-              <div><button><img src={twitter} alt="" /></button></div>
-              <div><button><img src={instagram} alt="" /></button></div>
-              <div><button><img src={linkdin} alt="" /></button></div>
+            <div className='grid-col-1 flex items-center justify-center'>
+              <div className='bg-neutral-2 w-[75%] h-[100%] p-8 rounded-[24px] flex flex-col justify-center items-center'>
+                <img className='mt-8 w-[95px] aspect-square rounded-full' src={founder} alt="" />
+                <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>John Carter</h2>
+                <span className='text-Small/Paragraph/Medium-Strong'>CEO & Co-Founder</span>
+                <p className='mt-1.5 text-center'>This platform has made Ayurveda accessible to me, and I couldn't be happier with the results. I've had a complete transformation in my health and well-being, and I owe it all to the doctors on this platform.</p>
+                <div className='mt-2 gap-4 flex mb-8'>
+                  <div><button><img src={facebook} alt="" /></button></div>
+                  <div><button><img src={twitter} alt="" /></button></div>
+                  <div><button><img src={instagram} alt="" /></button></div>
+                  <div><button><img src={linkdin} alt="" /></button></div>
+                </div>
+              </div>
             </div>
-            </div> 
+
+            <div className='grid-col-1 flex items-center justify-center'>
+              <div className='bg-neutral-2 w-[75%] h-[100%] p-8 rounded-[24px] flex flex-col justify-center items-center'>
+                <img className='mt-8 w-[95px] aspect-square rounded-full' src={founder} alt="" />
+                <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>John Carter</h2>
+                <span className='text-Small/Paragraph/Medium-Strong'>CEO & Co-Founder</span>
+                <p className='mt-1.5 text-center'>This platform has made Ayurveda accessible to me, and I couldn't be happier with the results. I've had a complete transformation in my health and well-being, and I owe it all to the doctors on this platform.</p>
+                <div className='mt-2 gap-4 flex mb-8'>
+                  <div><button><img src={facebook} alt="" /></button></div>
+                  <div><button><img src={twitter} alt="" /></button></div>
+                  <div><button><img src={instagram} alt="" /></button></div>
+                  <div><button><img src={linkdin} alt="" /></button></div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
 
-        <div>
-          <Footer/>
-        </div>
+
 
       </div>
+
     </div>
   )
 }

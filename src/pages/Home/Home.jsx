@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer'
-import { Outlet } from 'react-router-dom'
+
 import NavbarLogin from '../../components/Navbar/NavbarLogin'
 import banner from '../../assets/images/Home/Home.png'
 import card1 from '../../assets/images/Home/card1.png'
@@ -13,15 +13,14 @@ const Home = () => {
 
   return (
     <div className='bg-neutral-4'>
+
       <div className="container mx-auto px-3">
 
 
-        <NavbarLogin multimenu={true} />
-        <Outlet />
-
         <div className='py-5'>
-          <div className='bg-[#CFE1DF] py-2 pl-6 rounded-lg'>
-            <h4 className='font-bold text-primary-6'>You have a upcoming appointment on 17th May 2023</h4>
+          <div className='bg-[#CFE1DF] py-2 px-6 rounded-lg flex justify-between items-center'>
+            <h4 className='font-semibold text-primary-6'>You have a upcoming appointment on 17th May 2023</h4>
+            <i className='bi bi-x text-primary-10 text-[22px] cursor-pointer'></i>
           </div>
         </div>
 
@@ -72,7 +71,7 @@ const Home = () => {
 
         <div className='pt-10 grid sm:grid-cols-4 gap-6'>
           <div className=' grid-col-1'>
-            <div className='bg-neutral-2 w-[100%] h-[370px] p-4 rounded-[24px]'>
+            <div className='bg-neutral-2 w-[100%] h-[100%] p-4 rounded-[24px]'>
               <img className='w-[100%]' src={card1} alt="" />
               <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>Video Consultancy</h2>
               <p className='mt-1.5'>Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm vel facilisis volutpat est velitolm.</p>
@@ -80,7 +79,7 @@ const Home = () => {
           </div>
 
           <div className='grid-col-1'>
-            <div className='bg-neutral-2 w-[100%] h-[370px] p-4 rounded-[24px]'>
+            <div className='bg-neutral-2 w-[100%] h-[100%] p-4 rounded-[24px]'>
               <img className='w-[100%]' src={card1} alt="" />
               <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>Chat</h2>
               <p className='mt-1.5'>Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm vel facilisis volutpat est velitolm.</p>
@@ -88,7 +87,7 @@ const Home = () => {
           </div>
 
           <div className='grid-col-1'>
-            <div className='bg-neutral-2 w-[100%] h-[370px] p-4 rounded-[24px]'>
+            <div className='bg-neutral-2 w-[100%] h-[100%] p-4 rounded-[24px]'>
               <img className='w-[100%]' src={card1} alt="" />
               <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>Yoga</h2>
               <p className='mt-1.5'>Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm vel facilisis volutpat est velitolm.</p>
@@ -96,7 +95,7 @@ const Home = () => {
           </div>
 
           <div className='grid-col-1'>
-            <div className='bg-neutral-2 w-[100%] h-[370px] p-4 rounded-[24px]'>
+            <div className='bg-neutral-2 w-[100%] h-[100%] p-4 rounded-[24px]'>
               <img className='w-[100%]' src={card1} alt="" />
               <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>Medicine</h2>
               <p className='mt-1.5'>Lorem ipsum dolor sit amet consecte tur adipiscing elit semper dalaracc lacus vel facilisis volutpat est velitolm vel facilisis volutpat est velitolm.</p>
@@ -116,28 +115,28 @@ const Home = () => {
 
         <div className='pt-10 grid sm:grid-cols-4 gap-6'>
           <div className='grid-col-1'>
-            <div className='bg-neutral-2 w-[100%] h-[370px] p-8 rounded-[24px]'>
+            <div className='bg-neutral-2 w-[100%] h-[100%] p-8 rounded-[24px]'>
               <img className='w-[80px] aspect-square rounded-full' src={test1} alt="" />
               <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>“An amazing service”</h2>
               <p className='mt-1.5 text-justify'>This platform has made Ayurveda accessible to me, and I couldn't be happier with the results. I've had a complete transformation in my health and well-being, and I owe it all to the doctors on this platform.</p>
             </div>
           </div>
           <div className='grid-col-1'>
-            <div className='bg-neutral-2 w-[100%] h-[370px] p-8 rounded-[24px]'>
+            <div className='bg-neutral-2 w-[100%] h-[100%] p-8 rounded-[24px]'>
               <img className='w-[80px] aspect-square rounded-full' src={test1} alt="" />
               <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>“One of a kind service”</h2>
               <p className='mt-1.5 text-justify'>I was skeptical about Ayurveda, but this platform made me a believer. The doctor I consulted with was thorough and recommended a personalized treatment plan that has greatly improved my well-being.</p>
             </div>
           </div>
           <div className=' grid-col-1'>
-            <div className='bg-neutral-2 w-[100%] h-[370px] p-8 rounded-[24px]'>
+            <div className='bg-neutral-2 w-[100%] h-[100%] p-8 rounded-[24px]'>
               <img className='w-[80px] aspect-square rounded-full' src={test1} alt="" />
               <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>“The best service”</h2>
               <p className='mt-1.5 text-justify'>I found the perfect Ayurvedic practitioner on this platform. The consultation was seamless, and the treatment recommended has shown impressive results. Thank you for the excellent service."</p>
             </div>
           </div>
           <div className=' grid-col-1'>
-            <div className='bg-neutral-2 w-[100%] h-[370px] p-8 rounded-[24px]'>
+            <div className='bg-neutral-2 w-[100%] h-[100%] p-8 rounded-[24px]'>
               <img className='w-[80px] aspect-square rounded-full' src={test1} alt="" />
               <h2 className='mt-2.5 text-Small/Title/Medium text-primary-6'>“An amazing service”</h2>
               <p className='mt-1.5 text-justify'>This platform has made Ayurveda accessible to me, and I couldn't be happier with the results. I've had a complete transformation in my health and well-being, and I owe it all to the doctors on this platform.</p>
@@ -145,10 +144,11 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="pt-16">
+        <div className="py-[90px]">
           <Faq />
         </div>
       </div>
+
     </div>
   )
 

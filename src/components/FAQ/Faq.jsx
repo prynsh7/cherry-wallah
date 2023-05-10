@@ -10,7 +10,7 @@ const Faq = () => {
                         Frequently <br /> Asked Questions
                     </div>
                     <div className='text-Small/Paragraph/Large md:text-Medium+/Paragraph/Large md:mt-[20px] mt-[8px] text-Neutral70'>
-                        Everything you need to know about the Parampara Cold Pressed Oil.
+                       Everything you need to know about the Ayurveda Treatment. 
                     </div>
                 </div>
                 <div className="col-span-1 md:mt-[0px] mt-[32px] ">

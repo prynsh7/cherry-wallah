@@ -17,6 +17,7 @@ import Appointments from '../pages/Doctor/Appointments/Appointments';
 import Chat from '../pages/Doctor/Chat/Chat';
 import Calender from '../pages/Doctor/Calender/Calender';
 import Settings from '../pages/Doctor/Settings/Settings';
+import About from '../pages/About/About';
 
 
 const Router = () => {
@@ -49,8 +50,8 @@ const Router = () => {
         <Route exact path={ROUTES.ProductDetail} element={<RouteWithRole Element={ProductPage} />}></Route> */}
 
         </Route>
-
-
+        
+        <Route exact path={ROUTES.About} element={<RouteWithRole Element={About} />}></Route>
         <Route exact path={ROUTES.Login} element={<RouteWithRole Element={Login} />}></Route>
         <Route exact path={ROUTES.Register} element={<RouteWithRole Element={Register} />}></Route>
         <Route exact path={ROUTES.UserRegister} element={<RouteWithRole Element={UserRegister} />}></Route>

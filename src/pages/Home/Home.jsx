@@ -6,9 +6,13 @@ import banner from '../../assets/images/Home/Home.png'
 import card1 from '../../assets/images/Home/card1.png'
 import test1 from '../../assets/images/Home/test1.jpg'
 import Faq from '../../components/FAQ/Faq'
+import { ROUTES } from '../../routes/RouterConfig'
+import { useNavigate } from 'react-router-dom'
 
 
 const Home = () => {
+
+  const navigate = useNavigate()
 
   return (
     <div className='bg-neutral-4'>
@@ -53,12 +57,14 @@ const Home = () => {
 
         <div className='py-5'>
           <div className='bg-neutral-2 p-5 flex gap-6 justify-center items-center rounded-[8px]'>
-            <div className='relative flex items-center'>
-            <i class="bi bi-geo-alt absolute left-[5px]"></i>
-            <input className="border-[1px] rounded-[4px] p-[10px] pl-[20px]" placeholder="Enter City" />
+            <div className='relative flex items-center border-[1px] rounded-[8px] overflow-hidden'>
+            <i class="bi bi-geo-alt absolute left-[5px] text-[#000]/[0.5]"></i>
+            <input className="border-[1px] rounded-[4px] p-[10px] pl-[30px]" placeholder="Enter City" />
             </div>
             <input className="border-[1px] rounded-[4px] p-[10px]  w-[420px]" placeholder="Search doctors, clinics, hospitals, etc." />
-            <button className="py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]">
+            <button className="py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]"
+            onClick={() => navigate(ROUTES.DoctorsList)}
+            >
               Search
             </button>
           </div>

@@ -13,7 +13,7 @@ const Faq = () => {
                        Everything you need to know about the Ayurveda Treatment. 
                     </div>
                 </div>
-                <div className="col-span-2 md:mt-[0px] mt-[32px] bg-neutral-1 rounded-[8px] ">
+                <div className="col-span-2 md:mt-[0px] mt-[32px] flex items-center justify-center  rounded-[8px] ">
                     <Accordian />
                 </div>
             </div>

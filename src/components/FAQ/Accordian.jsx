@@ -11,9 +11,9 @@ import {
 import {AiOutlinePlus, AiOutlineMinus} from 'react-icons/ai'
 const Accordian = () => {
   return (
-    <div className='min-h-[200px] max-w-[600px]'>
+    <div className='min-h-[200px] max-w-[800px] w-[60%]'>
       <Accordion allowToggle className={`rounded-xl p-[10px] `}>
-        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px]'>
+        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px] shadow-sm'>
           {({isExpanded})=>(
             <div className={`${isExpanded?'bg-primary-1':''} p-[12px] rounded-[8px]`}>
           <h2>
@@ -38,7 +38,7 @@ const Accordian = () => {
           </div>
           )}
         </AccordionItem>
-        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px]'>
+        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px] shadow-sm'>
           {({isExpanded})=>(
             <div className={`${isExpanded?'bg-primary-1':''} p-[12px] rounded-[8px]`}>
           <h2>
@@ -60,7 +60,7 @@ const Accordian = () => {
           )}
         </AccordionItem>
 
-        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px]'>
+        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px] shadow-sm'>
           {({isExpanded})=>(
             <div className={`${isExpanded?'bg-primary-1':''} p-[12px] rounded-[8px]`}>
           <h2>
@@ -82,7 +82,7 @@ const Accordian = () => {
           )}
         </AccordionItem>
 
-        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px]'>
+        <AccordionItem className='mb-[20px] bg-primary-1 rounded-[8px] shadow-sm'>
           {({isExpanded})=>(
             <div className={`${isExpanded?'bg-primary-1':''} p-[12px] rounded-[8px]`}>
           <h2>

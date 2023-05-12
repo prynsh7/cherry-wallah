@@ -1,7 +1,6 @@
 import React from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import Footer from '../../components/Footer'
-
 import NavbarLogin from '../../components/Navbar/NavbarLogin'
 import banner from '../../assets/images/Home/Home.png'
 import card1 from '../../assets/images/Home/card1.png'
@@ -15,8 +14,6 @@ const Home = () => {
     <div className='bg-neutral-4'>
 
       <div className="container mx-auto px-3">
-
-
         <div className='py-5'>
           <div className='bg-[#CFE1DF] py-2 px-6 rounded-lg flex justify-between items-center'>
             <h4 className='font-semibold text-primary-6'>You have a upcoming appointment on 17th May 2023</h4>
@@ -37,7 +34,7 @@ const Home = () => {
               </button>
             </div>
           </div>
-          <div className='col-span-1 flex justify-center items-center  '>
+          <div className='col-span-1 flex justify-center items-center'>
             <img className='w-[450px]' src={banner} alt="" />
           </div>
         </div>
@@ -56,7 +53,10 @@ const Home = () => {
 
         <div className='py-5'>
           <div className='bg-neutral-2 p-5 flex gap-6 justify-center items-center rounded-[8px]'>
-            <input className="border-[1px] rounded-[4px] p-[10px]" placeholder="Enter City" />
+            <div className='relative flex items-center'>
+            <i class="bi bi-geo-alt absolute left-[5px]"></i>
+            <input className="border-[1px] rounded-[4px] p-[10px] pl-[20px]" placeholder="Enter City" />
+            </div>
             <input className="border-[1px] rounded-[4px] p-[10px]  w-[420px]" placeholder="Search doctors, clinics, hospitals, etc." />
             <button className="py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]">
               Search

@@ -3,6 +3,10 @@ export const ROUTES = {
     About: '/about',
     Produts: '/products',
     ProductDetail: '/products/:id',
+    DoctorsList: '/DoctorsList',
+    DoctorProfile: '/DoctorProfile',
+    UpcomingAppointment: '/UpcomingAppointment',
+    CompletedAppoinment: '/CompletedAppoinment',
 
     Login: '/auth/login',
     Register: '/auth/signup',

@@ -21,7 +21,10 @@ import About from '../pages/About/About';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer';
 import NavbarLogin from '../components/Navbar/NavbarLogin';
-
+import DoctorsList from '../pages/DoctorsList/DoctorsList';
+import DoctorProfile from '../pages/DoctorProfile/DoctorProfile';
+import UpcomingAppointment from '../pages/UpcomingAppointment/UpcomingAppointment';
+import CompletedAppoinment from '../pages/CompletedAppoinment/CompletedAppoinment';
 
 const Router = () => {
 
@@ -52,8 +55,10 @@ const Router = () => {
         <Route exact path={ROUTES.Home} element={<RouteWithoutRole />}>
           <Route index element={<Home />}></Route>
           <Route exact path={ROUTES.About} element={<About />}></Route>
-          <Route path='*' element={<NotFound />} />
-
+          <Route exact path={ROUTES.DoctorsList} element={<DoctorsList />}></Route>
+          <Route exact path={ROUTES.DoctorProfile} element={<DoctorProfile />}></Route>
+          <Route exact path={ROUTES.UpcomingAppointment} element={<UpcomingAppointment />}></Route>
+          <Route exact path={ROUTES.CompletedAppoinment} element={<CompletedAppoinment/>}></Route>
           {/* <Route index element={<RouteWithRole Element={Category} />}></Route>
         <Route index path="" element={<RouteWithRole Element={Category} />}></Route>
         <Route exact path={ROUTES.Produts} element={<RouteWithRole Element={Products} />}></Route>

@@ -7,6 +7,8 @@ export const ROUTES = {
     DoctorProfile: '/DoctorProfile',
     UpcomingAppointment: '/UpcomingAppointment',
     CompletedAppoinment: '/CompletedAppoinment',
+    Appointment: '/Appointment',
+    AppointmentPD: '/AppointmentPD',
 
     Login: '/auth/login',
     Register: '/auth/signup',

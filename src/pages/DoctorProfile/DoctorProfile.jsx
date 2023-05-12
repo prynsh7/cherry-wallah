@@ -23,7 +23,7 @@ const DoctorProfile = () => {
                     </div>
                 </div>
 
-                <div className='bg-primary-2 flex justify-center gap-[680px] p-[18px] items-center'>
+                <div className='bg-primary-2 flex justify-between p-[18px] items-center'>
                     <div className='flex justify-center items-center gap-4'>
                         <button className='bg-primary-1 px-[25px] py-[6px]'>
                             <h3>Video Consultant</h3>

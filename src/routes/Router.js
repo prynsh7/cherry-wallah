@@ -25,6 +25,10 @@ import DoctorsList from '../pages/DoctorsList/DoctorsList';
 import DoctorProfile from '../pages/DoctorProfile/DoctorProfile';
 import UpcomingAppointment from '../pages/UpcomingAppointment/UpcomingAppointment';
 import CompletedAppoinment from '../pages/CompletedAppoinment/CompletedAppoinment';
+import Appointment from '../pages/Appointment/Appointment';
+import AppointmentPD from '../pages/Appointment/AppointmentPD';
+
+
 
 const Router = () => {
 
@@ -59,6 +63,9 @@ const Router = () => {
           <Route exact path={ROUTES.DoctorProfile} element={<DoctorProfile />}></Route>
           <Route exact path={ROUTES.UpcomingAppointment} element={<UpcomingAppointment />}></Route>
           <Route exact path={ROUTES.CompletedAppoinment} element={<CompletedAppoinment />}></Route>
+          <Route exact path={ROUTES.Appointment} element={<Appointment />}></Route>
+          <Route exact path={ROUTES.AppointmentPD} element={<AppointmentPD />}></Route>
+
           {/* <Route index element={<RouteWithRole Element={Category} />}></Route>
         <Route index path="" element={<RouteWithRole Element={Category} />}></Route>
         <Route exact path={ROUTES.Produts} element={<RouteWithRole Element={Products} />}></Route>

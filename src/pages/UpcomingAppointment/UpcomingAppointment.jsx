@@ -1,5 +1,7 @@
 import React from 'react'
 import DoctorProfile from '../../assets/images/doctorlist.png'
+import CustomPagination from '../../components/Pagination/Pagination'
+import { Pagination } from 'antd'
 const UpcomingAppointment = () => {
     return (
         <div className='bg-neutral-4 pb-[60px]'>
@@ -28,27 +30,32 @@ const UpcomingAppointment = () => {
                     <button>Cancelled</button>
                 </div>
 
-                <div className='bg-[#ffff] flex p-[24px] mx-[32px] mt-[18px] gap-[740px] rounded-[10px] justify-center items-center'>
-                    <div className='flex justify-center items-center gap-6 '>
-                        <div className='text-center'>
-                            <img className='pb-[6px]' src={DoctorProfile} alt="" />
-                        </div>
-                        <div>
-                            <h3 className='text-Small/Title/Medium text-[#007E85]'>Dr. Priyansh Raj</h3>
-                            <p className='text-Small/Title/xSmall text-neutral-8'>Skin Specialist</p>
-                        <div className='border-2 p-[4px] rounded mt-2'>
-                            <span>17th May 2023 - 9:30 PM</span>
-                        </div>
-                        </div>
-                        
-                    </div>
-                    <div className='flex justify-center items-center'>
-                        <button className='py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]'><i class="bi bi-calendar pr-[8px]"></i>Reschedule</button>
-                    </div>
-                </div>
+               { [...Array(8)].map((item, index) => {
+                            return <div className='bg-[#ffff] flex p-[24px] mx-[32px] mt-[18px] rounded-[10px] justify-between items-center'>
+                                        <div className='flex justify-center items-center gap-6 '>
+                                            <div className='text-center'>
+                                                <img className='pb-[6px]' src={DoctorProfile} alt="" />
+                                            </div>
+                                            <div>
+                                                <h3 className='text-Small/Title/Medium text-[#007E85]'>Dr. Priyansh Raj</h3>
+                                                <p className='text-Small/Title/xSmall text-neutral-8'>Skin Specialist</p>
+                                            <div className='border-2 p-[4px] rounded mt-2'>
+                                                <span>17th May 2023 - 9:30 PM</span>
+                                            </div>
+                                            </div>
+                                            
+                                        </div>
+                                        <div className='flex justify-center items-center'>
+                                            <button className='py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]'><i class="bi bi-calendar pr-[8px]"></i>Reschedule</button>
+                                        </div>
+                                    </div>
+                
+                })}
 
             </div>
-
+            <div className='flex mx-auto mt-[60px] w-[fit-content]'>
+                    <CustomPagination />
+                </div>
         </div>
     )
 }

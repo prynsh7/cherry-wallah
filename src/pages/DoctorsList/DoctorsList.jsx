@@ -62,7 +62,7 @@ const DoctorsList = () => {
                     {
                         [...Array(10)].map((item, index) => {
                             return <div className='bg-[#ffff] flex p-[24px] mx-[85px] justify-between shadow-sm rounded-[14px] justify-center items-center'>
-                                <div className='flex justify-center items-center gap-[20px] '>
+                                <div className='flex justify-center items-center gap-5 '>
                                     <div className='text-center'>
                                         <img className='pb-[6px]' src={DoctorProfile} alt="" />
                                         {/* <button>View Profile</button> */}

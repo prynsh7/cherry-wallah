@@ -1,10 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DoctorProfilepic from '../../assets/images/doctorlist.png'
+import Modal from '../../components/Modal/Modal'
 
 const DoctorProfile = () => {
+    const [isOpen, setIsOpen] = useState(false)
+
+    const handleCloseModal = () => setIsOpen(false)
+    const handleOpenModal = () => setIsOpen(true)
+
     return (
         <div className='bg-neutral-4'>
-
+            <Modal isOpen={isOpen} handleSubmit={handleCloseModal} handleCancel={handleCloseModal}>
+                Hello
+            </Modal>
             <div className='container mx-auto py-[60px]'>
 
                 <div className='py-5'>
@@ -61,7 +69,7 @@ const DoctorProfile = () => {
                             </div>
                             <p>Dr. Hanshika Raj has over 12 years of experience as a Herbal Medicine Specialist. He has done Bachelor of Ayurveda, Medicine and Surgery (BAMS).</p>
                             <div className='mt-[16px]'>
-                                <button className='py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]'>Book Appointment</button>
+                                <button className='py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]' onClick={handleOpenModal}>Book Appointment</button>
                             </div>
                         </div>
                     </div>

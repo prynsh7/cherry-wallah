@@ -9,6 +9,10 @@ export const ROUTES = {
     CompletedAppoinment: '/CompletedAppoinment',
     Appointment: '/Appointment',
     AppointmentPD: '/AppointmentPD',
+    AppointmentConfirmation: '/AppointmentConfirmation',
+    CompletedAppointmentDetails: '/CompletedAppointmentDetails',
+    AppointmentReportDetailsField: '/AppointmentReportDetailsField',
+    UserSettings: '/UserSettings',
 
     Login: '/auth/login',
     Register: '/auth/signup',

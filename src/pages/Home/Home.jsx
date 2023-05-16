@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div className='bg-neutral-4'>
 
-      <div className="container mx-auto px-3">
+      <div className="container mx-auto px-[32px]">
         <div className='py-5'>
           <div className='bg-[#CFE1DF] py-2 px-6 rounded-lg flex justify-between items-center'>
             <h4 className='font-semibold text-primary-6'>You have a upcoming appointment on 17th May 2023</h4>

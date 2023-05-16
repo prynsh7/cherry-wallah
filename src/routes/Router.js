@@ -27,6 +27,10 @@ import UpcomingAppointment from '../pages/UpcomingAppointment/UpcomingAppointmen
 import CompletedAppoinment from '../pages/CompletedAppoinment/CompletedAppoinment';
 import Appointment from '../pages/Appointment/Appointment';
 import AppointmentPD from '../pages/Appointment/AppointmentPD';
+import AppointmentConfirmation from '../pages/Appointment/AppointmentConfirmation';
+import CompletedAppointmentDetails from '../pages/Appointment/CompletedAppointmentDetails';
+import AppointmentReportDetailsField from '../pages/Appointment/AppointmentReportDetailsField';
+import UserSettings from '../pages/User/UserSettings';
 
 
 
@@ -65,6 +69,12 @@ const Router = () => {
           <Route exact path={ROUTES.CompletedAppoinment} element={<CompletedAppoinment />}></Route>
           <Route exact path={ROUTES.Appointment} element={<Appointment />}></Route>
           <Route exact path={ROUTES.AppointmentPD} element={<AppointmentPD />}></Route>
+          <Route exact path={ROUTES.AppointmentConfirmation} element={<AppointmentConfirmation />}></Route>
+          <Route exact path={ROUTES.CompletedAppointmentDetails} element={<CompletedAppointmentDetails />}></Route>
+          <Route exact path={ROUTES.AppointmentReportDetailsField} element={<AppointmentReportDetailsField />}></Route>
+          <Route exact path={ROUTES.UserSettings} element={<UserSettings />}></Route>
+
+          
 
           {/* <Route index element={<RouteWithRole Element={Category} />}></Route>
         <Route index path="" element={<RouteWithRole Element={Category} />}></Route>

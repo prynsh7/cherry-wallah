@@ -22,7 +22,7 @@ const About = () => {
   }
 
   return (
-    <div className='About bg-neutral-4'>
+    <div className='About bg-neutral-4 px-[32px]'>
 
 
       <div className="container mx-auto py-[60px]">

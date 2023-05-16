@@ -29,7 +29,7 @@ const CompletedAppoinment = () => {
                     <button>Cancelled</button>
                 </div>
 
-                <div className='bg-[#ffff] flex p-[24px] mx-[32px] mt-[18px] gap-[740px] rounded-[10px] justify-center items-center'>
+                <div className='bg-[#ffff] flex p-[24px] mx-[32px] mt-[18px] rounded-[10px] justify-between items-center'>
                     <div className='flex justify-center items-center gap-6 '>
                         <div className='text-center'>
                             <img className='pb-[6px]' src={DoctorProfile} alt="" />

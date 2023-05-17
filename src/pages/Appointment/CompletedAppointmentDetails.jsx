@@ -1,33 +1,15 @@
 import React, { useState } from 'react'
-import Modal from '../../components/Modal/Modal'
 import DoctorProfile from '../../assets/images/doctorlist.png'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../routes/RouterConfig'
 
 
 
 const CompletedAppointmentDetails = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const handleCloseModal = () => setIsOpen(false)
-    const handleOpenModal = () => setIsOpen(true)
+    const navigate = useNavigate()
+
     return (
         <div className='bg-neutral-4'>
-            <Modal width={'80%'} className='bg-neutral-1' isOpen={isOpen} handleSubmit={handleCloseModal} handleCancel={handleCloseModal}>
-            <p className='text-Medium+/Label/Large-Strong'>Add Medicine</p>
-            <div className='grid grid-cols-3 gap-3 mt-[14px]'>
-          <div className='col-span-1'>
-            <label className='text-Medium+/Label/Small-Strong mb-2'>Patient Name</label>
-            <input className='outline-none border-2 border-primary-2 w-[100%] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter Patient Name' />
-          </div>
-          <div className='col-span-1'>
-            <label className='text-Medium+/Label/Small-Strong mb-2'>Mobile Number</label>
-            <input className='outline-none border-2 border-primary-2 w-[100%] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter Mobile Number ' />
-          </div>
-          <div className='col-span-1'>
-            <label className='text-Medium+/Label/Small-Strong mb-2'>Email</label>
-            <input className='outline-none border-2 border-primary-2 w-[100%] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter Email Address ' />
-          </div>
-        </div>
-            </Modal>
-
             <div className='container mx-auto px-[12px]'>
 
                 <div className='py-[32px]'>
@@ -66,7 +48,10 @@ const CompletedAppointmentDetails = () => {
                     <div className='pb-[32px] mx-[32px] gap-6 bg-[#ffff] flex flex-col rounded-[10px]'>
                         <div className='mx-[28px] mt-[20px] flex justify-between'>
                             <h3 className='text-Small/Title/Medium text-[black]'>Report</h3>
-                            <button className='px-[10px] py-[4px] rounded-[8px] border-2 border-primary-4'><i class="bi bi-filetype-pdf pr-[6px] text-primary-7"></i> <span className='text-primary-7'>Export</span> </button>
+                            <div className='flex gap-2'>
+                                <button onClick={() => { navigate(ROUTES.AppointmentReportDetailsField) }} className='px-[10px] py-[4px] rounded-[5px] border-2 border-primary-4'><i class="bi bi-pencil pr-[6px] text-primary-7"></i> <span className='text-primary-7'>Edit report</span> </button>
+                                <button className='px-[10px] py-[4px] rounded-[5px] border-2 border-primary-4'><i class="bi bi-filetype-pdf pr-[6px] text-primary-7"></i> <span className='text-primary-7'>Export</span> </button>
+                            </div>
                         </div>
                         <div className=' border-2 mx-[24px] border-primary-2 rounded'>
                             <div className='text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
@@ -96,7 +81,6 @@ const CompletedAppointmentDetails = () => {
                         <div className=' border-2 mx-[24px] border-primary-2 rounded'>
                             <div className='flex justify-between items-center text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
                                 <h2 className='mx-[16px]'>Prescription</h2>
-                                <button onClick={handleOpenModal}><i class="bi bi-plus-square text-[22px] text-neutral-9"></i></button>
                             </div>
 
                             <div className='flex gap-28 py-[12px] px-[30px] text-primary-7'>

@@ -1,8 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Modal from '../../components/Modal/Modal'
 import DoctorProfile from '../../assets/images/doctorlist.png'
+
+
+
 const CompletedAppointmentDetails = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const handleCloseModal = () => setIsOpen(false)
+    const handleOpenModal = () => setIsOpen(true)
     return (
         <div className='bg-neutral-4'>
+            <Modal width={'80%'} className='bg-neutral-1' isOpen={isOpen} handleSubmit={handleCloseModal} handleCancel={handleCloseModal}>
+            <p className='text-Medium+/Label/Large-Strong'>Add Medicine</p>
+            <div className='grid grid-cols-3 gap-3 mt-[14px]'>
+          <div className='col-span-1'>
+            <label className='text-Medium+/Label/Small-Strong mb-2'>Patient Name</label>
+            <input className='outline-none border-2 border-primary-2 w-[100%] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter Patient Name' />
+          </div>
+          <div className='col-span-1'>
+            <label className='text-Medium+/Label/Small-Strong mb-2'>Mobile Number</label>
+            <input className='outline-none border-2 border-primary-2 w-[100%] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter Mobile Number ' />
+          </div>
+          <div className='col-span-1'>
+            <label className='text-Medium+/Label/Small-Strong mb-2'>Email</label>
+            <input className='outline-none border-2 border-primary-2 w-[100%] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter Email Address ' />
+          </div>
+        </div>
+            </Modal>
+
             <div className='container mx-auto px-[12px]'>
 
                 <div className='py-[32px]'>
@@ -69,8 +94,9 @@ const CompletedAppointmentDetails = () => {
                         </div>
 
                         <div className=' border-2 mx-[24px] border-primary-2 rounded'>
-                            <div className='text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
+                            <div className='flex justify-between items-center text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
                                 <h2 className='mx-[16px]'>Prescription</h2>
+                                <button onClick={handleOpenModal}><i class="bi bi-plus-square text-[22px] text-neutral-9"></i></button>
                             </div>
 
                             <div className='flex gap-28 py-[12px] px-[30px] text-primary-7'>

@@ -1,7 +1,6 @@
 import axios from "axios";
+import { BASE_URL } from "../../utils/apiConstants";
 // import { API_PATH } from "../../constants/apiConstant";
-
-import { BASE_URL } from "../../constants/apiConstant";
 
 export const api = axios.create({
   withCredentials: false,

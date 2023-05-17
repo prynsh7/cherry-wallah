@@ -1,0 +1,7 @@
+export const BASE_URL = "http://localhost:8000/api/";
+
+////////////////////////////////////////////
+////////////////   AUTH    /////////////////
+////////////////////////////////////////////
+export const REGISTER_DOCTOR = "auth/signup/doctor";
+export const REGISTER_PATIENT = "auth/signup/patient";

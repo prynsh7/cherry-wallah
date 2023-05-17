@@ -1,22 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Auth from '../../components/Layout/AuthLayout'
 import { ToastContainer, toast } from 'react-toastify';
 import Loader from '../../components/Loader/index';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
 
 import { ROUTES } from '../../routes/RouterConfig';
 import Input from '../../components/Input/Input';
 import Select from '../../components/Input/Select';
+import { AuthAPI } from '../../apis/authAPI';
 
 
 const UserRegister = () => {
 
     const [data, setData] = React.useState({
-        phone: ''
+        phone: '',
+        first_name: '',
+        last_name: '',
+        email: '',
+        age: '',
+        gender:'',
+        password: '',
     })
 
     const navigate = useNavigate();
+
+    const location = useLocation();
+
+    const { state } = location;
+
+    console.log(state);
 
     const [otpSent, setOtpSent] = React.useState(false)
 
@@ -30,6 +43,19 @@ const UserRegister = () => {
         const { name, value } = e.target;
         setData(prev => ({ ...prev, [name]: value }))
     }
+
+    const handleSubmit = async () => {
+        const res = await AuthAPI.postRegisterPatient({...data, name:data.first_name + ' ' + data.last_name})
+        if(res.status){
+            toast.success('Registered Successfully')
+        }
+    }
+
+    useEffect(()=>{
+        if(state?.phone){
+            setData(prev => ({ ...prev, phone: state.phone }))
+        }
+    },[state])
     return (
         <Auth>
             <div className="md:w-[100%] min-w-[100%]  w-[100%] px-[36px] py-[32px] h-[100%] m-auto flex  justify-center">
@@ -49,29 +75,40 @@ const UserRegister = () => {
                     <div className="w-[100%] input-animation mt-[90px] flex flex-col gap-[10px]">
 
                         <div className='grid grid-cols-2 gap-[10px]'>
-                            <Input name='first_name' label="First Name" placeholder='Enter First Name' />
-                            <Input name='first_name' label="Last Name" placeholder='Enter Last Name' />
+                            <Input name='first_name' label="First Name" placeholder='Enter First Name' value={data.first_name} handleChange={handleChange}/>
+                            <Input name='last_name' label="Last Name" placeholder='Enter Last Name' value={data.last_name} handleChange={handleChange}/>
                             <div className='col-span-2'>
-                                <Input name='email' label="Email" placeholder='Enter Email' />
+                                <Input name='email' label="Email" placeholder='Enter Email' value={data.email} handleChange={handleChange} />
                             </div>
                             <div className='col-span-2'>
-                                <Input name='phone' label="Phone" placeholder='Enter Phone' />
+                                <Input disabled name='phone' value={data.phone} label="Phone" handleChange={handleChange} placeholder='Enter Phone' />
                             </div>
 
                             <div className='col-span-1'>
-                                <Input name='phone' label="Age" type='number' placeholder='Enter Age' />
+                                <Input name='age' value={data.age} handleChange={handleChange} label="Age" type='number' placeholder='Enter Age' />
                             </div>
                             <div className='col-span-1'>
-                                <Select label={"Gender"} options={[
+                                <Select handleChange={(e)=>{
+                                    console.log(e);
+                                    setData(prev=>({
+                                        ...prev,
+                                        gender:e
+                                    }))
+                                }} 
+                                label={"Gender"} 
+                                options={[
                                     {
                                         label : "Male",
-                                        value: "male"
+                                        value: "Male"
                                     },
                                     {
                                         label : "Female",
-                                        value: "female"
+                                        value: "Female"
                                     }
                                 ]} />
+                            </div>
+                            <div className='col-span-2'>
+                                <Input type='password' name='password' value={data.password} label="password" handleChange={handleChange} placeholder='Enter Password' />
                             </div>
 
 
@@ -85,8 +122,7 @@ const UserRegister = () => {
                         <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[30px]"
                             onClick={(e) => {
                                 e.preventDefault()
-                                toast.error('Some error occured')
-                                navigate(ROUTES.DoctorRegister)
+                                handleSubmit()
                             }}
                         >Submit</button>
                     </div>

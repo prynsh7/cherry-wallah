@@ -1,5 +1,8 @@
+import { ROUTES } from "../routes/RouterConfig";
 import { api } from "./config/axiosConfig";
 import { defineCancelApiObject } from "./config/axiosUtils";
+
+import * as apiConst from '../utils/apiConstants'
 
 
 export const AuthAPI = {
@@ -7,7 +10,6 @@ export const AuthAPI = {
         const response = await api.request({
             url: "auth/sendOTP",
             method: "POST",
-            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('fbToken'))}` },
             data: data,
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
@@ -19,7 +21,6 @@ export const AuthAPI = {
         const response = await api.request({
             url: "auth/verifyOTP",
             method: "POST",
-            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('fbToken'))}` },
             data: data,
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
@@ -28,13 +29,29 @@ export const AuthAPI = {
     },
 
 
-    postRegister: async (data, cancel = false) => {
+    postRegisterPatient: async (data, cancel = false) => {
         const response = await api.request({
-            url: "auth/signup",
+            url: apiConst.REGISTER_PATIENT,
             method: "POST",
-            headers: { 'Authorization': `Bearer ${JSON.parse(localStorage.getItem('fbToken'))}` },
+            headers: {
+                "x-request-token":sessionStorage.getItem('xtoken')
+            },
             data: {
-                user: data
+                user: data,
+                patient:data
+            },
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+
+        return response.data;
+    },
+
+    postRegisterDoctor: async (data, cancel = false) => {
+        const response = await api.request({
+            url: apiConst.REGISTER_DOCTOR,
+            method: "POST",
+            data: {
+                user: data,
             },
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });

@@ -7,15 +7,20 @@ import { ROUTES } from '../../routes/RouterConfig';
 import { useNavigate } from 'react-router-dom';
 
 import logo from '../../assets/images/logo.png'
+import { AuthAPI } from '../../apis/authAPI';
 
 
 const Regsiter = () => {
 
     const navigate = useNavigate()
 
+    const [profile, setProfile] = React.useState('')
+
     const [data, setData] = React.useState({
         phone: ''
     })
+
+    const [OTPReqId, setOTPReqId] = React.useState('')
 
     const [loading, setLoading] = React.useState(false)
 
@@ -25,6 +30,30 @@ const Regsiter = () => {
     const [otp, setOtp] = React.useState('')
 
     const [confirmation, setConfirmation] = React.useState(false)
+
+    const sendOTP = async () => {
+        if(!data.phone) return toast.error('Please enter phone number')
+        const res = await AuthAPI.postSendOtp(data)
+        if(res.success){
+             setOtpSent(true)
+             setOTPReqId(res.data.requestId)
+            }
+        console.log(res);
+    }
+
+    const verifyOTP = async () => {
+        if(!otp) return toast.error('Please enter OTP')
+        setLoading(true)
+        const res = await AuthAPI.postVerifyOtp({otp, requestId: OTPReqId})
+        if(res.success) {
+            if(!res.data.newUser) return toast.error('User already exists')
+            sessionStorage.setItem('xtoken', res.data.requestToken)
+            profile=='doctor'? navigate(ROUTES.DoctorRegister,{state: { phone: data.phone}}) : navigate(ROUTES.UserRegister,{state: { phone: data.phone}})
+        }
+        console.log(res);
+        setLoading(false)
+
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -53,7 +82,8 @@ const Regsiter = () => {
                             <div className='flex gap-[20px] my-[45px]'>
                                 <div className='hover:animate-shake-fast cursor-pointer bg-primary-1 w-[50%] aspect-square rounded-[8px] flex items-center justify-center flex flex-col gap-[15px]'
                                 onClick={() => {
-                                    setStep(2)
+                                    setStep(2);
+                                    setProfile('patient')
 
                                 }}
                                 >
@@ -63,7 +93,8 @@ const Regsiter = () => {
 
                                 <div className='hover:animate-shake-fast cursor-pointer bg-primary-1 w-[50%] aspect-square rounded-[8px] flex items-center justify-center flex flex-col gap-[15px]'
                                 onClick={() => {
-                                    setStep(2)
+                                    setStep(2);
+                                    setProfile('doctor')
                                 }}
                                 >
                                 <i className="bi bi-hospital text-primary-6 text-[20px]"></i>
@@ -86,7 +117,7 @@ const Regsiter = () => {
                                 {
                                     otpSent ? <div className="flex flex-col mt-[10px]">
                                         <label className="text-[#333333] opacity-70 text-[14px]">Enter OTP</label>
-                                        <OtpInput value={otp} valueLength={5} onChange={(e) => setOtp(e)} />
+                                        <OtpInput value={otp} valueLength={6} onChange={(e) => setOtp(e)} />
                                     </div> : null
 
                                 }
@@ -108,9 +139,9 @@ const Regsiter = () => {
                                             toast.error('Please accept terms and conditions')
                                             return
                                         }
-                                    
+
                                         {
-                                            otpSent ? navigate(ROUTES.UserRegister) : setOtpSent(true)
+                                            otpSent ? verifyOTP(): sendOTP();
                                         }
                                     }}
                                 >{

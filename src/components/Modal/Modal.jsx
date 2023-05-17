@@ -14,7 +14,7 @@ const Modal = ({
         {children}
         <div className='flex justify-between mt-[14px]'>
         <Button label={'Close'} onClick={handleCancel} type='outlined'/>
-            <Button label={'Save Change'} onClick={handleSubmit} type='linear'/>
+            <Button label={'Save change'} onClick={handleSubmit} type='linear'/>
         </div>
     </Mod>
   )

@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
 import DoctorProfilepic from '../../assets/images/doctorlist.png'
 import Modal from '../../components/Modal/Modal'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../routes/RouterConfig'
+import TimeSlots from '../../components/TimeSlots/TimeSlots'
 
 const DoctorProfile = () => {
+    const navigate = useNavigate()
     const [isOpen, setIsOpen] = useState(false)
-
     const handleCloseModal = () => setIsOpen(false)
     const handleOpenModal = () => setIsOpen(true)
 
     return (
         <div className='bg-neutral-4'>
-            <Modal isOpen={isOpen} handleSubmit={handleCloseModal} handleCancel={handleCloseModal}>
-                Hello
+
+            <Modal width={'50%'} className='bg-neutral-1' isOpen={isOpen}
+                handleSubmit={() => {
+                    handleCloseModal()
+                    navigate(ROUTES.Appointment)
+                }}
+                handleCancel={handleCloseModal}>
+                <TimeSlots />
             </Modal>
+
             <div className='container mx-auto py-[60px]'>
 
                 <div className='py-5'>
@@ -73,6 +83,11 @@ const DoctorProfile = () => {
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <div className='bg-[#ffff]  mx-[85px] py-[30px] rounded-[14px] mt-[36px]'>
+                    <div className='text-Small/Title/Small text-[#007E85] px-[28px]'>Doctor info</div>
+                    <p className='mt-[6px] px-[28px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ratione praesentium dignissimos quam accusantium, consectetur illum assumenda tempore libero sit repellat quibusdam aliquam odit atque asperiores reiciendis nemo odio non? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas perspiciatis quaerat corporis dignissimos. Pariatur consectetur deserunt vero ratione optio deleniti excepturi vitae ipsum unde? Repellat ducimus dolorem quo provident sint?</p>
                 </div>
 
                 <div className='bg-[#ffff]  mx-[85px] py-[30px] rounded-[14px] mt-[36px]'>

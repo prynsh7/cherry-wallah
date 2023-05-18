@@ -31,6 +31,7 @@ import AppointmentConfirmation from '../pages/Appointment/AppointmentConfirmatio
 import CompletedAppointmentDetails from '../pages/Appointment/CompletedAppointmentDetails';
 import AppointmentReportDetailsField from '../pages/Appointment/AppointmentReportDetailsField';
 import UserSettings from '../pages/User/UserSettings';
+import NavbarPatient from '../components/Navbar/NavbarPatient';
 
 
 
@@ -40,7 +41,8 @@ const Router = () => {
     return (
       <>
 
-        <NavbarLogin />
+        {/* <NavbarLogin /> */}
+        <NavbarPatient/>
         <Outlet />
         <Footer />
       </>

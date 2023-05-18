@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import DoctorProfile from '../../assets/images/doctorlist.png'
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../routes/RouterConfig'
+
+
+
 const CompletedAppointmentDetails = () => {
+    const navigate = useNavigate()
+
     return (
         <div className='bg-neutral-4'>
             <div className='container mx-auto px-[12px]'>
@@ -41,7 +48,10 @@ const CompletedAppointmentDetails = () => {
                     <div className='pb-[32px] mx-[32px] gap-6 bg-[#ffff] flex flex-col rounded-[10px]'>
                         <div className='mx-[28px] mt-[20px] flex justify-between'>
                             <h3 className='text-Small/Title/Medium text-[black]'>Report</h3>
-                            <button className='px-[10px] py-[4px] rounded-[8px] border-2 border-primary-4'><i class="bi bi-filetype-pdf pr-[6px] text-primary-7"></i> <span className='text-primary-7'>Export</span> </button>
+                            <div className='flex gap-2'>
+                                <button onClick={() => { navigate(ROUTES.AppointmentReportDetailsField) }} className='px-[10px] py-[4px] rounded-[5px] border-2 border-primary-4'><i class="bi bi-pencil pr-[6px] text-primary-7"></i> <span className='text-primary-7'>Edit report</span> </button>
+                                <button className='px-[10px] py-[4px] rounded-[5px] border-2 border-primary-4'><i class="bi bi-filetype-pdf pr-[6px] text-primary-7"></i> <span className='text-primary-7'>Export</span> </button>
+                            </div>
                         </div>
                         <div className=' border-2 mx-[24px] border-primary-2 rounded'>
                             <div className='text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
@@ -69,7 +79,7 @@ const CompletedAppointmentDetails = () => {
                         </div>
 
                         <div className=' border-2 mx-[24px] border-primary-2 rounded'>
-                            <div className='text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
+                            <div className='flex justify-between items-center text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
                                 <h2 className='mx-[16px]'>Prescription</h2>
                             </div>
 

@@ -1,6 +1,9 @@
 import React from 'react'
 import DoctorProfile from '../../assets/images/doctorlist.png'
+import { useNavigate } from 'react-router-dom'
+import {ROUTES} from '../../routes/RouterConfig'
 const AppointmentPD = () => {
+const navigate=useNavigate()
     return (
         <div className='bg-neutral-4'>
 
@@ -67,7 +70,7 @@ const AppointmentPD = () => {
                             </div>
                            </div>
 
-                            <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Next</button>
+                            <button onClick={() => { navigate(ROUTES.AppointmentConfirmation) }} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Next</button>
                         </div>
                     </div>
                 </div>

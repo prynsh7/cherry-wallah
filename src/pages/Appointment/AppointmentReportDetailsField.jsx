@@ -157,6 +157,8 @@ const AppointmentReportDetailsField = () => {
                                     <input className='outline-none border-2 border-primary-2 w-[250px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter dosages and frequency' />
                                 </div>
                             </div>
+                            <button className='font-bold text-neutral-9 pb-[8px] px-[20px]'>+ Add medicines</button>
+
                         </div>
                     </div>
 

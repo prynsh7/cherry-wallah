@@ -1,6 +1,10 @@
 import React from 'react'
 import DoctorProfile from '../../assets/images/doctorlist.png'
+import { useNavigate } from 'react-router-dom'
+import {ROUTES} from '../../routes/RouterConfig'
 const Appointment = () => {
+const navigate=useNavigate()
+
     return (
         <div className='bg-neutral-4'>
 
@@ -33,7 +37,7 @@ const Appointment = () => {
                             <input className="border-[1px] rounded-[4px] p-[10px] w-[100%] mt-2" placeholder="Phone Number" />
                             <p className='mt-[15px]'>You will receive an OTP shortly. <br />
                                 We will send appointment-related communications on this number.</p>
-                            <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Continue</button>
+                            <button onClick={() => { navigate(ROUTES.AppointmentPD) }} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Continue</button>
                         </div>
                     </div>
                 </div>

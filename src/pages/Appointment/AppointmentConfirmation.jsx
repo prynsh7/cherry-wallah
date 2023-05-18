@@ -1,9 +1,18 @@
 import React from 'react'
+import { useState } from 'react'
+import Modal from '../../components/Modal/Modal'
 import DoctorProfile from '../../assets/images/doctorlist.png'
+import TimeSlots from '../../components/TimeSlots/TimeSlots'
 
 const AppointmentConfirmation = () => {
+    const [isOpen, setIsOpen] = useState(false)
+    const handleCloseModal = () => setIsOpen(false)
+    const handleOpenModal = () => setIsOpen(true)
     return (
         <div className='bg-neutral-4'>
+            <Modal width={'50%'} className='bg-neutral-1' isOpen={isOpen} handleSubmit={handleCloseModal} handleCancel={handleCloseModal}>
+                <TimeSlots />
+            </Modal>
             <div className='container mx-auto py-[60px]'>
 
                 <div className='grid sm:grid-cols-2 gap-10 px-20'>
@@ -38,7 +47,7 @@ const AppointmentConfirmation = () => {
                             <h3>+918651439657</h3>
                             <div className='flex gap-6'>
                                 <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[50%] py-[8px] mt-[20px]">Cancel Appointment</button>
-                                <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[50%] py-[8px] mt-[20px]">Reschedule Appointment</button>
+                                <button onClick={handleOpenModal} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[50%] py-[8px] mt-[20px]">Reschedule Appointment</button>
                             </div>
                         </div>
                     </div>

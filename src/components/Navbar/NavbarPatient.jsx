@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes/RouterConfig";
 import Button from "../Button/Button";
 import { Dropdown } from "antd";
+import {AiOutlineUser} from 'react-icons/ai'
 
 const navOptions = [
   {
@@ -20,36 +21,40 @@ const navOptions = [
     link: "/contact",
   }];
 
+  
+
+
+const NavbarPatient = ({ multimenu = true, auth = false }) => {
+  const navigate = useNavigate();
+
   const items = [
     {
       key: '1',
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.antgroup.com">
-          1st menu item
-        </a>
+        <Button onClick={()=>navigate(ROUTES.UserSettings)}  className={'w-full flex justify-start'} label={<div className="flex justify-start items-center gap-2"><AiOutlineUser/> Profile</div>} type="outlined"/>
       ),
     },
-    {
+    {   
       key: '2',
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.aliyun.com">
-          2nd menu item
-        </a>
+        <Button  onClick={()=>navigate(ROUTES.UpcomingAppointment)} className={'w-full flex justify-start bg-transparent text-neutral-10'} label={'Services'}/>
       ),
     },
     {
       key: '3',
       label: (
-        <a target="_blank" rel="noopener noreferrer" href="https://www.luohanacademy.com">
-          3rd menu item
-        </a>
+        <Button  onClick={()=>navigate(ROUTES.UpcomingAppointment)} className={'w-full bg-transparent text-neutral-10'} label={'My Appointments'}/>
+      ),
+    },
+    {
+      key: '4',
+      label: (
+        <Button  onClick={()=>navigate(ROUTES.UpcomingAppointment)} className={'w-full bg-transparent text-neutral-10'} label={'History'}/>
       ),
     },
   ];
 
 
-const NavbarPatient = ({ multimenu = true, auth = false }) => {
-  const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(auth);
   const [selected, setSelected] = useState('Home');
 
@@ -102,7 +107,7 @@ const NavbarPatient = ({ multimenu = true, auth = false }) => {
                     items,
                   }}
                 >
-                <div className="w-[40px] aspect-square rounded-full bg-[red] cursor-pointer">
+                <div className="w-[40px] aspect-square rounded-full border border-1 border-primary-6 cursor-pointer">
 
                 </div>
                 </Dropdown>

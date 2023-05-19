@@ -77,7 +77,7 @@ const DoctorsList = () => {
                                 </div>
                                 <div className='flex justify-center items-center'>
                                     <button className='py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]'
-                                        onClick={() => navigate(ROUTES.DoctorProfile)}
+                                        onClick={() => navigate(ROUTES.User.DoctorProfile)}
                                     >Book Appointment</button>
                                 </div>
                             </div>

@@ -7,7 +7,9 @@ import {
   CalendarOutlined,
   EditOutlined,
   MessageOutlined,
-  SettingOutlined
+  SettingOutlined,
+
+  AppstoreAddOutlined 
 } from '@ant-design/icons';
 
 import { Button, Layout, Menu, theme } from 'antd';
@@ -35,6 +37,7 @@ const keyRouteMap = {
   '4': ROUTES.Doctor.calender,
   '5': ROUTES.Doctor.chats,
   '6': ROUTES.Doctor.settings,
+  '7': ROUTES.Doctor.Refrral,
 }
 
 const DoctorLayout = () => {
@@ -58,6 +61,8 @@ const DoctorLayout = () => {
     const key = Object.keys(keyRouteMap).find(key => keyRouteMap[key] === path);
     setSelectedKey(key);
   }, [])
+
+  const [isCardWhite, setIscardWhite] = useState(true)
 
   return (
     <Layout className='min-h-[100vh] flex'>
@@ -104,6 +109,11 @@ const DoctorLayout = () => {
                   icon: <SettingOutlined style={styleIcon} />,
                   label: 'Setttings',
                 },
+                {
+                  key: '7',
+                  icon: <AppstoreAddOutlined style={styleIcon} />,
+                  label: 'Referral',
+                },
               ]}
             />
           </div>
@@ -139,7 +149,7 @@ const DoctorLayout = () => {
             background: colorBgContainer,
           }}
         >
-          <Outlet />
+          <Outlet context={{setIscardWhite}}/>
         </Content>
       </Layout>
     </Layout>

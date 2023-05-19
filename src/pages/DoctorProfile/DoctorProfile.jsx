@@ -17,7 +17,7 @@ const DoctorProfile = () => {
             <Modal width={'50%'} className='bg-neutral-1' isOpen={isOpen}
                 handleSubmit={() => {
                     handleCloseModal()
-                    navigate(ROUTES.Appointment)
+                    navigate(ROUTES.User.Appointment)
                 }}
                 handleCancel={handleCloseModal}>
                 <TimeSlots />

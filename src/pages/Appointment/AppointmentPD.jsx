@@ -70,7 +70,7 @@ const navigate=useNavigate()
                             </div>
                            </div>
 
-                            <button onClick={() => { navigate(ROUTES.AppointmentConfirmation) }} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Next</button>
+                            <button onClick={() => { navigate(ROUTES.User.AppointmentConfirmation) }} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Next</button>
                         </div>
                     </div>
                 </div>

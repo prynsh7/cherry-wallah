@@ -19,7 +19,7 @@ const UserRegister = () => {
         last_name: '',
         email: '',
         age: '',
-        gender:'',
+        gender: '',
         password: '',
     })
 
@@ -45,17 +45,31 @@ const UserRegister = () => {
     }
 
     const handleSubmit = async () => {
-        const res = await AuthAPI.postRegisterPatient({...data, name:data.first_name + ' ' + data.last_name})
-        if(res.status){
-            toast.success('Registered Successfully')
+        try {
+            const res = await AuthAPI.postRegisterPatient({ ...data, name: data.first_name + ' ' + data.last_name })
+            if (res.success) {
+                toast.success('Registered Successfully')
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('refreshToken', res.data.refreshToken)
+                localStorage.setItem('user', JSON.stringify(res.data.user))
+                setTimeout(() => {
+                    navigate(ROUTES.User.root)
+                }, 1000)
+
+            }
+        } catch (err) {
+            console.log(err);
+            toast.error('Something went wrong')
+        } finally {
+            setLoading(false)
         }
     }
 
-    useEffect(()=>{
-        if(state?.phone){
+    useEffect(() => {
+        if (state?.phone) {
             setData(prev => ({ ...prev, phone: state.phone }))
         }
-    },[state])
+    }, [state])
     return (
         <Auth>
             <div className="md:w-[100%] min-w-[100%]  w-[100%] px-[36px] py-[32px] h-[100%] m-auto flex  justify-center">
@@ -75,8 +89,8 @@ const UserRegister = () => {
                     <div className="w-[100%] input-animation mt-[90px] flex flex-col gap-[10px]">
 
                         <div className='grid grid-cols-2 gap-[10px]'>
-                            <Input name='first_name' label="First Name" placeholder='Enter First Name' value={data.first_name} handleChange={handleChange}/>
-                            <Input name='last_name' label="Last Name" placeholder='Enter Last Name' value={data.last_name} handleChange={handleChange}/>
+                            <Input name='first_name' label="First Name" placeholder='Enter First Name' value={data.first_name} handleChange={handleChange} />
+                            <Input name='last_name' label="Last Name" placeholder='Enter Last Name' value={data.last_name} handleChange={handleChange} />
                             <div className='col-span-2'>
                                 <Input name='email' label="Email" placeholder='Enter Email' value={data.email} handleChange={handleChange} />
                             </div>
@@ -88,24 +102,28 @@ const UserRegister = () => {
                                 <Input name='age' value={data.age} handleChange={handleChange} label="Age" type='number' placeholder='Enter Age' />
                             </div>
                             <div className='col-span-1'>
-                                <Select handleChange={(e)=>{
+                                <Select handleChange={(e) => {
                                     console.log(e);
-                                    setData(prev=>({
+                                    setData(prev => ({
                                         ...prev,
-                                        gender:e
+                                        gender: e
                                     }))
-                                }} 
-                                label={"Gender"} 
-                                options={[
-                                    {
-                                        label : "Male",
-                                        value: "Male"
-                                    },
-                                    {
-                                        label : "Female",
-                                        value: "Female"
-                                    }
-                                ]} />
+                                }}
+                                    label={"Gender"}
+                                    options={[
+                                        {
+                                            label: "Male",
+                                            value: "male"
+                                        },
+                                        {
+                                            label: "Female",
+                                            value: "female"
+                                        },
+                                        {
+                                            label: "Other",
+                                            value: "other"
+                                        }
+                                    ]} />
                             </div>
                             <div className='col-span-2'>
                                 <Input type='password' name='password' value={data.password} label="password" handleChange={handleChange} placeholder='Enter Password' />

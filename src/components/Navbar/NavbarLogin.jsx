@@ -11,6 +11,10 @@ const navOptions = [
     link: "/",
   },
   {
+    name: "Services",
+    link: "/services",
+  },
+  {
     name: "About",
     link: "/about",
   },
@@ -24,7 +28,6 @@ const NavbarLogin = ({ multimenu = true, auth = false }) => {
   const navigate = useNavigate();
   const [isAuth, setIsAuth] = useState(auth);
   const [selected, setSelected] = useState('Home');
-
   const [visible, setVisible] = useState(false);
 
   return (

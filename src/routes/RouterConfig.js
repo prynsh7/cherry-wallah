@@ -3,16 +3,7 @@ export const ROUTES = {
     About: '/about',
     Produts: '/products',
     ProductDetail: '/products/:id',
-    DoctorsList: '/DoctorsList',
-    DoctorProfile: '/DoctorProfile',
-    UpcomingAppointment: '/UpcomingAppointment',
-    CompletedAppoinment: '/CompletedAppoinment',
-    Appointment: '/Appointment',
-    AppointmentPD: '/AppointmentPD',
-    AppointmentConfirmation: '/AppointmentConfirmation',
-    CompletedAppointmentDetails: '/CompletedAppointmentDetails',
-    AppointmentReportDetailsField: '/AppointmentReportDetailsField',
-    UserSettings: '/UserSettings',
+
 
     Login: '/auth/login',
     Register: '/auth/signup',
@@ -26,11 +17,18 @@ export const ROUTES = {
         calender: '/doctor/calender',
         settings: '/doctor/settings',
     },
-    User:{
-        root:'/user',
-        address:'/user/address',
-        password:'/user/password',
-        coupons:'/user/coupons',
-        loyaltyPoints:'/user/loyalty-points',
+    User: {
+        root: '/user',
+        About: '/user/about',
+        DoctorsList: '/user/DoctorsList',
+        DoctorProfile: '/user/DoctorProfile',
+        UpcomingAppointment: '/user/UpcomingAppointment',
+        CompletedAppoinment: '/user/CompletedAppoinment',
+        Appointment: '/user/Appointment',
+        AppointmentPD: '/user/AppointmentPD',
+        AppointmentConfirmation: '/user/AppointmentConfirmation',
+        CompletedAppointmentDetails: '/user/CompletedAppointmentDetails',
+        AppointmentReportDetailsField: '/user/AppointmentReportDetailsField',
+        UserSettings: '/user/UserSettings',
     }
 }

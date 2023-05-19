@@ -38,11 +38,13 @@ import NavbarPatient from '../components/Navbar/NavbarPatient';
 const Router = () => {
 
   const RouteWithoutRole = () => {
+
+    const user = JSON.parse(localStorage.getItem('user'))
+
+
     return (
       <>
-
-        {/* <NavbarLogin /> */}
-        <NavbarPatient/>
+        <NavbarPatient isAuth={user ? true : false} />
         <Outlet />
         <Footer />
       </>
@@ -62,36 +64,41 @@ const Router = () => {
   return (
     <div>
       <Routes>
-        <Route exact path={ROUTES.Home} element={<RouteWithoutRole />}>
-          <Route index element={<Home />}></Route>
-          <Route exact path={ROUTES.About} element={<About />}></Route>
-          <Route exact path={ROUTES.DoctorsList} element={<DoctorsList />}></Route>
-          <Route exact path={ROUTES.DoctorProfile} element={<DoctorProfile />}></Route>
-          <Route exact path={ROUTES.UpcomingAppointment} element={<UpcomingAppointment />}></Route>
-          <Route exact path={ROUTES.CompletedAppoinment} element={<CompletedAppoinment />}></Route>
-          <Route exact path={ROUTES.Appointment} element={<Appointment />}></Route>
-          <Route exact path={ROUTES.AppointmentPD} element={<AppointmentPD />}></Route>
-          <Route exact path={ROUTES.AppointmentConfirmation} element={<AppointmentConfirmation />}></Route>
-          <Route exact path={ROUTES.CompletedAppointmentDetails} element={<CompletedAppointmentDetails />}></Route>
-          <Route exact path={ROUTES.AppointmentReportDetailsField} element={<AppointmentReportDetailsField />}></Route>
-          <Route exact path={ROUTES.UserSettings} element={<UserSettings />}></Route>
-
-          
-
-          {/* <Route index element={<RouteWithRole Element={Category} />}></Route>
-        <Route index path="" element={<RouteWithRole Element={Category} />}></Route>
-        <Route exact path={ROUTES.Produts} element={<RouteWithRole Element={Products} />}></Route>
-        <Route exact path={ROUTES.ProductDetail} element={<RouteWithRole Element={ProductPage} />}></Route> */}
-
-        </Route>
 
         <Route exact path={ROUTES.Login} element={<Login />}></Route>
         <Route exact path={ROUTES.Register} element={<Register />}></Route>
         <Route exact path={ROUTES.UserRegister} element={<UserRegister />}></Route>
         <Route exact path={ROUTES.DoctorRegister} element={<RegisterDoctor />}></Route>
 
+        <Route exact path={ROUTES.Home} element={<RouteWithoutRole />}>
+          <Route index element={<Home />}></Route>
+          <Route exact path={ROUTES.About} element={<About />}></Route>
+          <Route exact path={"*"} element={<NotFound />}></Route>
+        </Route>
+
+        // PATIENT ROUTES
+        <Route exact path={ROUTES.User.root} element={<RouteWithUser />}>
+          <Route index element={<Home />}></Route>
+          <Route exact path={ROUTES?.User?.About} element={<About />}></Route>
+          <Route exact path={ROUTES?.User?.DoctorsList} element={<DoctorsList />}></Route>
+          <Route exact path={ROUTES?.User?.DoctorProfile} element={<DoctorProfile />}></Route>
+          <Route exact path={ROUTES?.User?.UpcomingAppointment} element={<UpcomingAppointment />}></Route>
+          <Route exact path={ROUTES?.User?.CompletedAppoinment} element={<CompletedAppoinment />}></Route>
+          <Route exact path={ROUTES?.User?.Appointment} element={<Appointment />}></Route>
+          <Route exact path={ROUTES?.User?.AppointmentPD} element={<AppointmentPD />}></Route>
+          <Route exact path={ROUTES?.User?.AppointmentConfirmation} element={<AppointmentConfirmation />}></Route>
+          <Route exact path={ROUTES?.User?.CompletedAppointmentDetails} element={<CompletedAppointmentDetails />}></Route>
+          <Route exact path={ROUTES?.User?.AppointmentReportDetailsField} element={<AppointmentReportDetailsField />}></Route>
+          <Route exact path={ROUTES?.User?.UserSettings} element={<UserSettings />}></Route>
 
 
+        </Route>
+
+
+
+
+
+        //DOCTOR ROUTES
         <Route exact path={ROUTES.Doctor.root} element={<DoctorLayout />}>
           <Route index path="" element={<DoctorHome />}></Route>
           <Route exact path={ROUTES.Doctor.patients} element={<Patients />}></Route>
@@ -103,17 +110,6 @@ const Router = () => {
           <Route path='*' element={<NotFound />} />
         </Route>
 
-        {/*
-        <Route exact path={ROUTES.About} element={<RouteWithRole Element={About} />}></Route>
-
-
-
-        //User Profile
-        <Route exact path={ROUTES.User.root} element={<RouteWithUser Element={User} />}></Route>
-        <Route exact path={ROUTES.User.address} element={<RouteWithUser Element={UserAddresses} />}></Route>
-        <Route exact path={ROUTES.User.password} element={<RouteWithUser Element={UserPassword} />}></Route>
-        <Route exact path={ROUTES.User.coupons} element={<RouteWithUser Element={UserCoupons} />}></Route>
-        <Route exact path={ROUTES.User.loyaltyPoints} element={<RouteWithUser Element={UserLoyaltyPoints} />}></Route> */}
       </Routes>
     </div>
   )

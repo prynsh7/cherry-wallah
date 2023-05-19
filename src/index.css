@@ -59,3 +59,21 @@
 .ant-menu-light.ant-menu-root.ant-menu-vertical{
     border-right: 0px;
 }
+
+.loader_container {
+    position: fixed;
+    z-index: 9999;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.25);
+
+}
+
+.ant-spin .ant-spin-dot-item {
+    background-color: #1A3B36;
+}

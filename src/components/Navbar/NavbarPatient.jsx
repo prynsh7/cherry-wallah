@@ -5,12 +5,16 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../../routes/RouterConfig";
 import Button from "../Button/Button";
 import { Dropdown } from "antd";
-import {AiOutlineUser} from 'react-icons/ai'
+import { AiOutlineUser } from 'react-icons/ai'
 
 const navOptions = [
   {
     name: "Home",
     link: "/",
+  },
+  {
+    name: "Services",
+    link: "/services",
   },
   {
     name: "About",
@@ -21,41 +25,50 @@ const navOptions = [
     link: "/contact",
   }];
 
-  
 
 
-const NavbarPatient = ({ multimenu = true, auth = false }) => {
+
+const NavbarPatient = ({ user, isAuth = false}) => {
   const navigate = useNavigate();
 
   const items = [
     {
       key: '1',
       label: (
-        <Button onClick={()=>navigate(ROUTES.UserSettings)}  className={'w-full flex justify-start'} label={<div className="flex justify-start items-center gap-2"><AiOutlineUser/> Profile</div>} type="outlined"/>
+        <Button onClick={() => navigate(ROUTES.UserSettings)} className={'w-full flex justify-start'} label={<div className="flex justify-start items-center gap-2"><AiOutlineUser /> Profile</div>} type="outlined" />
       ),
     },
-    {   
+    {
       key: '2',
       label: (
-        <Button  onClick={()=>navigate(ROUTES.UpcomingAppointment)} className={'w-full flex justify-start bg-transparent text-neutral-10'} label={'Services'}/>
+        <Button onClick={() => navigate(ROUTES.UpcomingAppointment)} className={'w-full flex justify-start bg-transparent text-neutral-10'} label={'Services'} />
       ),
     },
     {
       key: '3',
       label: (
-        <Button  onClick={()=>navigate(ROUTES.UpcomingAppointment)} className={'w-full bg-transparent text-neutral-10'} label={'My Appointments'}/>
+        <Button onClick={() => navigate(ROUTES.UpcomingAppointment)} className={'w-full bg-transparent text-neutral-10'} label={'My Appointments'} />
       ),
     },
     {
       key: '4',
       label: (
-        <Button  onClick={()=>navigate(ROUTES.UpcomingAppointment)} className={'w-full bg-transparent text-neutral-10'} label={'History'}/>
+        <Button onClick={() => navigate(ROUTES.UpcomingAppointment)} className={'w-full bg-transparent text-neutral-10'} label={'History'} />
+      ),
+    },
+    {
+      key: '4',
+      label: (
+        <Button onClick={() => {
+          localStorage.removeItem('user')
+          navigate(ROUTES.Login)
+        }} className={'w-full bg-transparent text-[red]'} label={<p className="text-red">Log Out</p>} />
       ),
     },
   ];
 
 
-  const [isAuth, setIsAuth] = useState(auth);
+  // const [isAuth, setIsAuth] = useState(auth);
   const [selected, setSelected] = useState('Home');
 
   const [visible, setVisible] = useState(false);
@@ -74,43 +87,59 @@ const NavbarPatient = ({ multimenu = true, auth = false }) => {
 
           <div className="relative">
             <ul className="flex gap-[30px]">
-                {
-                  navOptions.map((i, key) => (
-                    <li className="inline-block">
-                      <a href="javascript:void(0)"
-                      onClick={() => {setSelected(i.name)
-                      navigate(i.link)
+              {
+                navOptions.map((i, key) => (
+                  <li className="inline-block">
+                    <a href="javascript:void(0)"
+                      onClick={() => {
+                        setSelected(i.name)
+                        navigate(i.link)
                       }}
-                       className={(i.name === selected ? "text-primary-6" : "text-neutral-13") + " text-Medium+/Title/xxSmall"}>
-                        {i.name}
-                      </a>
-                    </li>
-                  ))
-                }
+                      className={(i.name === selected ? "text-primary-6" : "text-neutral-13") + " text-Medium+/Title/xxSmall"}>
+                      {i.name}
+                    </a>
+                  </li>
+                ))
+              }
             </ul>
-            
+
 
           </div>
 
-          {isAuth ? (
-            <div className="flex gap-8">
-              {/* <img src={location} alt="location icon" />
-              <img src={wallet} alt="wallet icon" />
-              <img src={cart} alt="user cart" />
-              <img src={user} alt="user profile" />
-              <img src={menu} alt="menu icon" /> */}
+          {!isAuth ? (
+            <div className="btn__div flex gap-[10px]">
+
+              <Button
+                type="outlined"
+                className="w-[150px]"
+                onClick={() => {
+                  navigate(ROUTES.Register);
+                }}
+                label={"Register"}
+              />
+
+              <Button
+                type="linear"
+                className="w-[150px]"
+                onClick={() => {
+                  navigate(ROUTES.Login);
+                }}
+                label={"Login"}
+              />
             </div>
           ) : (
-            <div className="btn__div flex gap-[10px]">
-                <Dropdown
-                 menu={{
-                    items,
-                  }}
-                >
-                <div className="w-[40px] aspect-square rounded-full border border-1 border-primary-6 cursor-pointer">
-
+            <div className="btn__div flex gap-[10px] cursor-pointer">
+              <Dropdown
+                menu={{
+                  items,
+                }}
+              >
+                <div className="flex flex-row gap-[20px] items-center">
+                  <div className="w-[40px] aspect-square rounded-full border border-1 border-primary-6 cursor-pointer">
+                  </div>
+                  <p className="text-[#000]/[0.5]">{user?.first_name}</p>
                 </div>
-                </Dropdown>
+              </Dropdown>
             </div>
           )}
         </div>

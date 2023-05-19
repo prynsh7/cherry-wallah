@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
 
 import { ROUTES } from '../../routes/RouterConfig';
+import { AuthAPI } from '../../apis/authAPI';
 
 
 const Login = () => {
 
     const [data, setData] = React.useState({
-        phone: ''
+        phone: '',
+        password: '',
     })
 
     const navigate = useNavigate();
@@ -28,6 +30,26 @@ const Login = () => {
         const { name, value } = e.target;
         setData(prev => ({ ...prev, [name]: value }))
     }
+
+    const handleSubmit = async () => {
+        try {
+            const res = await AuthAPI.postLogin(data)
+            if (res.success) {
+                toast.success('Registered Successfully')
+                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('refreshToken', res.data.refreshToken)
+                localStorage.setItem('user', JSON.stringify(res.data.user.role))
+                if(res.data.user.role==='doctor') navigate(ROUTES.Doctor.appointments)
+                if(res.data.user.role==='patient') navigate(ROUTES.Home)
+            }
+        } 
+        catch (err) {
+            console.log(err);
+            toast.error(err.message)
+        }
+    }
+
+
     return (
         <Auth>
             <div className="md:w-[100%] min-w-[100%]  w-[100%] px-[36px] py-[32px] h-[100%] m-auto flex  justify-center">
@@ -47,14 +69,14 @@ const Login = () => {
                     <div className="w-[100%] input-animation mt-[90px] flex flex-col gap-[10px]">
                         <div className="flex flex-col">
                             <label className="text-[#333333] opacity-70 text-[14px]">Email / Mobile No.</label>
-                            <input name="phone" onChange={handleChange} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Email" />
+                            <input value={data.phone} name="phone" onChange={handleChange} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Email" />
                         </div>
 
                         {
                             loginType === "password" ?
                                 <div className="flex flex-col">
                                     <label className="text-[#333333] opacity-70 text-[14px]">Password</label>
-                                    <input name="password" onChange={handleChange} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Password" />
+                                    <input value={data.password} name="password" onChange={handleChange} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Password" />
                                 </div>
                                 : null
                         }
@@ -75,7 +97,9 @@ const Login = () => {
                         <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[30px]"
                             onClick={(e) => {
                                 e.preventDefault()
-                                toast.error('Some error occured')
+                                if(!data.phone||!data.password) toast.error('Please fill phone and password')
+                                // toast.error('Some error occured')
+                                handleSubmit()
                             }}
                         >{
                                 loginType === "password" ? "Login" : "Send OTP"

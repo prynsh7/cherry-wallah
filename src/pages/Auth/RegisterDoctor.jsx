@@ -15,62 +15,257 @@ const stepTitleMap = {
 }
 
 
-const renderForm = (step) => {
-  switch (step) {
-    case 0:
-      return <div className='flex flex-col gap-[15px]'>
-        <Input label="Full Name" placeholder="Enter Full Name" />
-        <CustomSelect label="Specialization" placeholder="Select Specialization" options={[]} />
-        <CustomSelect label="Gender" placeholder="Select Gender" options={[]} />
-        <CustomSelect label="City" placeholder="Select City" options={[]} />
 
-        <div className='flex flex-col'>
-          <label className='text-[#333333] opacity-70 text-[14px]'>Brief Description <span className='text-[#FF0000]'>*</span></label>
-          <textarea className='border-[1px] rounded-[4px] mt-[5px] min-h-[100px]'>
-          </textarea>
-        </div>
-      </div>
-
-    case 1:
-      return <div className='flex flex-col gap-[15px]'>
-        <Input label="Registration Number" placeholder="Enter Registration Number" />
-        <CustomSelect label="Registration Council" placeholder="Select " options={[]} />
-        <CustomSelect label="Registration Year" placeholder="Select " options={[]} />
-      </div>
-
-    case 2:
-      return <div className='flex flex-col gap-[15px]'>
-        <CustomSelect label="Degree" placeholder="Select " options={[]} />
-        <Input label="College / University" placeholder="Enter College / University" />
-        <CustomSelect label="Year of Completion" placeholder="Select " options={[]} />
-        <Input label="Year of Experiences" placeholder="Enter Year of Experiences" type='number' />
-        <Input label="Upload Certificate" placeholder="Upload" type='file' />
-      </div>
-    case 3:
-      return <div className='flex flex-col gap-[15px]'>
-        <CustomSelect label="Establishment" placeholder="Search to select" options={[]} />
-        <CustomSelect label="Degree" placeholder="Select " options={[]} />
-        <Input label="Establishment Name" placeholder="Enter Establishment Name" />
-        <CustomSelect label="City" placeholder="Select " options={[]} />
-        <Input label="Locality" placeholder="Enter Locality" />
-      </div>
-    case 4:
-      return <div className='flex flex-col gap-[15px]'>
-        <CustomSelect label="Profile Type" placeholder="Select " options={[]} />
-        <Input label="Profile Name" placeholder="Enter Profile Name" />
-        <Input label="Profile Description" placeholder="Enter Profile Description" />
-        <Input label="Profile Image" placeholder="Upload Profile Image" type='file' />
-      </div>
-    case 5:
-      return <div className='flex flex-col gap-[15px]'>
-        <p className='text-center text-primary-6'>Successfully Submitted</p>
-      </div>
-
-  }
-}
 
 
 const RegisterDoctor = () => {
+
+  const [data, setData] = useState({
+    name: '',
+    specialization: '',
+    gender:'',
+    city:'',
+    description:'',
+    registrationNumber:'',
+    registrationCouncil:'',
+    registrationYear:'',
+    degree:'',
+    college:'',
+    year:'',
+    experince:'',
+    certificate:'',
+    establishmentType:'',
+    establishmentName:'',
+    establishmentCity:'',
+    establishmentLocality:'',
+    profileType:'',
+    profileName:'',
+    profileDescription:'',
+    profileImage:'',
+  })
+
+  const dummyOptions = [
+    {
+      label: 'Dummy 1',
+      value: 'dummy1'
+    },
+    {
+      label: 'Dummy 2',
+      value: 'dummy2'
+    },
+  ]
+
+  const genderOptions = [
+    {
+      value:'Male',
+      label:'Male',
+    },
+    {
+      value:'Female',
+      label:'Female',
+    },
+  ]
+
+  const handleChange = (e) => {
+    setData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }))
+  }
+
+  const handleSelect = (name,value) => {
+    setData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  const renderForm = (step) => {
+    switch (step) {
+      case 0:
+        return <div className='flex flex-col gap-[15px]'>
+          <Input 
+          name={'name'} 
+          value={data.name} 
+          label="Full Name" 
+          placeholder="Enter Full Name"
+          handleChange={handleChange}
+          />
+          <CustomSelect 
+          value={data.specialization} 
+          name={'specialization'} 
+          label="Specialization" 
+          placeholder="Select Specialization" 
+          options={dummyOptions} 
+          handleChange={(e)=>{handleSelect('specialization',e)}}
+          />
+          <CustomSelect 
+          label="Gender" 
+          placeholder="Select Gender" 
+          options={genderOptions} 
+          value={data.gender}
+          name={'gender'}
+          handleChange={(e)=>{handleSelect('gender',e)}}
+          />
+          <CustomSelect 
+          label="City" 
+          placeholder="Select City" 
+          options={dummyOptions} 
+          value={data.city}
+          name={'city'}
+          handleChange={(e)=>{handleSelect('city',e)}}
+          />
+  
+          <div className='flex flex-col'>
+            <label className='text-[#333333] opacity-70 text-[14px]'>Brief Description <span className='text-[#FF0000]'>*</span></label>
+            <textarea className='border-[1px] rounded-[4px] mt-[5px] min-h-[100px]'>
+            </textarea>
+          </div>
+        </div>
+  
+      case 1:
+        return <div className='flex flex-col gap-[15px]'>
+          <Input 
+          label="Registration Number" 
+          placeholder="Enter Registration Number" 
+          value={data.registrationNumber}
+          name={'registrationNumber'}
+          handleChange={handleChange}
+          />
+          <CustomSelect 
+          label="Registration Council" 
+          placeholder="Select " 
+          options={dummyOptions} 
+          value={data.registrationCouncil}
+          name={'registrationCouncil'}
+          handleChange={(e)=>{handleSelect('registrationCouncil',e)}}
+          />
+          <CustomSelect 
+          label="Registration Year" 
+          placeholder="Select " 
+          options={dummyOptions} 
+          value={data.registrationYear}
+          name={'registrationYear'}
+          handleChange={(e)=>{handleSelect('registrationYear',e)}}
+          />
+        </div>
+  
+      case 2:
+        return <div className='flex flex-col gap-[15px]'>
+          <CustomSelect 
+          label="Degree" 
+          placeholder="Select " 
+          options={dummyOptions} 
+          value={data.degree}
+          name={'degree'}
+          handleChange={(e)=>{handleSelect('degree',e)}}
+          />
+          <Input 
+          label="College / University" 
+          placeholder="Enter College / University"
+          value={data.college}
+          name={'college'}
+          handleChange={handleChange}
+          />
+          <CustomSelect 
+          label="Year of Completion" 
+          placeholder="Select " 
+          options={dummyOptions} 
+          value={data.year}
+          name={'year'}
+          handleChange={(e)=>{handleSelect('year',e)}}
+          />
+          <Input 
+          label="Year of Experiences" 
+          placeholder="Enter Year of Experiences" 
+          type='number' 
+          value={data.experince}
+          name={'experince'}
+          handleChange={handleChange}
+          />
+          <Input 
+          label="Upload Certificate" 
+          placeholder="Upload" 
+          type='file' 
+          name={'certificate'}
+          handleChange={handleChange}
+          />
+        </div>
+      case 3:
+        return <div className='flex flex-col gap-[15px]'>
+          <CustomSelect 
+          label="Establishment" 
+          placeholder="Search to select" 
+          options={dummyOptions} 
+          value={data.establishmentType}
+          name={'establishmentType'}
+          handleChange={(e)=>{handleSelect('establishmentType',e)}}
+          />
+          {/* <CustomSelect label="Degree" placeholder="Select " options={dummyOptions} /> */}
+          <Input 
+          label="Establishment Name" 
+          placeholder="Enter Establishment Name" 
+          value={data.establishmentName}
+          name={'establishmentName'}
+          handleChange={handleChange}
+          />
+          <CustomSelect 
+          label="City" 
+          placeholder="Select " 
+          options={dummyOptions} 
+          value={data.establishmentCity}
+          name={'establishmentCity'}
+          handleChange={(e)=>{handleSelect('establishmentCity',e)}}
+          />
+          <Input 
+          label="Locality" 
+          placeholder="Enter Locality" 
+          value={data.establishmentLocality}
+          name={'establishmentLocality'}
+          handleChange={handleChange}
+          />
+        </div>
+      case 4:
+        return <div className='flex flex-col gap-[15px]'>
+          <CustomSelect 
+          label="Profile Type" 
+          placeholder="Select " 
+          options={dummyOptions} 
+          value={data.profileType}
+          name={'profileType'}
+          handleChange={(e)=>{handleSelect('profileType',e)}}
+          />
+          <Input 
+          label="Profile Name" 
+          placeholder="Enter Profile Name" 
+          value={data.profileName}
+          name={'profileName'}
+          handleChange={handleChange}
+          />
+          <Input 
+          label="Profile Description" 
+          placeholder="Enter Profile Description" 
+          value={data.profileDescription}
+          name={'profileDescription'}
+          handleChange={handleChange}
+          />
+          <Input 
+          label="Profile Image" 
+          placeholder="Upload Profile Image" 
+          type='file' 
+          name={'profileImage'}
+          handleChange={handleChange}
+          />
+        </div>
+      case 5:
+        return <div className='flex flex-col gap-[15px]'>
+          <p className='text-center text-primary-6'>Successfully Submitted</p>
+        </div>
+  
+    }
+  }
+
+
 
   const [step, setStep] = useState(0);
 

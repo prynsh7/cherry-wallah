@@ -35,19 +35,19 @@ const NavbarPatient = ({ user, isAuth = false}) => {
     {
       key: '1',
       label: (
-        <Button onClick={() => navigate(ROUTES.UserSettings)} className={'w-full flex justify-start'} label={<div className="flex justify-start items-center gap-2"><AiOutlineUser /> Profile</div>} type="outlined" />
+        <Button onClick={() => navigate(ROUTES.User.UserSettings)} className={'w-full flex justify-start'} label={<div className="flex justify-start items-center gap-2"><AiOutlineUser /> Profile</div>} type="outlined" />
       ),
     },
     {
       key: '2',
       label: (
-        <Button onClick={() => navigate(ROUTES.UpcomingAppointment)} className={'w-full flex justify-start bg-transparent text-neutral-10'} label={'Services'} />
+        <Button onClick={() => navigate(ROUTES.User.UpcomingAppointment)} className={'w-full flex justify-start bg-transparent text-neutral-10'} label={'Services'} />
       ),
     },
     {
       key: '3',
       label: (
-        <Button onClick={() => navigate(ROUTES.UpcomingAppointment)} className={'w-full bg-transparent text-neutral-10'} label={'My Appointments'} />
+        <Button onClick={() => navigate(ROUTES.User.UpcomingAppointment)} className={'w-full bg-transparent text-neutral-10'} label={'My Appointments'} />
       ),
     },
     {

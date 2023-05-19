@@ -16,6 +16,8 @@ export const ROUTES = {
         chats: '/doctor/chats',
         calender: '/doctor/calender',
         settings: '/doctor/settings',
+        Refrral: '/doctor/Refrral',
+        AppointmentHistory: 'AppointmentHistory',
     },
     User: {
         root: '/user',

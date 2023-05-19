@@ -32,6 +32,9 @@ import CompletedAppointmentDetails from '../pages/Appointment/CompletedAppointme
 import AppointmentReportDetailsField from '../pages/Appointment/AppointmentReportDetailsField';
 import UserSettings from '../pages/User/UserSettings';
 import NavbarPatient from '../components/Navbar/NavbarPatient';
+import Refrral from '../pages/Doctor/Refrral/Refrral';
+import AppointmentHistory from '../pages/Doctor/AppointmentHistory/AppointmentHistory';
+
 
 
 
@@ -106,7 +109,10 @@ const Router = () => {
           <Route exact path={ROUTES.Doctor.chats} element={<Chat />}></Route>
           <Route exact path={ROUTES.Doctor.calender} element={<Calender />}></Route>
           <Route exact path={ROUTES.Doctor.settings} element={<Settings />}></Route>
+          <Route exact path={ROUTES.Doctor.Refrral} element={<Refrral />}></Route>
+          <Route exact path={ROUTES.Doctor.AppointmentHistory} element={<AppointmentHistory />}></Route>
 
+          
           <Route path='*' element={<NotFound />} />
         </Route>
 

@@ -37,7 +37,7 @@ const navigate=useNavigate()
                             <input className="border-[1px] rounded-[4px] p-[10px] w-[100%] mt-2" placeholder="Phone Number" />
                             <p className='mt-[15px]'>You will receive an OTP shortly. <br />
                                 We will send appointment-related communications on this number.</p>
-                            <button onClick={() => { navigate(ROUTES.AppointmentPD) }} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Continue</button>
+                            <button onClick={() => { navigate(ROUTES.User.AppointmentPD) }} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Continue</button>
                         </div>
                     </div>
                 </div>

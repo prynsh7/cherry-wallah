@@ -38,11 +38,11 @@ const Login = () => {
                 toast.success('Registered Successfully')
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('refreshToken', res.data.refreshToken)
-                localStorage.setItem('user', JSON.stringify(res.data.user.role))
-                if(res.data.user.role==='doctor') navigate(ROUTES.Doctor.appointments)
-                if(res.data.user.role==='patient') navigate(ROUTES.Home)
+                localStorage.setItem('user', JSON.stringify(res.data.user))
+                if (res.data.user.role === 'doctor') navigate(ROUTES.Doctor.appointments)
+                if (res.data.user.role === 'patient') navigate(ROUTES.Home)
             }
-        } 
+        }
         catch (err) {
             console.log(err);
             toast.error(err.message)
@@ -97,7 +97,7 @@ const Login = () => {
                         <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[30px]"
                             onClick={(e) => {
                                 e.preventDefault()
-                                if(!data.phone||!data.password) toast.error('Please fill phone and password')
+                                if (!data.phone || !data.password) toast.error('Please fill phone and password')
                                 // toast.error('Some error occured')
                                 handleSubmit()
                             }}

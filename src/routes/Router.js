@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 
 import Home from '../pages/Home/Home';
@@ -51,12 +51,18 @@ const Router = () => {
 
   const RouteWithoutRole = () => {
 
-    const user = JSON.parse(localStorage.getItem('user'))
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
+
+    const useEffect = () => {
+      if (!user) {
+        window.location.href = ROUTES.Login
+      }
+    }
 
 
     return (
       <>
-        <NavbarPatient isAuth={user ? true : false} />
+        <NavbarPatient user={user ? user : null} isAuth={user ? true : false} />
         <Outlet />
         <Footer />
       </>
@@ -130,6 +136,7 @@ const Router = () => {
           <Route index path={ROUTES.Admin.Doctor} element={<Doctor />}></Route>
           <Route index path={ROUTES.Admin.Patient} element={<Patient />}></Route>
           <Route index path={ROUTES.Admin.AppointmentList} element={<AppointmentList />}></Route>
+
           <Route path='*' element={<NotFound />} />
         </Route>
 

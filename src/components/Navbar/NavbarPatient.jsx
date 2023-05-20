@@ -62,10 +62,11 @@ const NavbarPatient = ({ user, isAuth = false}) => {
         <Button onClick={() => {
           localStorage.removeItem('user')
           navigate(ROUTES.Login)
-        }} className={'w-full bg-transparent text-[red]'} label={<p className="text-red">Log Out</p>} />
+        }} className={'w-full  text-[red]'} label={<p className="text-red">Log Out</p>} />
       ),
     },
   ];
+
 
 
   // const [isAuth, setIsAuth] = useState(auth);
@@ -137,7 +138,7 @@ const NavbarPatient = ({ user, isAuth = false}) => {
                 <div className="flex flex-row gap-[20px] items-center">
                   <div className="w-[40px] aspect-square rounded-full border border-1 border-primary-6 cursor-pointer">
                   </div>
-                  <p className="text-[#000]/[0.5]">{user?.first_name}</p>
+                  <p className="text-[#000]/[0.5] capitalize">{user?.first_name}</p>
                 </div>
               </Dropdown>
             </div>

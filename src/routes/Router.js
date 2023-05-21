@@ -137,6 +137,7 @@ const Router = () => {
           <Route index path={ROUTES.Admin.Patient} element={<Patient />}></Route>
           <Route index path={ROUTES.Admin.AppointmentList} element={<AppointmentList />}></Route>
 
+
           <Route path='*' element={<NotFound />} />
         </Route>
 

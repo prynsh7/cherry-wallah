@@ -2,58 +2,100 @@ import React from 'react'
 import Button from '../../components/Button/Button';
 import { Table } from 'antd';
 import CustomPagination from '../../components/Pagination/Pagination';
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../routes/RouterConfig'
+
 
 function AppointmentList() {
   const [count, setCount] = React.useState({})
-
-  const [appointment, setAppointment] = React.useState([])
+  const navigate = useNavigate()
+  const [appointment, setAppointment] = React.useState([
+    {
+      id: 1,
+      appointment: '#75245432589',
+      date_time: '22/02/22 5:01PM',
+      total_revenue: '₹2456',
+    },
+    {
+      id: 2,
+      appointment: '#75245432589',
+      date_time: '22/02/22 5:01PM',
+      total_revenue: '₹2456',
+    },
+    {
+      id: 3,
+      appointment: '#75245432589',
+      date_time: '22/02/22 5:01PM',
+      total_revenue: '₹2456',
+    },
+    {
+      id: 4,
+      appointment: '#75245432589',
+      date_time: '22/02/22 5:01PM',
+      total_revenue: '₹2456',
+    },
+    {
+      id: 5,
+      appointment: '#75245432589',
+      date_time: '22/02/22 5:01PM',
+      total_revenue: '₹2456',
+    },
+  ])
 
   const columns = [
     {
       title: 'Appointment',
-      dataIndex: 'title',
-      key: 'name',
-      render: (_, record) => <a href='javascript:void(0)'
-      >{record.title}</a>
-    },
-    
+      dataIndex: 'appointment',
+      key: 'appointment',
+      render: (index) => {
+          return <p className='cursor-pointer'
+              onClick={(e) => {
+                  navigate(ROUTES.Admin.AppointmentDetails)
+              }}
+          >{index}</p>
+      }
+  },
+
     {
       title: 'Status',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
+      key: 'status',
+      render: (_, record) => {
+        console.log(record)
+        return <>   <div className="flex flex-row items-center">
+          <button className="bg-[#5BB84C] text-[12px] whitespace-nowrap text-neutral-1 rounded-full py-[6px] px-[16px] font-semibold"
+          // onClick={(e) => {
+          //   localStorage.setItem('job', JSON.stringify(record))
+          //   gaHelper.dashboardClickViewApplicants()
+          // }} 
+          >Completed</button>
+        </div>
+        </>
+      },
+    },
+    {
+      title: 'Date & Time',
+      dataIndex: 'date_time',
+      key: 'date_time',
       render: (text) => <p>{text.split("T")[0]} </p>,
     },
     {
-        title: 'Date & Time',
-        dataIndex: 'createdAt',
-        key: 'createdAt',
-        render: (text) => <p>{text.split("T")[0]} </p>,
-      },
-      {
-        title: 'Total Revenue',
-        dataIndex: 'createdAt',
-        key: 'createdAt',
-        render: (text) => <p>{text.split("T")[0]} </p>,
-      },
+      title: 'Total Revenue',
+      dataIndex: 'total_revenue',
+      key: 'total_revenue',
+      render: (text) => <p>{text.split("T")[0]} </p>,
+    },
     {
       title: 'Action',
       key: 'action',
       render: (_, record) => {
         console.log(record)
         return <>   <div className="flex gap-[10px] flex-row items-center">
-          <button className="text-white border-[1px] border-[#F2C347] rounded-[4px] py-[5px] h-[100%] px-[10px]"
-            title='Duplicate job'
+          <button className="text-white py-[5px] h-[100%] px-[10px]"
+            title='option'
             onClick={(e) => {
               e.preventDefault()
             }}
-          ><img src="/assets/difference.svg" width={20} /></button>
-
-          <button className="bg-[#F2C347] text-[12px] whitespace-nowrap text-black rounded-[4px] py-[6px] px-[16px] font-semibold"
-          // onClick={(e) => {
-          //   localStorage.setItem('job', JSON.stringify(record))
-          //   gaHelper.dashboardClickViewApplicants()
-          // }} 
-          >View Applicants</button>
+          ><i class="bi bi-three-dots-vertical text-black"></i></button>
         </div>
         </>
       },

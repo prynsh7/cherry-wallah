@@ -3,41 +3,92 @@ import Button from 'antd';
 import { Select, Space } from 'antd';
 import { Table } from 'antd';
 import CustomPagination from '../../components/Pagination/Pagination';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../routes/RouterConfig';
+
 
 function Doctor() {
+
     const [count, setCount] = React.useState({})
 
-    const [appointment, setAppointment] = React.useState([])
+    const navigate = useNavigate()
+
+    const [appointment, setAppointment] = React.useState([
+        {
+            id:1,
+            name:'Aditya Anand',
+            phone:'+91 8651439657',
+            email:'adityaanand1245@gmail.com',
+            specialization:'Eye specialist',
+        },
+        {
+            id:2,
+            name:'Aditya Anand',
+            phone:'+91 8651439657',
+            email:'adityaanand1245@gmail.com',
+            specialization:'Eye specialist',
+        },
+        {
+            id:3,
+            name:'Aditya Anand',
+            phone:'+91 8651439657',
+            email:'adityaanand1245@gmail.com',
+            specialization:'Eye specialist',
+        },
+        {
+            id:4,
+            name:'Aditya Anand',
+            phone:'+91 8651439657',
+            email:'adityaanand1245@gmail.com',
+            specialization:'Eye specialist',
+        },
+    ])
+    
 
     const columns = [
         {
             title: 'Doctor Name',
-            dataIndex: 'title',
+            dataIndex: 'name',
             key: 'name',
-            render: (_, record) => <a href='javascript:void(0)'
-            >{record.title}</a>
+            render: (index) => {
+                return <p className='cursor-pointer' 
+                onClick={(e) => {
+                    navigate(ROUTES.Admin.DoctorDetails)
+                }}
+                >{index}</p>
+            }
         },
         {
             title: 'Phone',
-            dataIndex: 'applicants_count',
-            key: 'applicants_count',
+            dataIndex: 'phone',
+            key: 'phone',
         },
         {
             title: 'Email',
-            dataIndex: 'posted_by',
-            key: 'posted_by',
+            dataIndex: 'email',
+            key: 'email',
         },
         {
             title: 'Specialization',
-            dataIndex: 'createdAt',
-            key: 'createdAt',
+            dataIndex: 'specialization',
+            key: 'specialization',
             render: (text) => <p>{text.split("T")[0]} </p>,
         },
         {
             title: 'Status',
-            dataIndex: 'createdAt',
-            key: 'createdAt',
-            render: (text) => <p>{text.split("T")[0]} </p>,
+            key: 'status',
+            render: (_, record) => {
+                console.log(record)
+                return <>   <div className="flex flex-row items-center">
+                    <button className="bg-[#5BB84C] text-[12px] whitespace-nowrap text-neutral-1 rounded-full py-[6px] px-[16px] font-semibold"
+                    // onClick={(e) => {
+                    //   localStorage.setItem('job', JSON.stringify(record))
+                    //   gaHelper.dashboardClickViewApplicants()
+                    // }} 
+                    >Verified</button>
+                </div>
+                </>
+            },
         },
         {
             title: 'Action',
@@ -45,19 +96,13 @@ function Doctor() {
             render: (_, record) => {
                 console.log(record)
                 return <>   <div className="flex gap-[10px] flex-row items-center">
-                    <button className="text-white border-[1px] border-[#F2C347] rounded-[4px] py-[5px] h-[100%] px-[10px]"
-                        title='Duplicate job'
+                    <button className="text-white py-[5px] h-[100%] px-[10px]"
+                        title='option'
                         onClick={(e) => {
                             e.preventDefault()
                         }}
-                    ><img src="/assets/difference.svg" width={20} /></button>
-
-                    <button className="bg-[#F2C347] text-[12px] whitespace-nowrap text-black rounded-[4px] py-[6px] px-[16px] font-semibold"
-                    // onClick={(e) => {
-                    //   localStorage.setItem('job', JSON.stringify(record))
-                    //   gaHelper.dashboardClickViewApplicants()
-                    // }} 
-                    >View Applicants</button>
+                    ><i class="bi bi-three-dots-vertical text-black"></i></button>
+                    
                 </div>
                 </>
             },

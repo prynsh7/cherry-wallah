@@ -42,6 +42,9 @@ import Admin from './../pages/Admin/Admin'
 import Doctor from './../pages/Admin/Doctor'
 import Patient from './../pages/Admin/Patient'
 import AppointmentList from './../pages/Admin/AppointmentList'
+import DoctorDetails from './../pages/Admin/DoctorDetails'
+import PatientDetails from './../pages/Admin/PatientDetails'
+import AppointmentDetails from './../pages/Admin/AppointmentDetails'
 import AdminLayout from '../components/Layout/AdminLayout';
 
 
@@ -126,6 +129,7 @@ const Router = () => {
           <Route exact path={ROUTES.Doctor.settings} element={<Settings />}></Route>
           <Route exact path={ROUTES.Doctor.Refrral} element={<Refrral />}></Route>
           <Route exact path={ROUTES.Doctor.AppointmentHistory} element={<AppointmentHistory />}></Route>
+        
           <Route path='*' element={<NotFound />} />
         </Route>
 
@@ -134,6 +138,9 @@ const Router = () => {
           <Route index path={ROUTES.Admin.Dashboard} element={<AdminDashboard />}></Route>
           <Route index path={ROUTES.Admin.Admin} element={<Admin />}></Route>
           <Route index path={ROUTES.Admin.Doctor} element={<Doctor />}></Route>
+          <Route index path={ROUTES.Admin.DoctorDetails} element={<DoctorDetails />}></Route>
+          <Route index path={ROUTES.Admin.PatientDetails} element={<PatientDetails />}></Route>
+          <Route index path={ROUTES.Admin.AppointmentDetails} element={<AppointmentDetails />}></Route>
           <Route index path={ROUTES.Admin.Patient} element={<Patient />}></Route>
           <Route index path={ROUTES.Admin.AppointmentList} element={<AppointmentList />}></Route>
 

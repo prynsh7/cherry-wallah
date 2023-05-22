@@ -38,6 +38,9 @@ export const ROUTES = {
         Dashboard:'/admin/dashboard',
         Admin:'/admin/Admin',
         Doctor:'/admin/Doctor',
+        DoctorDetails: '/admin/Doctor/id',
+        PatientDetails: '/admin/Patient/id',
+        AppointmentDetails: '/admin/AppointmentDetails/id',
         AppointmentList: '/admin/AppointmentList',
         Patient:'/admin/Patient'
     }

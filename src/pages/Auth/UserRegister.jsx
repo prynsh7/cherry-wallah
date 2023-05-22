@@ -29,15 +29,7 @@ const UserRegister = () => {
 
     const { state } = location;
 
-    console.log(state);
-
-    const [otpSent, setOtpSent] = React.useState(false)
-
-    const [loginType, setLoginType] = React.useState('otp')
-
     const [loading, setLoading] = React.useState(false)
-
-    const [confirmation, setConfirmation] = React.useState(false)
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -46,14 +38,17 @@ const UserRegister = () => {
 
     const handleSubmit = async () => {
         try {
-            const res = await AuthAPI.postRegisterPatient({ ...data, name: data.first_name + ' ' + data.last_name })
+            const res = data?.profile == "patient" ? await AuthAPI.postRegisterPatient({ ...data, name: data.first_name + ' ' + data.last_name }) : await AuthAPI.postRegisterDoctor({ ...data, name: data.first_name + ' ' + data.last_name })
+
             if (res.success) {
                 toast.success('Registered Successfully')
                 localStorage.setItem('token', res.data.token)
                 localStorage.setItem('refreshToken', res.data.refreshToken)
                 localStorage.setItem('user', JSON.stringify(res.data.user))
+
                 setTimeout(() => {
-                    navigate(ROUTES.User.root)
+                    data?.profile === 'doctor' ? navigate(ROUTES.DoctorRegister) :
+                        navigate(ROUTES.User.root)
                 }, 1000)
 
             }
@@ -68,6 +63,7 @@ const UserRegister = () => {
     useEffect(() => {
         if (state?.phone) {
             setData(prev => ({ ...prev, phone: state.phone }))
+            setData(prev => ({ ...prev, profile: state.profile }))
         }
     }, [state])
     return (

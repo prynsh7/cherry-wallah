@@ -34,11 +34,11 @@ export const AuthAPI = {
             url: apiConst.REGISTER_PATIENT,
             method: "POST",
             headers: {
-                "x-request-token":sessionStorage.getItem('xtoken')
+                "x-request-token": sessionStorage.getItem('xtoken')
             },
             data: {
                 user: data,
-                patient:data
+                patient: data
             },
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
@@ -50,9 +50,27 @@ export const AuthAPI = {
         const response = await api.request({
             url: apiConst.REGISTER_DOCTOR,
             method: "POST",
+            headers: {
+                "x-request-token": sessionStorage.getItem('xtoken')
+            },
             data: {
                 user: data,
+                doctor: data
             },
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+
+        return response.data;
+    },
+
+    putUpdateDoctor: async (data, cancel = false) => {
+        const response = await api.request({
+            url: apiConst.UPDATE_DOCTOR,
+            method: "PUT",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
+            data: data,
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
 

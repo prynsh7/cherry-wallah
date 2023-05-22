@@ -5,4 +5,6 @@ export const BASE_URL = process.env.REACT_APP_ENVIRONMENT === "development" ? "h
 ////////////////   AUTH    /////////////////
 ////////////////////////////////////////////
 export const REGISTER_DOCTOR = "auth/signup/doctor";
+export const UPDATE_DOCTOR = "doctor/updateMe";
+
 export const REGISTER_PATIENT = "auth/signup/patient";

@@ -33,20 +33,29 @@ const Login = () => {
 
     const handleSubmit = async () => {
         try {
+            setLoading(true)
             const res = await AuthAPI.postLogin(data)
             if (res.success) {
                 toast.success('Registered Successfully')
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('refreshToken', res.data.refreshToken)
+                sessionStorage.setItem('token', res.data.token)
+                sessionStorage.setItem('refreshToken', res.data.refreshToken)
                 localStorage.setItem('user', JSON.stringify(res.data.user))
-                if (res.data.user.role === 'doctor') navigate(ROUTES.Doctor.appointments)
-                if (res.data.user.role === 'patient') navigate(ROUTES.Home)
+                if (res.data.user.role === 'doctor') {
+                    if (res.data.doctor.profile_completed) navigate(ROUTES.DoctorRegister)
+                    else navigate(ROUTES.DoctorRegister)
+                }
+                if (res.data.user.role === 'patient') navigate(ROUTES.User.root)
             }
         }
         catch (err) {
             console.log(err);
-            toast.error(err.message)
+            const errMsg = err?.response?.data?.message || err.message || 'Something went wrong'
+            toast.error(errMsg)
         }
+        finally {
+            setLoading(false)
+        }
+
     }
 
 
@@ -69,7 +78,11 @@ const Login = () => {
                     <div className="w-[100%] input-animation mt-[90px] flex flex-col gap-[10px]">
                         <div className="flex flex-col">
                             <label className="text-[#333333] opacity-70 text-[14px]">Email / Mobile No.</label>
-                            <input value={data.phone} name="phone" onChange={handleChange} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Email" />
+                            <input value={data.phone} name="phone" onChange={(e) => {
+                                if (e.target.value.length < 11) {
+                                    handleChange(e)
+                                }
+                            }} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Email" />
                         </div>
 
                         {

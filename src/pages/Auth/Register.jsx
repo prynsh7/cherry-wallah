@@ -61,7 +61,7 @@ const Regsiter = () => {
             if (res.success) {
                 if (!res.data.newUser) return toast.error('User already exists')
                 sessionStorage.setItem('xtoken', res.data.requestToken)
-                profile == 'doctor' ? navigate(ROUTES.DoctorRegister, { state: { phone: data.phone } }) : navigate(ROUTES.UserRegister, { state: { phone: data.phone } })
+                navigate(ROUTES.UserRegister, { state: { phone: data.phone, profile: profile } })
             }
         } catch (err) {
             console.log(err);
@@ -131,7 +131,13 @@ const Regsiter = () => {
                             <div className="input-animation mt-[90px]">
                                 <div className="flex flex-col">
                                     <label className="text-[#333333] opacity-70 text-[14px]">Mobile No.</label>
-                                    <input name="phone" disabled={otpSent} onChange={handleChange} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Mobile No." />
+                                    <input name="phone" value={
+                                        data.phone
+                                    } disabled={otpSent} onChange={(e) => {
+                                        if (e.target.value.length <= 10) {
+                                            handleChange(e)
+                                        }
+                                    }} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Mobile No." />
                                 </div>
 
                                 {

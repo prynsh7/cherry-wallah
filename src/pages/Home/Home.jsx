@@ -66,7 +66,7 @@ const Home = () => {
                             <input className="border-[1px] rounded-[4px] p-[10px] pl-[35px]  w-[420px]" placeholder="Search doctors, clinics, hospitals, etc." />
                         </div>
             <button className="py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]"
-              onClick={() => navigate(ROUTES.User.DoctorsList)}
+              onClick={() => navigate(`/user/${ROUTES.User.DoctorsList}`)}
             >
               Search
             </button>

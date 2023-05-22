@@ -17,7 +17,7 @@ const UserLayout = ({ children }) => {
     }, [localStorage.getItem('user')])
 
     return (
-        user && user.role === 'patient' ? <div className='bg-neutral-3'>
+        user  ? <div className='bg-neutral-3'>
             <NavbarPatient user={user} isAuth={true} />
 
             <div className="col-span-12">

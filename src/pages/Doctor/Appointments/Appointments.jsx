@@ -2,41 +2,101 @@ import React from 'react'
 import Button from '../../../components/Button/Button'
 import { Table } from 'antd';
 import CustomPagination from '../../../components/Pagination/Pagination';
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../../routes/RouterConfig'
 
 function Appointments() {
   const [count, setCount] = React.useState({})
+  const navigate = useNavigate()
+  const [appointment, setAppointment] = React.useState([
+    {
+      id: 1,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 2,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 3,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 4,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 5,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 6,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
 
-  const [appointment, setAppointment] = React.useState([])
+  ])
 
   const columns = [
     {
       title: 'Name',
-      dataIndex: 'title',
+      dataIndex: 'name',
       key: 'name',
-      render: (_, record) => <a href='javascript:void(0)'
-      >{record.title}</a>
+      render: (index) => {
+        return <p className='cursor-pointer'
+            onClick={(e) => {
+                navigate(ROUTES.User.AppointmentReportDetailsField)
+            }}
+        >{index}</p>
+    }
     },
     {
       title: 'Phone',
-      dataIndex: 'applicants_count',
-      key: 'applicants_count',
+      dataIndex: 'phone',
+      key: 'phone',
     },
     {
       title: 'Email',
-      dataIndex: 'posted_by',
-      key: 'posted_by',
+      dataIndex: 'email',
+      key: 'email',
     },
     {
       title: 'Date & Time',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-      render: (text) => <p>{text.split("T")[0]} </p>,
+      dataIndex: 'date_time',
+      key: 'date_time',
     },
     {
       title: 'Status',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-      render: (text) => <p>{text.split("T")[0]} </p>,
+      key: 'status',
+      render: (_, record) => {
+        console.log(record)
+        return <>   <div className="flex flex-row items-center">
+          <button className="bg-[#5BB84C] text-[12px] whitespace-nowrap text-neutral-1 rounded-full py-[6px] px-[16px] font-semibold"
+          // onClick={(e) => {
+          //   localStorage.setItem('job', JSON.stringify(record))
+          //   gaHelper.dashboardClickViewApplicants()
+          // }} 
+          >Completed</button>
+        </div>
+        </>
+      },
     },
     {
       title: 'Action',
@@ -44,19 +104,13 @@ function Appointments() {
       render: (_, record) => {
         console.log(record)
         return <>   <div className="flex gap-[10px] flex-row items-center">
-          <button className="text-white border-[1px] border-[#F2C347] rounded-[4px] py-[5px] h-[100%] px-[10px]"
-            title='Duplicate job'
+          <button className="text-white py-[5px] h-[100%] px-[10px]"
+            title='option'
             onClick={(e) => {
               e.preventDefault()
             }}
-          ><img src="/assets/difference.svg" width={20} /></button>
+          ><i class="bi bi-three-dots-vertical text-black"></i></button>
 
-          <button className="bg-[#F2C347] text-[12px] whitespace-nowrap text-black rounded-[4px] py-[6px] px-[16px] font-semibold"
-          // onClick={(e) => {
-          //   localStorage.setItem('job', JSON.stringify(record))
-          //   gaHelper.dashboardClickViewApplicants()
-          // }} 
-          >View Applicants</button>
         </div>
         </>
       },
@@ -75,10 +129,10 @@ function Appointments() {
       </div>
 
 
-      <div className="mt-[30px] flex justify-between items-center">
+      {/* <div className="flex justify-between items-center">
         <h6 className="text-Medium+/Label/Medium ">{""}</h6>
-        {/* <Button type='primary' label='+ Add Patient' /> */}
-      </div>
+        <Button type='primary' label='+ Add Patient' />
+      </div> */}
 
       <div className='mt-[30px]'>
         <Table columns={columns} dataSource={appointment} />

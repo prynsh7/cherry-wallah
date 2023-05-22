@@ -17,7 +17,8 @@ export const ROUTES = {
         calender: '/doctor/calender',
         settings: '/doctor/settings',
         Refrral: '/doctor/Refrral',
-        AppointmentHistory: 'AppointmentHistory',
+        AppointmentHistory: '/doctor/AppointmentHistory',
+        AppointmentReportDetailsField: '/doctor/AppointmentReportDetailsField',
     },
     User: {
         root: '/user',

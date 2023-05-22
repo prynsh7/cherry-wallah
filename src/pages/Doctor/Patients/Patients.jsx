@@ -3,6 +3,8 @@ import Button from '../../../components/Button/Button'
 import { Select, Table, Radio } from 'antd';
 import Modal from '../../../components/Modal/Modal'
 import CustomPagination from '../../../components/Pagination/Pagination';
+import { useNavigate } from 'react-router-dom'
+import { ROUTES } from '../../../routes/RouterConfig'
 
 function Patients() {
   const [isOpen, setIsOpen] = useState(false)
@@ -11,32 +13,79 @@ function Patients() {
 
 
   const [count, setCount] = useState({})
-
-  const [appointment, setAppointment] = useState([])
+  const navigate = useNavigate()
+  const [appointment, setAppointment] = useState([
+    {
+      id: 1,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 2,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 3,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 4,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 5,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+    {
+      id: 6,
+      name: 'Aditya Anand',
+      phone: '8651439657',
+      email: 'adityaanand1245@gmail.com',
+      date_time: '22/02/22 05:30PM'
+    },
+  ])
 
   const columns = [
     {
       title: 'Name',
-      dataIndex: 'title',
+      dataIndex: 'name',
       key: 'name',
-      render: (_, record) => <a href='javascript:void(0)'
-      >{record.title}</a>
+      render: (index) => {
+        return <p className='cursor-pointer'
+            onClick={(e) => {
+                navigate(ROUTES.Doctor.AppointmentHistory)
+            }}
+        >{index}</p>
+    }
     },
     {
       title: 'Phone',
-      dataIndex: 'applicants_count',
-      key: 'applicants_count',
+      dataIndex: 'phone',
+      key: 'phone',
     },
     {
       title: 'Email',
-      dataIndex: 'posted_by',
-      key: 'posted_by',
+      dataIndex: 'email',
+      key: 'email',
     },
     {
       title: 'Last Appointment',
-      dataIndex: 'createdAt',
-      key: 'createdAt',
-      render: (text) => <p>{text.split("T")[0]} </p>,
+      dataIndex: 'date_time',
+      key: 'date_time',
     },
     {
       title: 'Action',
@@ -44,19 +93,13 @@ function Patients() {
       render: (_, record) => {
         console.log(record)
         return <>   <div className="flex gap-[10px] flex-row items-center">
-          <button className="text-white border-[1px] border-[#F2C347] rounded-[4px] py-[5px] h-[100%] px-[10px]"
-            title='Duplicate job'
+          <button className="text-white py-[5px] h-[100%] px-[10px]"
+            title='option'
             onClick={(e) => {
               e.preventDefault()
             }}
-          ><img src="/assets/difference.svg" width={20} /></button>
+          ><i class="bi bi-three-dots-vertical text-black"></i></button>
 
-          <button className="bg-[#F2C347] text-[12px] whitespace-nowrap text-black rounded-[4px] py-[6px] px-[16px] font-semibold"
-          // onClick={(e) => {
-          //   localStorage.setItem('job', JSON.stringify(record))
-          //   gaHelper.dashboardClickViewApplicants()
-          // }} 
-          >View Applicants</button>
         </div>
         </>
       },
@@ -70,7 +113,6 @@ function Patients() {
   };
   return (
     <div className='flex flex-col'>
-
       <Modal width={'80%'} className='bg-neutral-1' isOpen={isOpen} handleSubmit={handleCloseModal} handleCancel={handleCloseModal}>
         <p className='text-Medium+/Label/Large-Strong'>Add Patients</p>
         <div className='grid grid-cols-3 gap-3 mt-[14px]'>

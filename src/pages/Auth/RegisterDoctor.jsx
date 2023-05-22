@@ -7,6 +7,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Loader from "../../components/Loader";
 import { ROUTES } from '../../routes/RouterConfig';
 import { useNavigate } from 'react-router-dom';
+import Submission from '../../assets/images/Submission.png';
 
 
 
@@ -284,8 +285,8 @@ const RegisterDoctor = () => {
           />
         </div>
       case 5:
-        return <div className='flex flex-col gap-[15px]'>
-          <p className='text-center text-primary-6'>Successfully Submitted</p>
+        return <div className='flex items-center rounded-md gap-[15px] w-[870px] h-[275px] bg-cover' style={{backgroundImage: `url(${Submission})`}}>
+          <p className='font-semibold text-neutral-1 ml-[20px]'>We have received your application verification document. <br />Your account is set for verification, we will update you on email once it is verified.</p>
         </div>
 
     }

@@ -60,18 +60,15 @@ const AppointmentHistory = () => {
         },
     ];
 
-    const { setIscardWhite } = useOutletContext()
-
-    useEffect(() => {
-        setIscardWhite(false);
-    }, [])
+    
     return (
-        <div className='h-[100%] width-[100%] bg-neutral-4'>
-            <div className='flex items-center font-semibold bg-neutral-1 rounded p-[12px]'>
-                <Button className={' px-2 py-1'} type='outlined' label={<div><i class="bi bi-arrow-left"></i></div>} />
-                <h3 className='pl-4'>Patient</h3> <span className='text-primary-6'>#52466246</span>
+        <div className='h-[100%] width-[100%]'>
+            <div className='flex items-center border-2 border-primary-2 font-semibold bg-neutral-1 rounded p-[12px]'>
+                <button><div><i class="bi bi-arrow-left"></i></div></button>
+                {/* <Button className={' px-2 py-1'} type='linear' label={<div><i class="bi bi-arrow-left"></i></div>} /> */}
+                <h3 className='pl-4'>Patient</h3> <span className='text-primary-6'> #52466246</span>
             </div>
-            <div className='flex bg-neutral-1 rounded my-[24px] justify-between items-center p-[26px]'>
+            <div className='flex bg-neutral-1 border-2 border-primary-2 rounded-[10px] my-[24px] justify-between items-center p-[26px]'>
                 <div className='flex gap-6 items-center'>
                     <img src={DoctorProfile} alt="" />
                     <p> <span className='font-bold'>Priyansh Raj</span> <br />+91 894352346</p>

@@ -62,9 +62,9 @@ const Home = () => {
               <input className="border-[1px] rounded-[4px] p-[10px] pl-[35px]" placeholder="Enter City" />
             </div>
             <div className='relative flex items-center'>
-                            <i class="bi bi-search absolute pl-[12px] text-primary-5"></i>
-                            <input className="border-[1px] rounded-[4px] p-[10px] pl-[35px]  w-[420px]" placeholder="Search doctors, clinics, hospitals, etc." />
-                        </div>
+              <i class="bi bi-search absolute pl-[12px] text-primary-5"></i>
+              <input className="border-[1px] rounded-[4px] p-[10px] pl-[35px]  w-[420px]" placeholder="Search doctors, clinics, hospitals, etc." />
+            </div>
             <button className="py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]"
               onClick={() => navigate(ROUTES.Doctors)}
             >

@@ -32,7 +32,10 @@ const Regsiter = () => {
     const [confirmation, setConfirmation] = React.useState(false)
 
     const sendOTP = async () => {
-        if (!data.phone) return toast.error('Please enter phone number')
+        if (!data.phone) {
+            return toast.error('Please enter phone number')
+        }
+        
 
         try {
             setLoading(true)

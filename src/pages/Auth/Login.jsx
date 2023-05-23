@@ -32,6 +32,11 @@ const Login = () => {
     }
 
     const handleSubmit = async () => {
+
+        if(!data.phone || !data.password){
+            return toast.error("Please fill all the details")
+        }
+
         try {
             setLoading(true)
             const res = await AuthAPI.postLogin(data)
@@ -89,7 +94,7 @@ const Login = () => {
                             loginType === "password" ?
                                 <div className="flex flex-col">
                                     <label className="text-[#333333] opacity-70 text-[14px]">Password</label>
-                                    <input value={data.password} name="password" onChange={handleChange} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Password" />
+                                    <input value={data.password} type='password' name="password" onChange={handleChange} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Password" />
                                 </div>
                                 : null
                         }
@@ -110,8 +115,6 @@ const Login = () => {
                         <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[30px]"
                             onClick={(e) => {
                                 e.preventDefault()
-                                if (!data.phone || !data.password) toast.error('Please fill phone and password')
-                                // toast.error('Some error occured')
                                 handleSubmit()
                             }}
                         >{

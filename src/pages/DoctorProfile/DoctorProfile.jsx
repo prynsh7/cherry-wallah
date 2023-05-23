@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DoctorProfilepic from '../../assets/images/doctorlist.png'
 import Modal from '../../components/Modal/Modal'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ROUTES } from '../../routes/RouterConfig'
 import TimeSlots from '../../components/TimeSlots/TimeSlots'
+import { ToastContainer, toast } from 'react-toastify'
+import Loader from '../../components/Loader'
+import { DoctorAPI } from '../../apis/doctorAPI'
 
 const DoctorProfile = () => {
     const navigate = useNavigate()
@@ -11,8 +14,41 @@ const DoctorProfile = () => {
     const handleCloseModal = () => setIsOpen(false)
     const handleOpenModal = () => setIsOpen(true)
 
+    const [data, setData] = useState()
+    const [loading, setLoading] = useState(false)
+
+    const { id } = useParams()
+
+    const getDoctorById = async () => {
+        try {
+            setLoading(true)
+
+            const res = await DoctorAPI.getDoctorById(id)
+
+            if (res.success) {
+                console.log("doctor get success", res.data)
+                setData(res.data.doctor)
+            }
+
+        } catch (err) {
+            console.log("error fetching doctors", err)
+            const errMsg = err?.response?.data?.message || err?.message || "Some error occured"
+            toast.error(errMsg)
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    useEffect(() => {
+        getDoctorById()
+    }, [])
+
     return (
         <div className='bg-neutral-4'>
+            {
+                loading && <Loader />
+            }
+            <ToastContainer />
 
             <Modal width={'50%'} className='bg-neutral-1' isOpen={isOpen}
                 handleSubmit={() => {
@@ -69,7 +105,7 @@ const DoctorProfile = () => {
                         </div>
 
                         <div>
-                            <h3 className='text-Small/Title/Medium text-[#007E85]'>Dr. Hanshika Raj</h3>
+                            <h3 className='text-Small/Title/Medium text-[#007E85]'>{data?.name}</h3>
                             <p className='text-Small/Title/xSmall text-neutral-8'>Herbal Medicine Specialist</p>
                             <p className='text-neutral-9'>12 years experience overall</p>
                             <p className='text-neutral-9'>₹500 consultation fee</p>

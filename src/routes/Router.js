@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Outlet, Route, Routes } from 'react-router-dom'
 
 import Home from '../pages/Home/Home';
@@ -56,11 +56,9 @@ const Router = () => {
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')))
 
-    const useEffect = () => {
-      if (!user) {
-        window.location.href = ROUTES.Login
-      }
-    }
+   useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')))
+   }, [localStorage.getItem('user')])
 
 
     return (
@@ -94,15 +92,17 @@ const Router = () => {
         <Route exact path={ROUTES.Home} element={<RouteWithoutRole />}>
           <Route index element={<Home />}></Route>
           <Route exact path={ROUTES.About} element={<About />}></Route>
+          <Route exact path={ROUTES.Doctors} element={<DoctorsList />}></Route>
+          <Route exact path={ROUTES.DoctorDetails} element={<DoctorProfile />}></Route>
           <Route exact path={"*"} element={<NotFound />}></Route>
         </Route>
 
         // PATIENT ROUTES
         <Route exact path={ROUTES.User.root} element={<RouteWithUser />}>
-          <Route path="" element={<Home />}></Route>
-          <Route exact path={ROUTES.User.About} element={<About />} />
+          {/* <Route path="" element={<Home />}></Route> */}
+          {/* <Route exact path={ROUTES.User.About} element={<About />} />
           <Route path={ROUTES.User.DoctorsList} element={<DoctorsList />} />
-          <Route exact path={ROUTES.User.DoctorProfile} element={<DoctorProfile />} />
+          <Route exact path={ROUTES.User.DoctorProfile} element={<DoctorProfile />} /> */}
           <Route exact path={ROUTES.User.UpcomingAppointment} element={<UpcomingAppointment />} />
           <Route exact path={ROUTES.User.CompletedAppoinment} element={<CompletedAppoinment />} />
           <Route exact path={ROUTES.User.Appointment} element={<Appointment />} />
@@ -111,7 +111,7 @@ const Router = () => {
           <Route exact path={ROUTES.User.CompletedAppointmentDetails} element={<CompletedAppointmentDetails />} />
           <Route exact path={ROUTES.User.AppointmentReportDetailsField} element={<AppointmentReportDetailsField />} />
           <Route exact path={ROUTES.User.UserSettings} element={<UserSettings />} />
-
+          <Route exact path={"*"} element={<NotFound />}></Route>
 
         </Route>
 

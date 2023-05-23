@@ -44,7 +44,7 @@ const Login = () => {
                     if (res.data.doctor.profile_completed) navigate(ROUTES.DoctorRegister)
                     else navigate(ROUTES.DoctorRegister)
                 }
-                if (res.data.user.role === 'patient') navigate(ROUTES.User.root)
+                if (res.data.user.role === 'patient') navigate(ROUTES.Home)
             }
         }
         catch (err) {

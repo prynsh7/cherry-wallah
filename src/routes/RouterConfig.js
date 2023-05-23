@@ -1,10 +1,8 @@
 export const ROUTES = {
     Home: '/',
     About: '/about',
-    Produts: '/products',
-    ProductDetail: '/products/:id',
-
-
+    Doctors: '/doctors',
+    DoctorDetails: '/doctors/detail/:id',
     Login: '/auth/login',
     Register: '/auth/signup',
     UserRegister: '/auth/register',
@@ -23,8 +21,8 @@ export const ROUTES = {
     User: {
         root: '/user',
         About: '/user/about',
-        DoctorsList: '/user/DoctorsList',
-        DoctorProfile: '/user/DoctorProfile',
+        DoctorsList: '/user/doctors',
+        DoctorProfile: '/user/doctor/:id',
         UpcomingAppointment: '/user/UpcomingAppointment',
         CompletedAppoinment: '/user/CompletedAppoinment',
         Appointment: '/user/Appointment',
@@ -36,13 +34,13 @@ export const ROUTES = {
     },
     Admin: {
         root: '/admin',
-        Dashboard:'/admin/dashboard',
-        Admin:'/admin/Admin',
-        Doctor:'/admin/Doctor',
+        Dashboard: '/admin/dashboard',
+        Admin: '/admin/Admin',
+        Doctor: '/admin/Doctor',
         DoctorDetails: '/admin/Doctor/id',
         PatientDetails: '/admin/Patient/id',
         AppointmentDetails: '/admin/AppointmentDetails/id',
         AppointmentList: '/admin/AppointmentList',
-        Patient:'/admin/Patient'
+        Patient: '/admin/Patient'
     }
 }

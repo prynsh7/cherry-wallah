@@ -138,7 +138,7 @@ const NavbarPatient = ({ user, isAuth = false}) => {
                 <div className="flex flex-row gap-[20px] items-center">
                   <div className="w-[40px] aspect-square rounded-full border border-1 border-primary-6 cursor-pointer">
                   </div>
-                  <p className="text-[#000]/[0.5] capitalize">{user?.first_name}</p>
+                  <p className="text-[#000]/[0.5] capitalize">{user?.name}</p>
                 </div>
               </Dropdown>
             </div>

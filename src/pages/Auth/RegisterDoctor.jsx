@@ -285,7 +285,7 @@ const RegisterDoctor = () => {
           />
         </div>
       case 5:
-        return <div className='flex items-center rounded-md gap-[15px] w-[870px] h-[275px] bg-cover' style={{backgroundImage: `url(${Submission})`}}>
+        return <div className='flex items-center rounded-md gap-[15px] w-[870px] h-[275px] bg-cover' style={{ backgroundImage: `url(${Submission})` }}>
           <p className='font-semibold text-neutral-1 ml-[20px]'>We have received your application verification document. <br />Your account is set for verification, we will update you on email once it is verified.</p>
         </div>
 
@@ -345,6 +345,58 @@ const RegisterDoctor = () => {
 
   }
   const next = () => {
+    if (step == 0) {
+      if (
+        !data.name ||
+        !data?.specialization ||
+        !data?.gender ||
+        !data?.city ||
+        !data?.description) {
+        return toast.error("Please enter basic details")
+      }
+    }
+    
+    if (step == 1) {
+      if (
+        !data.registrationNumber ||
+        !data?.registrationCouncil||
+        !data?.registrationYear )
+         {
+        return toast.error("Please enter registration details")
+      }
+    }
+    if (step == 2) {
+      if (
+        !data.degree ||
+        !data?.college||
+        !data?.year||
+        !data?.experince||
+        !data?.certificate )
+         {
+        return toast.error("Please enter educational details")
+      }
+    }
+    if (step == 3) {
+      if (
+        !data.establishmentType ||
+        !data?.establishmentName||
+        !data?.establishmentCity||
+        !data?.establishmentLocality )
+         {
+        return toast.error("Please enter establishment details")
+      }
+    }
+    
+    if (step == 4) {
+      if (
+        !data.profileType ||
+        !data?.profileName||
+        !data?.profileDescription||
+        !data?.profileImage )
+         {
+        return toast.error("Please enter profile details")
+      }
+    }
     if (step === 4) {
       updateDoctorProfile();
       return;

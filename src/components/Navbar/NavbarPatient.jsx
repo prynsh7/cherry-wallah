@@ -61,6 +61,7 @@ const NavbarPatient = ({ user, isAuth = false}) => {
       label: (
         <Button onClick={() => {
           localStorage.removeItem('user')
+          localStorage.removeItem('token')
           navigate(ROUTES.Login)
         }} className={'w-full  text-[red]'} label={<p className="text-red">Log Out</p>} />
       ),

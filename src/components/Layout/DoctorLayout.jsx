@@ -9,7 +9,7 @@ import {
   MessageOutlined,
   SettingOutlined,
 
-  AppstoreAddOutlined 
+  AppstoreAddOutlined
 } from '@ant-design/icons';
 
 import { Button, Layout, Menu, theme } from 'antd';
@@ -118,9 +118,15 @@ const DoctorLayout = () => {
             />
           </div>
 
-          <button className='bg-linear flex gap-[10px] justify-center py-[12px] w-[100%] align text-neutral-1 text-Medium+/Label/Small-Strong rounded-[8px]'> <LogoutOutlined style={styleIcon} /> {
-            collapsed ? '' : 'Logout'
-          } </button>
+          <button className='bg-linear flex gap-[10px] justify-center py-[12px] w-[100%] align text-neutral-1 text-Medium+/Label/Small-Strong rounded-[8px]'
+            onClick={() => {
+              localStorage.removeItem('user')
+              localStorage.removeItem('token')
+              navigate(ROUTES.Login)
+            }}
+          > <LogoutOutlined style={styleIcon} /> {
+              collapsed ? '' : 'Logout'
+            } </button>
         </div>
       </Sider>
       <Layout>
@@ -147,9 +153,12 @@ const DoctorLayout = () => {
             padding: 24,
             minHeight: 280,
             background: colorBgContainer,
+            maxHeight: 'calc(100vh - 120px)',
+            overflowY: 'auto',
+            position: 'relative',
           }}
         >
-          <Outlet context={{setIscardWhite}}/>
+          <Outlet context={{ setIscardWhite }} />
         </Content>
       </Layout>
     </Layout>

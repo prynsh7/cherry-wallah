@@ -7,6 +7,19 @@ import * as apiConst from '../utils/apiConstants'
 
 export const DoctorAPI = {
 
+    getMe: async (cancel = false) => {
+        const response = await api.request({
+            url: "doctor/getMe",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
+            method: "GET",
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+
+        return response.data;
+    },
+
     getDoctors: async (cancel = false) => {
         const response = await api.request({
             url: "doctor",
@@ -28,6 +41,6 @@ export const DoctorAPI = {
     }
 
 
-    }
+}
 
 const cancelApiObject = defineCancelApiObject(DoctorAPI);

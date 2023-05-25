@@ -1,59 +1,224 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { DoctorAPI } from '../../../apis/doctorAPI'
+import { toast } from 'react-toastify'
+import { AuthAPI } from '../../../apis/authAPI'
+import CustomSelect from '../../../components/Input/Select'
+import Input from '../../../components/Input/Input'
+import Button from '../../../components/Button/Button'
+
+const dummyOptions = [
+  {
+    label: 'Dummy 1',
+    value: 'dummy1'
+  },
+  {
+    label: 'Dummy 2',
+    value: 'dummy2'
+  },
+]
+
+const genderOptions = [
+  {
+    value: 'male',
+    label: 'Male',
+  },
+  {
+    value: 'female',
+    label: 'Female',
+  },
+  {
+    value: 'other',
+    label: 'Other',
+  }
+]
 
 function Settings() {
+
+  const [data, setData] = useState({
+    name: "",
+    email: "",
+    mobile: "",
+    dob: "",
+    gender: "",
+    speciality: "",
+    availability: "",
+    city: "",
+    description: "",
+    medical_registration_no: "",
+    medical_registration_council: "",
+    medical_registration_year: "",
+    educational_degree: "",
+    educational_college: "",
+    educational_year: "",
+    educational_certificate: "",
+    has_establishemnt: "",
+    establishment_degree: "",
+    establishment_name: "",
+    establishment_address: "",
+    establishment_city: "",
+    profile: "",
+    profile_image: "",
+  })
+  const [loading, setLoading] = useState(false)
+
+
+  const getProfileDetails = async () => {
+    try {
+      setLoading(true)
+
+      const res = await DoctorAPI.getMe()
+
+      if (res.success) {
+        console.log("doctor get success", res.data)
+        setData(res.data)
+      }
+
+    } catch (err) {
+      console.log("error fetching doctors", err)
+      const errMsg = err?.response?.data?.message || err?.message || "Some error occured"
+      toast.error(errMsg)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  const updateDoctorProfile = async () => {
+
+    try {
+      setLoading(true);
+
+      const obj = {
+        name: data?.name,
+        email: data?.email,
+        mobile: data?.mobile,
+        dob: data?.dob,
+        gender: data?.gender,
+        speciality: data?.speciality,
+        availability: data?.availability,
+        city: data?.city,
+        description: data?.description,
+        medical_registration_no: data?.registrationNumber,
+        medical_registration_council: data?.registrationCouncil,
+        medical_registration_year: data?.registrationYear,
+        educational_degree: data?.degree,
+        educational_college: data?.college,
+        educational_year: data?.year,
+        educational_certificate: data?.certificate,
+        has_establishemnt: data?.hasEstablishment,
+        establishment_degree: data?.establishmentType,
+        establishment_name: data?.establishmentName,
+        establishment_address: data?.establishmentLocality,
+        establishment_city: data?.establishmentCity,
+        profile: data?.profileType,
+        profile_image: data?.profileImage,
+      }
+
+      Object.keys(obj).forEach((key) => (obj[key] == null || obj[key] == "") && delete obj[key]);
+
+      const res = await AuthAPI.putUpdateDoctor(obj);
+      if (res.success) {
+        // setStep(step + 1);
+        // localStorage.removeItem('doctorReg');
+      }
+
+    } catch (err) {
+      const error = err?.response?.data?.message || err?.message || "something went wrong";
+      toast.error(error);
+    } finally {
+      setLoading(false);
+    }
+
+  }
+
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setData({ ...data, [name]: value })
+  }
+
+  const handleSelect = (name, value) => {
+    setData({ ...data, [name]: value })
+  }
+
+
+  useEffect(() => {
+    getProfileDetails()
+  }, [])
+
+
   return (
     <div className=''>
       <div className='container mx-auto'>
 
-        <div className='pb-[32px]'>
+        <div className='pb-[10px]'>
           <div className='pb-[32px] gap-6 bg-[#ffff] flex flex-col rounded-[10px]'>
             <div className='mx-[28px] mt-[20px] flex justify-between'>
               <h3 className='text-Medium+/Label/Large-Strong text-[black]'>Settings</h3>
             </div>
-            <div className=' border-2 mx-[24px] border-primary-2 rounded'>
+            <div className=' border-2 mx-[24px] border-primary-2 rounded '>
               <div className='text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
                 <h2>Basic info</h2>
               </div>
-              <div className='flex'>
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Name*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter full name' />
-                </div>
+              <div className='grid grid-cols-3 gap-[20px] p-[20px]'>
 
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Specialization*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your specialization' />
-                </div>
-
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>City*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[280px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your city' />
+                <Input
+                  name={'name'}
+                  value={data?.name}
+                  label="Full Name"
+                  placeholder="Enter Full Name"
+                  handleChange={handleChange}
+                />
+                <Input
+                  name={'email'}
+                  value={data?.email}
+                  label="Email"
+                  placeholder="Enter Email "
+                  handleChange={handleChange}
+                />
+                <Input
+                  name={'mobile'}
+                  type='number'
+                  value={data?.mobile}
+                  label="Mobile"
+                  placeholder="Enter Mobile"
+                  handleChange={handleChange}
+                />
+                <CustomSelect
+                  value={data?.speciality}
+                  name={'speciality'}
+                  label="Specialization"
+                  placeholder="Select Specialization"
+                  options={dummyOptions}
+                  handleChange={(e) => { handleSelect('specialization', e) }}
+                />
+                <CustomSelect
+                  label="Gender"
+                  placeholder="Select Gender"
+                  options={genderOptions}
+                  value={data?.gender}
+                  name={'gender'}
+                  handleChange={(e) => { handleSelect('gender', e) }}
+                />
+                <CustomSelect
+                  label="City"
+                  placeholder="Select City"
+                  options={dummyOptions}
+                  value={data?.city}
+                  name={'city'}
+                  handleChange={(e) => { handleSelect('city', e) }}
+                />
+                <div className='flex flex-col col-span-3'>
+                  <label className='text-[#333333] opacity-70 text-[16px] font-medium'>Brief Description <span className='text-[#FF0000]'>*</span></label>
+                  <textarea className='border-[1px] p-[10px] rounded-[4px] mt-[5px] min-h-[100px]'
+                    name='description'
+                    value={data?.description}
+                    onChange={handleChange}
+                  >
+                  </textarea>
                 </div>
               </div>
 
-              <p className='px-[20px] text-primary-7'>Gender*</p>
-              <div className='mx-[10px] flex felx-col'>
-                <div className='flex bg-neutral-1 p-[12px] rounded'>
-                  <div className='bg-[none] border border-primary-6 rounded-full h-[18px] w-[18px] p-[4px]'>
-                    <div className='w-[100%] h-[100%] border rounded-full bg-primary-6'></div>
-                  </div>
-                  <span className='pl-[6px] text-primary-6'>Male</span>
-                </div>
 
-                <div className='flex bg-neutral-1 p-[12px] rounded-[4px]'>
-                  <div className='bg-[none] border border-primary-6 rounded-full h-[18px] w-[18px] p-[4px]'>
-                    <div className='w-[100%] h-[100%] border border-primary-6 rounded-full bg-[none]'></div>
-                  </div>
-                  <span className='pl-[6px] text-primary-6'>Female</span>
-                </div>
 
-                <div className='flex bg-neutral-1 p-[12px] rounded-[4px]'>
-                  <div className='bg-[none] border border-primary-6 rounded-full h-[18px] w-[18px] p-[4px]'>
-                    <div className='w-[100%] h-[100%] border border-primary-6 rounded-full bg-[none]'></div>
-                  </div>
-                  <span className='pl-[6px] text-primary-6'>Others</span>
-                </div>
-              </div>
 
             </div>
 
@@ -61,21 +226,30 @@ function Settings() {
               <div className='text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
                 <h2>Medical Registration</h2>
               </div>
-              <div className='flex'>
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Registration Number*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter registration number' />
-                </div>
-
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Registration Council*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your registration council' />
-                </div>
-
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Registration Date*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your registration date' />
-                </div>
+              <div className='grid grid-cols-3 gap-[20px] p-[20px]'>
+                <Input
+                  label="Registration Number"
+                  placeholder="Enter Registration Number"
+                  value={data?.medical_registration_no}
+                  name={'medical_registration_no'}
+                  handleChange={handleChange}
+                />
+                <CustomSelect
+                  label="Registration Council"
+                  placeholder="Select "
+                  options={dummyOptions}
+                  value={data?.medical_registration_council}
+                  name={'medical_registration_council'}
+                  handleChange={(e) => { handleSelect('medical_registration_council', e) }}
+                />
+                <CustomSelect
+                  label="Registration Year"
+                  placeholder="Select "
+                  options={[...Array(50)]?.map((_, i) => ({ label: `${i + 1970}`, value: `${i + 1970}` })) || []}
+                  value={data?.medical_registration_year}
+                  name={'medical_registration_year'}
+                  handleChange={(e) => { handleSelect('medical_registration_year', e) }}
+                />
               </div>
             </div>
 
@@ -84,24 +258,45 @@ function Settings() {
                 <h2>Educational Details</h2>
               </div>
 
-              <div className='flex'>
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Degree*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your degree' />
-                </div>
-
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>College/University*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[250px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your college/university' />
-                </div>
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Year of completion*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter completion year' />
-                </div>
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Years of experiences*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your experiences' />
-                </div>
+              <div className='grid grid-cols-3 gap-[20px] p-[20px]'>
+                <CustomSelect
+                  label="Degree"
+                  placeholder="Select "
+                  options={dummyOptions}
+                  value={data?.educational_degree}
+                  name={'educational_degree'}
+                  handleChange={(e) => { handleSelect('educational_degree', e) }}
+                />
+                <Input
+                  label="College / University"
+                  placeholder="Enter College / University"
+                  value={data?.educational_college}
+                  name={'educational_college'}
+                  handleChange={handleChange}
+                />
+                <CustomSelect
+                  label="Year of Completion"
+                  placeholder="Select "
+                  options={[...Array(50)]?.map((_, i) => ({ label: `${i + 1970}`, value: `${i + 1970}` })) || []}
+                  value={data?.educational_year}
+                  name={'educational_year'}
+                  handleChange={(e) => { handleSelect('educational_year', e) }}
+                />
+                <Input
+                  label="Year of Experiences"
+                  placeholder="Enter Year of Experiences"
+                  type='number'
+                  value={data?.experince}
+                  name={'experince'}
+                  handleChange={handleChange}
+                />
+                <Input
+                  label="Upload Certificate"
+                  placeholder="Upload"
+                  type='file'
+                  name={'educational_certificate'}
+                  handleChange={handleChange}
+                />
               </div>
             </div>
 
@@ -110,59 +305,108 @@ function Settings() {
                 <h2>Establishment Details</h2>
               </div>
 
-              <div className='flex'>
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Establishment*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter establishment' />
-                </div>
-
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Degree*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[250px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your degree' />
-                </div>
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Establishment Name*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your establishment name' />
-                </div>
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>City*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your city' />
-                </div>
-                
+              <div className='grid grid-cols-3 gap-[20px] p-[20px]'>
+                <CustomSelect
+                  label="Has Establishment"
+                  placeholder="Search to select"
+                  options={[{ label: 'Yes', value: true }, { label: 'No', value: false }]}
+                  value={data?.has_establishemnt}
+                  name={'hasEstablishment'}
+                  handleChange={(e) => { handleSelect('has_establishemnt', e) }}
+                />
+                {
+                  data?.has_establishemnt && <>
+                    <CustomSelect
+                      label="Establishment Type"
+                      placeholder="Search to select"
+                      options={dummyOptions}
+                      value={data?.establishment_degree}
+                      name={'establishment_degree'}
+                      handleChange={(e) => { handleSelect('establishment_degree', e) }}
+                    />
+                    {/* <CustomSelect label="Degree" placeholder="Select " options={dummyOptions} /> */}
+                    <Input
+                      label="Establishment Name"
+                      placeholder="Enter Establishment Name"
+                      value={data?.establishment_name}
+                      name={'establishment_name'}
+                      handleChange={handleChange}
+                    />
+                    <CustomSelect
+                      label="City"
+                      placeholder="Select "
+                      options={dummyOptions}
+                      value={data?.establishment_city}
+                      name={'establishment_city'}
+                      handleChange={(e) => { handleSelect('establishment_city', e) }}
+                    />
+                    <Input
+                      label="Locality"
+                      placeholder="Enter Locality"
+                      value={data?.establishment_address}
+                      name={'establishment_address'}
+                      handleChange={handleChange}
+                    />
+                  </>
+                }
               </div>
-              <div className='flex'>
-              <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Locality*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your locality' />
-                </div>
-                <div className='flex gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>State*</p>
-                  <input className='outline-none border-2 border-primary-2 w-[235px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Enter your state' />
-                </div>
-                </div>
             </div>
 
             <div className=' border-2 mx-[24px] border-primary-2 rounded'>
               <div className='text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
                 <h2>Profile Section</h2>
               </div>
-              <div className='flex'>
-                <div className='flex relative gap-2 flex-col py-[18px] px-[20px] text-primary-7'>
-                  <p>Profile*</p>
-                  <div className='flex items-center relative justify-end'>
-                  <i class="bi absolute bi-chevron-down absolute pr-[10px] text-primary-7"></i>
-                  <input className='outline-none border-2 border-primary-2 w-[250px] rounded-[4px] py-[4px] px-[10px]' type="text" placeholder='Select  your profile ' />
-                  </div>
+              <div className='grid grid-cols-3 gap-[20px] p-[20px]'>
+                <CustomSelect
+                  label="Profile Type"
+                  placeholder="Select "
+                  options={dummyOptions}
+                  value={data?.profile}
+                  name={'profile'}
+                  handleChange={(e) => { handleSelect('profile', e) }}
+                />
+                <Input
+                  label="Profile Name"
+                  placeholder="Enter Profile Name"
+                  value={data?.profileName}
+                  name={'profileName'}
+                  handleChange={handleChange}
+                />
+                <div className='flex flex-col col-span-3'>
+                  <label className='text-[#333333] opacity-70 text-[16px] font-medium'>Profile Description <span className='text-[#FF0000]'>*</span></label>
+                  <textarea className='border-[1px] p-[10px] rounded-[4px] mt-[5px] min-h-[100px]'
+                    name='profileDescription'
+                    value={data?.profileDescription}
+                    onChange={handleChange}
+                  >
+                  </textarea>
                 </div>
+                <Input
+                  label="Consultation Fee"
+                  type={'number'}
+                  placeholder="Enter Consultation Fee (INR)"
+                  value={data?.counsultationFee}
+                  name={'counsultationFee'}
+                  handleChange={handleChange}
+                />
+                <div className='col-span-2'></div>
+                <Input
+                  label="Profile Image"
+                  placeholder="Upload Profile Image"
+                  type='file'
+                  name={'profileImage'}
+                  handleChange={handleChange}
+                />
 
               </div>
             </div>
           </div>
 
-          <div className='mx-[20px] flex justify-between bg-primary-2 p-[12px] rounded-[8px]'>
-            <button className='px-[10px] py-[4px] rounded-[8px] border-2 border-primary-4'> <span className='text-primary-7'>Cancel</span> </button>
-            <button className='px-[10px] py-[4px] rounded-[8px] border-2 border-primary-4'><span className='text-primary-7'>Save</span> </button>
-          </div>
+          <div class="footer border-[1px] border-primary-2 rounded-[4px] max-width-[100%] md:w-[100%] left-[14%] w-[100%] sticky bottom-0 shadow-md bg-[#fff] "><div class="flex justify-between gap-[10px] py-[10px] px-[20px]">
+            <Button label='Cancel' type='outlined' />
+            <Button label='Save' type='primary' />
+
+          </div></div>
 
 
         </div>

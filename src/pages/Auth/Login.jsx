@@ -33,7 +33,7 @@ const Login = () => {
 
     const handleSubmit = async () => {
 
-        if(!data.phone || !data.password){
+        if (!data.phone || !data.password) {
             return toast.error("Please fill all the details")
         }
 
@@ -46,7 +46,7 @@ const Login = () => {
                 sessionStorage.setItem('refreshToken', res.data.refreshToken)
                 localStorage.setItem('user', JSON.stringify(res.data.user))
                 if (res.data.user.role === 'doctor') {
-                    if (res.data.doctor.profile_completed) navigate(ROUTES.DoctorRegister)
+                    if (res.data.doctor.profile_completed) navigate(ROUTES.Doctor.root)
                     else navigate(ROUTES.DoctorRegister)
                 }
                 if (res.data.user.role === 'patient') navigate(ROUTES.Home)
@@ -62,6 +62,48 @@ const Login = () => {
         }
 
     }
+
+    const sendOtp = async () => {
+        try {
+            setLoading(true)
+            const res = await AuthAPI.postSendOtp({ phone: data.phone })
+            if (res.success) {
+                // toast.success('OTP Sent Successfully')
+                toast.error('Some Error Occured while Sending OTP')
+                setOtpSent(true)
+            }
+        }
+        catch (err) {
+            console.log(err);
+            const errMsg = err?.response?.data?.message || err.message || 'Something went wrong'
+            toast.error(errMsg)
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+
+
+    const verifyOtp = async () => {
+        try {
+            setLoading(true)
+            const res = await AuthAPI.postVerifyOtp({ phone: data.phone, otp: data.otp })
+            if (res.success) {
+
+                toast.success('OTP Verified Successfully')
+                setConfirmation(true)
+            }
+        }
+        catch (err) {
+            console.log(err);
+            const errMsg = err?.response?.data?.message || err.message || 'Something went wrong'
+            toast.error(errMsg)
+        }
+        finally {
+            setLoading(false)
+        }
+    }
+
 
 
     return (
@@ -115,7 +157,9 @@ const Login = () => {
                         <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[30px]"
                             onClick={(e) => {
                                 e.preventDefault()
-                                handleSubmit()
+                                {
+                                    loginType === "password" ? handleSubmit() : sendOtp()
+                                }
                             }}
                         >{
                                 loginType === "password" ? "Login" : "Send OTP"

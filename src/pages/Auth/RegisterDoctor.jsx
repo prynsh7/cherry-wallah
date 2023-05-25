@@ -158,7 +158,7 @@ const RegisterDoctor = () => {
           <CustomSelect
             label="Registration Year"
             placeholder="Select "
-            options={dummyOptions}
+            options={[...Array(50)]?.map((_, i) => ({ label: `${i + 1970}`, value: `${i + 1970}` })) || []}
             value={data.registrationYear}
             name={'registrationYear'}
             handleChange={(e) => { handleSelect('registrationYear', e) }}
@@ -185,7 +185,7 @@ const RegisterDoctor = () => {
           <CustomSelect
             label="Year of Completion"
             placeholder="Select "
-            options={dummyOptions}
+            options={[...Array(50)]?.map((_, i) => ({ label: `${i + 1970}`, value: `${i + 1970}` })) || []}
             value={data.year}
             name={'year'}
             handleChange={(e) => { handleSelect('year', e) }}
@@ -269,11 +269,21 @@ const RegisterDoctor = () => {
             name={'profileName'}
             handleChange={handleChange}
           />
+          <div className='flex flex-col'>
+            <label className='text-[#333333] opacity-70 text-[14px]'>Profile Description <span className='text-[#FF0000]'>*</span></label>
+            <textarea className='border-[1px] p-[10px] rounded-[4px] mt-[5px] min-h-[100px]'
+              name='profileDescription'
+              value={data.profileDescription}
+              onChange={handleChange}
+            >
+            </textarea>
+          </div>
           <Input
-            label="Profile Description"
-            placeholder="Enter Profile Description"
-            value={data.profileDescription}
-            name={'profileDescription'}
+            label="Consultation Fee"
+            type={'number'}
+            placeholder="Enter Consultation Fee (INR)"
+            value={data.counsultationFee}
+            name={'counsultationFee'}
             handleChange={handleChange}
           />
           <Input
@@ -370,18 +380,16 @@ const RegisterDoctor = () => {
         !data.degree ||
         !data?.college||
         !data?.year||
-        !data?.experince||
-        !data?.certificate )
+        !data?.experince)
          {
         return toast.error("Please enter educational details")
       }
     }
     if (step == 3) {
-      if (
-        !data.establishmentType ||
+      if ( data?.hasEstablishment && (!data.establishmentType ||
         !data?.establishmentName||
         !data?.establishmentCity||
-        !data?.establishmentLocality )
+        !data?.establishmentLocality) )
          {
         return toast.error("Please enter establishment details")
       }
@@ -391,8 +399,7 @@ const RegisterDoctor = () => {
       if (
         !data.profileType ||
         !data?.profileName||
-        !data?.profileDescription||
-        !data?.profileImage )
+        !data?.profileDescription )
          {
         return toast.error("Please enter profile details")
       }

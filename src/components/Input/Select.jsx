@@ -4,7 +4,7 @@ import { Select } from 'antd'
 const CustomSelect = ({ label, placeholder, options, value, handleChange, name, required, labelStyle, selectStyle, }) => {
     return (
         <div className="flex flex-col">
-            <label className={"text-[#333333] opacity-70 text-[14px] " + labelStyle || ""}>{label} {
+            <label className={"text-[#333333] opacity-70 text-[16px] font-medium " + labelStyle || ""}>{label} {
                 required ? <span className="text-[#FF0000]">*</span> : null
             }</label>
             <Select

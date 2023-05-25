@@ -42,8 +42,8 @@ const UserRegister = () => {
 
             if (res.success) {
                 toast.success('Registered Successfully')
-                localStorage.setItem('token', res.data.token)
-                localStorage.setItem('refreshToken', res.data.refreshToken)
+                sessionStorage.setItem('token', res.data.token)
+                sessionStorage.setItem('refreshToken', res.data.refreshToken)
                 localStorage.setItem('user', JSON.stringify(res.data.user))
 
                 setTimeout(() => {

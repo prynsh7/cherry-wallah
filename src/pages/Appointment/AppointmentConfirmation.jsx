@@ -7,7 +7,7 @@ import { useLocation } from 'react-router-dom'
 
 const AppointmentConfirmation = () => {
     const {state} = useLocation()
-    const {appointment} = state 
+    const {appointment, doctor} = state 
     const [isOpen, setIsOpen] = useState(false)
     const handleCloseModal = () => setIsOpen(false)
     const handleOpenModal = () => setIsOpen(true)
@@ -19,22 +19,22 @@ const AppointmentConfirmation = () => {
             <div className='container mx-auto py-[60px]'>
 
                 <div className='grid sm:grid-cols-2 gap-10 px-20'>
-                    <div className='grid-col-1 bg-neutral-1 p-[40px] rounded-[12px]'>
-                        <div className=' py-[12px]'>
+                <div className='col-span-1 bg-neutral-1 p-[40px] rounded-[12px]'>
+                        <div className='border-b-2 py-[12px]'>
                             <span className='text-Medium+/Title/Small pt-[36px]'>Appointment on</span>
                         </div>
-                        <div className='border-y-2 py-[12px] flex'>
+                        <div className='border-b-2 py-[12px] flex'>
                             <i class="bi bi-calendar-event pr-[8px] text-[#5E912E]"></i>
-                            <p>{appointment.appointment_time}</p>
+                            <p>{appointment?.appointment_time}</p>
                         </div>
                         <div className='gap-4 flex pt-[20px] '>
                             <div className='text-center'>
-                                <img className='pb-[6px]' src={DoctorProfile} alt="" />
+                                <img className='pb-[6px] w-[100px] aspect-square rounded-full' src={doctor?.profile_image} alt="" />
                             </div>
                             <div>
-                                <h3 className='text-Small/Title/Medium text-[#007E85]'>Dr. Hanshika Raj</h3>
-                                <p className='text-Small/Title/xSmall text-neutral-8'>Herbal Medicine Specialist</p>
-                                <p>BAMS, India</p>
+                                <h3 className='text-Small/Title/Medium text-[#007E85]'>{doctor?.name}</h3>
+                                <p className='text-Small/Title/xSmall text-neutral-8'>{doctor?.profile_name}</p>
+                                <p>{doctor?.educational_degree}, {doctor?.educational_college}</p>
                             </div>
                         </div>
                     </div>

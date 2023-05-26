@@ -106,9 +106,9 @@ const DoctorsList = () => {
 
                                     <div>
                                         <h3 className='text-Small/Title/Medium text-[#007E85]'>{item?.name}</h3>
-                                        <p className='text-Small/Title/xSmall text-neutral-8'>Herbal Medicine Specialist</p>
-                                        <p className='text-neutral-9'>{} years experience overall</p>
-                                        <p className='text-neutral-9'>₹500 consultation fee</p>
+                                        <p className='text-Small/Title/xSmall text-neutral-8'>{item?.profile_name}</p>
+                                        <p className='text-neutral-9'>{item?.medical_experience} years experience overall</p>
+                                        <p className='text-neutral-9'>₹{item?.consultation_fee} consultation fee</p>
                                     </div>
                                 </div>
                                 <div className='flex justify-center items-center'>

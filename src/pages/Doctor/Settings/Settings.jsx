@@ -407,9 +407,9 @@ function Settings() {
                   </textarea>
                 </div>
                 <Input
-                  label="Consultation Fee ( INR )"
+                  label="Consultation Fee ( ₹ )"
                   type={'number'}
-                  placeholder="Enter Consultation Fee (INR)"
+                  placeholder="Enter Consultation Fee (₹)"
                   value={data?.consultation_fee}
                   name={'consultation_fee'}
                   handleChange={handleChange}

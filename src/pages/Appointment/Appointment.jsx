@@ -16,6 +16,7 @@ const Appointment = () => {
 
     const {state} = useLocation()
     console.log(state);
+    const {doctor} = state
 
     const [phone, setPhone] = useState('')
 
@@ -56,7 +57,7 @@ const Appointment = () => {
             console.log(res);
             if(res.success){
                 message.success('Appointment booked successfully')
-                navigate(ROUTES.User.AppointmentConfirmation, {state: res.data})
+                navigate(ROUTES.User.AppointmentConfirmation, {state: {...res.data, doctor: doctor}})
             }
         }
         catch(err){
@@ -91,16 +92,16 @@ const Appointment = () => {
                         </div>
                         <div className='border-b-2 py-[12px] flex'>
                             <i class="bi bi-calendar-event pr-[8px] text-[#5E912E]"></i>
-                            <p>On April 23, 2023</p>
+                            <p>{state.timeSlot.time}</p>
                         </div>
                         <div className='gap-4 flex pt-[20px] '>
                             <div className='text-center'>
-                                <img className='pb-[6px]' src={DoctorProfile} alt="" />
+                                <img className='pb-[6px] w-[100px] aspect-square rounded-full' src={doctor?.profile_image} alt="" />
                             </div>
                             <div>
-                                <h3 className='text-Small/Title/Medium text-[#007E85]'>Dr. Hanshika Raj</h3>
-                                <p className='text-Small/Title/xSmall text-neutral-8'>Herbal Medicine Specialist</p>
-                                <p>BAMS, India</p>
+                                <h3 className='text-Small/Title/Medium text-[#007E85]'>{doctor?.name}</h3>
+                                <p className='text-Small/Title/xSmall text-neutral-8'>{doctor?.profile_name}</p>
+                                <p>{doctor?.educational_degree}, {doctor?.educational_college}</p>
                             </div>
                         </div>
                     </div>

@@ -33,7 +33,8 @@ const TimeSlots = ({
     doctorSpeciality,
     timeSlots,
     handleTimeSlot,
-    timeSlot
+    timeSlot,
+    data
 }) => {
 
     const [week, setWeek] = useState({});
@@ -95,8 +96,8 @@ const TimeSlots = ({
         <div>
             <p className='text-Medium+/Label/Large-Strong'>Pick a time slot</p>
             <div className='py-[16px] flex flex-col gap-[4px]'>
-                <h3 className='text-Small/Label/Large-Strong text-[#007E85]'>Dr. Hanshika Raj</h3>
-                <p className='text-Small/Label/Large-Strong text-neutral-8'>Herbal Medicine Specialist</p>
+                <h3 className='text-Small/Label/Large-Strong text-[#007E85]'>{data?.name}</h3>
+                <p className='text-Small/Label/Large-Strong text-neutral-8'>{data?.profile_name}</p>
             </div>
 
             <div className="grid grid-cols-9 gap-[5px] bg-[#e5e5e5] p-[5px] rounded-t-[8px] ">

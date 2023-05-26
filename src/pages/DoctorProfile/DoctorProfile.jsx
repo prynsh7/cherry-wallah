@@ -146,7 +146,7 @@ const DoctorProfile = () => {
                     navigate(ROUTES.User.Appointment, { state: { doctor: data, timeSlot: timeSlot } })
                 }}
                 handleCancel={handleCloseModal}>
-                <TimeSlots handleTimeSlot={handleTimeSlot} timeSlot={timeSlot} timeSlots={timeSlots} />
+                <TimeSlots handleTimeSlot={handleTimeSlot} timeSlot={timeSlot} timeSlots={timeSlots} data={data}/>
             </Modal>
 
             <div className='container mx-auto py-[60px]'>
@@ -188,7 +188,7 @@ const DoctorProfile = () => {
                     </div>
                 </div>
 
-                <div className='bg-[#ffff] flex px-[28px] mx-[85px] py-[40px] rounded-[14px] justify-center items-center mt-[36px]'>
+                <div className='bg-[#ffff] flex px-[28px] mx-[85px] py-[40px] rounded-[14px] items-center mt-[36px]'>
                     <div className='flex justify-center items-center gap-6 '>
                         <div className='w-[100px] border-[1px] h-[100px] object-contain rounded-full  overflow-hidden'>
 
@@ -199,14 +199,14 @@ const DoctorProfile = () => {
 
                         <div>
                             <h3 className='text-Small/Title/Medium text-[#007E85]'>{data?.name}</h3>
-                            <p className='text-Small/Title/xSmall text-neutral-8'>Herbal Medicine Specialist</p>
-                            <p className='text-neutral-9'>12 years experience overall</p>
-                            <p className='text-neutral-9'>₹500 consultation fee</p>
+                            <p className='text-Small/Title/xSmall text-neutral-8'>{data?.profile_name}</p>
+                            <p className='text-neutral-9'>{data?.medical_experience} years experience overall</p>
+                            <p className='text-neutral-9'>₹{data?.consultation_fee} consultation fee</p>
                             <div className='relative flex items-center mt-[14px]'>
                                 <i class="bi bi-patch-check absolute text-[#6EAB36] pr-[14px]"></i>
                                 <p className='text-[#6EAB36] pl-[22px]'>Medical Registration Verified</p>
                             </div>
-                            <p>Dr. Hanshika Raj has over 12 years of experience as a Herbal Medicine Specialist. He has done Bachelor of Ayurveda, Medicine and Surgery (BAMS).</p>
+                            <p>{data?.name} has over {data?.medical_experience} years of experience as a {data?.profile_name}. He has done {data?.educational_degree} from {data?.educational_college} ({data?.educational_year}).</p>
                             <div className='mt-[16px]'>
                                 <button className='py-[12.5px] font-semibold px-[40px] text-[0.875em] bg-linear text-[#fff] rounded-[4px]' onClick={handleOpenModal}>Book Appointment</button>
                             </div>
@@ -216,7 +216,7 @@ const DoctorProfile = () => {
 
                 <div className='bg-[#ffff]  mx-[85px] py-[30px] rounded-[14px] mt-[36px]'>
                     <div className='text-Small/Title/Small text-[#007E85] px-[28px]'>Doctor info</div>
-                    <p className='mt-[6px] px-[28px]'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus ratione praesentium dignissimos quam accusantium, consectetur illum assumenda tempore libero sit repellat quibusdam aliquam odit atque asperiores reiciendis nemo odio non? Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas perspiciatis quaerat corporis dignissimos. Pariatur consectetur deserunt vero ratione optio deleniti excepturi vitae ipsum unde? Repellat ducimus dolorem quo provident sint?</p>
+                    <p className='mt-[6px] px-[28px]'>{data?.profile_description}</p>
                 </div>
 
                 <div className='bg-[#ffff]  mx-[85px] py-[30px] rounded-[14px] mt-[36px]'>

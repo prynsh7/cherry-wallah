@@ -138,6 +138,7 @@ const NavbarPatient = ({ user, isAuth = false}) => {
               >
                 <div className="flex flex-row gap-[20px] items-center">
                   <div className="w-[40px] aspect-square rounded-full border border-1 border-primary-6 cursor-pointer">
+                  <img src="https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=1480&t=st=1682599573~exp=1682600173~hmac=70167dd96663e16bc7d1b9ea915c69f452455a2db0362cb2b6eff25ae440acbd" alt="user" className="w-full h-full rounded-full object-cover" />
                   </div>
                   <p className="text-[#000]/[0.5] capitalize">{user?.name}</p>
                 </div>

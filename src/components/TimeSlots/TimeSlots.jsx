@@ -1,4 +1,32 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+
+
+const monthArray = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "June",
+    "July",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+];
+
+
+
+const dayArray = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+];
 
 const TimeSlots = ({
     doctorName,
@@ -7,6 +35,62 @@ const TimeSlots = ({
     handleTimeSlot,
     timeSlot
 }) => {
+
+    const [week, setWeek] = useState({});
+
+    const [weekUtc, setWeekUtc] = useState({});
+
+
+
+
+    const currentWeek = () => {
+        var curr = new Date(); // get current date
+        var first = curr.getDate() - curr.getDay(); // First day is the day of the month - the day of the week
+        var last = first + 6; // last day is the first day + 6
+
+        var firstday = new Date(curr.setDate(first)).toISOString().substring(0, 10);
+        var lastday = new Date(curr.setDate(last)).toISOString().substring(0, 10);
+
+        var firstdayUtc = new Date(curr.setDate(first)).toUTCString();
+        var lastdayUtc = new Date(curr.setDate(last)).toUTCString();
+
+        setWeek({ firstday, lastday });
+        setWeekUtc({ firstday: firstdayUtc, lastday: lastdayUtc });
+    };
+
+    const nextWeek = () => {
+        var curr = new Date(weekUtc.lastday); // get current date
+        var first = curr.getDate() + 1; // First day is the day of the month - the day of the week
+        var last = first + 6; // last day is the first day + 6
+
+        var firstday = new Date(curr.setDate(first)).toISOString().substring(0, 10);
+        var lastday = new Date(curr.setDate(last)).toISOString().substring(0, 10);
+
+        var firstdayUtc = new Date(curr.setDate(first)).toUTCString();
+        var lastdayUtc = new Date(curr.setDate(last)).toUTCString();
+
+        setWeek({ firstday, lastday });
+        setWeekUtc({ firstday: firstdayUtc, lastday: lastdayUtc });
+    };
+
+    const previousWeek = () => {
+        var curr = new Date(weekUtc.firstday); // get current date
+        var first = curr.getDate() - 7; // First day is the day of the month - the day of the week
+        var last = first + 6; // last day is the first day + 6
+
+        var firstday = new Date(curr.setDate(first)).toISOString().substring(0, 10);
+        var lastday = new Date(curr.setDate(last)).toISOString().substring(0, 10);
+
+        var firstdayUtc = new Date(curr.setDate(first)).toUTCString();
+        var lastdayUtc = new Date(curr.setDate(last)).toUTCString();
+
+        setWeek({ firstday, lastday });
+        setWeekUtc({ firstday: firstdayUtc, lastday: lastdayUtc });
+    };
+
+    useEffect(() => {
+        currentWeek();
+    }, []);
     return (
         <div>
             <p className='text-Medium+/Label/Large-Strong'>Pick a time slot</p>
@@ -14,30 +98,31 @@ const TimeSlots = ({
                 <h3 className='text-Small/Label/Large-Strong text-[#007E85]'>Dr. Hanshika Raj</h3>
                 <p className='text-Small/Label/Large-Strong text-neutral-8'>Herbal Medicine Specialist</p>
             </div>
-            <div className='text-center border-y-2 gap-4 grid grid-cols-6 py-[12px]'>
+
+            <div className="grid grid-cols-9 gap-[5px] bg-[#e5e5e5] p-[5px] rounded-t-[8px] ">
                 <div className='col-span-1 justify-center flex'>
-                    <button><i class="bi bi-chevron-left text-[18px]"></i></button>
+                    <button
+                        onClick={() => previousWeek()}
+                    ><i class="bi bi-chevron-left text-[18px]"></i></button>
                 </div>
-                <div className='col-span-1'>
-                    <p>Today</p>
-                    <p className='text-[#4E7926]'>6 slots available</p>
-                </div>
-                <div className='col-span-1'>
-                    <p>Tommorrow</p>
-                    <p className='text-[#4E7926]'>6 slots available</p>
-                </div>
-                <div className='col-span-1'>
-                    <p>Monday</p>
-                    <p className='text-[#4E7926]'>6 slots available</p>
-                </div>
-                <div className='col-span-1'>
-                    <p>Tue, 23 Apr</p>
-                    <p className='text-[#4E7926]'>6 slots available</p>
-                </div>
+                {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
+                    <div
+                        className="col col-span-1 flex flex-col justify-center items-center"
+                        key={index + "day"}
+                    >
+                        <p className="text-[14px]">{dayArray[index].slice(0, 3)} </p>
+                        <p className="text-[14px]">
+                            {Number(week?.firstday?.split("-")[2]) + index}
+                        </p>
+                    </div>
+                ))}
                 <div className='col-span-1 justify-center flex'>
-                    <button><i class="bi bi-chevron-right text-[18px]"></i></button>
+                    <button
+                        onClick={() => nextWeek()}
+                    ><i class="bi bi-chevron-right text-[18px]"></i></button>
                 </div>
             </div>
+
 
             <div className='py-[16px] '>
                 {
@@ -47,7 +132,7 @@ const TimeSlots = ({
                             <div className='grid grid-cols-8 gap-4 mt-2 mb-4'>
                                 {
                                     i.slots.map((slot, index) => (
-                                        <button className={`col-span-1 border border-2 rounded p-[2px] text-center ${timeSlot?.id==slot?.id?' bg-primary-6 text-neutral-2':'text-primary-6'}`} onClick={()=>handleTimeSlot(slot)}>{slot.time}</button>
+                                        <button className={`col-span-1 border border-2 rounded p-[2px] text-center ${timeSlot?.id == slot?.id ? ' bg-primary-6 text-neutral-2' : 'text-primary-6'}`} onClick={() => handleTimeSlot(slot)}>{slot.time}</button>
                                     ))
                                 }
                             </div>

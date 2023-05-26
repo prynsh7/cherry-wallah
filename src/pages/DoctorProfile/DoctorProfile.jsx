@@ -219,9 +219,12 @@ const DoctorProfile = () => {
                     <p className='mt-[6px] px-[28px]'>{data?.profile_description}</p>
                 </div>
 
-                <div className='bg-[#ffff]  mx-[85px] py-[30px] rounded-[14px] mt-[36px]'>
-                    <div className='text-Small/Title/Small text-[#007E85] px-[28px] mb-[14px]'>Patient Stories for Dr. Hanshika Raj</div>
-                    <div className='border-y-2 px-[28px] pt-[14px] pb-[14px]'>
+                <div className='bg-[#ffff]  mx-[85px] py-[30px] px-7 rounded-[14px] mt-[36px]'>
+                    <div className='text-Small/Title/Small text-[#007E85] mb-[14px]'>Patient Stories for Dr. Hanshika Raj</div>
+                    <h6>
+                        No Stories yet,  Be the first to write a story for {data?.name}.
+                    </h6>
+                    {/* <div className='border-y-2 px-[28px] pt-[14px] pb-[14px]'>
                         <p className='text-neutral-9 font-bold'>Jaya D M (Verified)</p>
                         <p className='mt-2 text-[#6EAB36]'>Visited For Digestive Issues</p>
                         <p className='mt-2'>Dr. Kumar helped me overcome years of digestive issues through personalized Ayurvedic treatment including dietary changes and herbal supplements. His careful listening to my symptoms and medical history made a huge difference. I was amazed at how quickly my symptoms improved and continue to work with him to maintain my digestive health.</p>
@@ -259,7 +262,7 @@ const DoctorProfile = () => {
                             <i class="bi bi-hand-thumbs-up-fill absolute text-neutral-9 pr-[12px]"></i>
                             <p className='pl-[22px]'>I recommend the doctor</p>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

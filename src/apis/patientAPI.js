@@ -16,8 +16,34 @@ export const PatientAPI = {
         });
 
         return response.data;
-    }
+    },
 
+    getPatient: async (cancel = false) => {
+        const response = await api.request({
+            url: "patient/getMe",
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(localStorage.getItem('bearerToken'))}`,
+                "x-request-token": sessionStorage.getItem('token')
+            },
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+        return response.data;
+    },
+
+    updatePatient: async (data, cancel = false) => {
+        const response = await api.request({
+            url: "patient/updateMe",
+            method: "PUT",
+            headers: {
+                'Authorization': `Bearer ${JSON.parse(localStorage.getItem('bearerToken'))}`,
+                "x-request-token": sessionStorage.getItem('token')
+            },
+            data: data,
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+        return response.data;
+    },
 }
 
 const cancelApiObject = defineCancelApiObject(PatientAPI);

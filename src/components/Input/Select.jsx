@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select } from 'antd'
 
-const CustomSelect = ({ label, placeholder, options, value, handleChange, name, required, labelStyle, selectStyle, }) => {
+const CustomSelect = ({ label, placeholder, options, value, handleChange, name, required, labelStyle, selectStyle, disabled}) => {
     return (
         <div className="flex flex-col">
             <label className={"text-[#333333] opacity-70 text-[16px] font-medium " + labelStyle || ""}>{label} {
@@ -11,6 +11,7 @@ const CustomSelect = ({ label, placeholder, options, value, handleChange, name, 
                 showSearch
                 name={name}
                 value={value}
+                disabled={disabled}
                 className='h-[40px] '
                 style={{
                     width: '100%',

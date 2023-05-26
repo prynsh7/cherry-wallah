@@ -19,6 +19,91 @@ const DoctorProfile = () => {
 
     const { id } = useParams()
 
+    const [timeSlot, setTimeSlot] = useState()
+
+    const timeSlots = [
+        {
+            id: 1,
+            mode:"Morning",
+            slots: [
+                {
+                    id: 1,
+                    time: "10:00 AM"
+                },
+                {
+                    id: 2,
+                    time: "10:30 AM"
+                },
+                {
+                    id: 3,
+                    time: "11:00 AM"
+                },
+                {
+                    id: 4,
+                    time: "11:30 AM"
+                },
+                {
+                    id: 5,
+                    time: "12:00 PM"
+                },
+            ]
+        },
+        {
+            id: 2,
+            mode:"Afternoon",
+            slots: [
+                {
+                    id: 6,
+                    time: "12:30 PM"
+                },
+                {
+                    id: 7,
+                    time: "01:00 PM"
+                },
+                {
+                    id: 8,
+                    time: "01:30 PM"
+                },
+                {
+                    id: 9,
+                    time: "02:00 PM"
+                },
+                {
+                    id: 10,
+                    time: "02:30 PM"
+                },
+            ]
+        },
+        {
+            id: 3,
+            mode:"Evening",
+
+            slots: [
+                {
+                    id: 11,
+
+                    time: "03:00 PM"
+                },
+                {
+                    id: 12,
+                    time: "03:30 PM"
+                },
+                {
+                    id: 13,
+                    time: "04:00 PM"
+                },
+                {
+                    id: 14,
+                    time: "04:30 PM"
+                },
+                {
+                    id: 15,
+                    time: "05:00 PM"
+                },
+            ]
+        }
+    ]
+
     const getDoctorById = async () => {
         try {
             setLoading(true)
@@ -43,6 +128,10 @@ const DoctorProfile = () => {
         getDoctorById()
     }, [])
 
+    const handleTimeSlot = (e) => {
+        setTimeSlot(e)
+    }
+
     return (
         <div className='bg-neutral-4'>
             {
@@ -52,11 +141,12 @@ const DoctorProfile = () => {
 
             <Modal width={'50%'} className='bg-neutral-1' isOpen={isOpen}
                 handleSubmit={() => {
+                    if(!timeSlot) return toast.error("Please select a time slot")
                     handleCloseModal()
-                    navigate(ROUTES.User.Appointment)
+                    navigate(ROUTES.User.Appointment,{state:{doctor:data,timeSlot:timeSlot}})
                 }}
                 handleCancel={handleCloseModal}>
-                <TimeSlots />
+                <TimeSlots handleTimeSlot={handleTimeSlot} timeSlot={timeSlot} timeSlots={timeSlots}/>
             </Modal>
 
             <div className='container mx-auto py-[60px]'>

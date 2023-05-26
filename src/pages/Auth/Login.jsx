@@ -7,6 +7,7 @@ import logo from '../../assets/images/logo.png'
 
 import { ROUTES } from '../../routes/RouterConfig';
 import { AuthAPI } from '../../apis/authAPI';
+import OtpInput from '../../components/OtpInput/OtpInput';
 
 
 const Login = () => {
@@ -20,11 +21,15 @@ const Login = () => {
 
     const [otpSent, setOtpSent] = React.useState(false)
 
+    const [otp, setOtp] = React.useState('')
+
     const [loginType, setLoginType] = React.useState('otp')
 
     const [loading, setLoading] = React.useState(false)
 
     const [confirmation, setConfirmation] = React.useState(false)
+
+    const [otpReqId, setOtpReqId] = React.useState('')
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -69,8 +74,10 @@ const Login = () => {
             const res = await AuthAPI.postSendOtp({ phone: data.phone })
             if (res.success) {
                 // toast.success('OTP Sent Successfully')
-                toast.error('Some Error Occured while Sending OTP')
+                toast.success('Some Error Occured while Sending OTP')
                 setOtpSent(true)
+                console.log(res)
+                setOtpReqId(res.data.requestId)
             }
         }
         catch (err) {
@@ -87,11 +94,20 @@ const Login = () => {
     const verifyOtp = async () => {
         try {
             setLoading(true)
-            const res = await AuthAPI.postVerifyOtp({ phone: data.phone, otp: data.otp })
+            const res = await AuthAPI.postVerifyOtp({ requestId: otpReqId, otp: otp,  })
             if (res.success) {
 
                 toast.success('OTP Verified Successfully')
-                setConfirmation(true)
+                sessionStorage.setItem('token', res.data.token)
+                if(res.data.newUser) return toast.error('User Not Registered, Please Register First')
+                sessionStorage.setItem('token', res.data.token)
+                sessionStorage.setItem('refreshToken', res.data.refreshToken)
+                localStorage.setItem('user', JSON.stringify(res.data.user))
+                if (res.data.user.role === 'doctor') {
+                    if (res.data.doctor.profile_completed) navigate(ROUTES.Doctor.root)
+                    else navigate(ROUTES.DoctorRegister)
+                }
+                if (res.data.user.role === 'patient') navigate(ROUTES.Home)
             }
         }
         catch (err) {
@@ -138,7 +154,17 @@ const Login = () => {
                                     <label className="text-[#333333] opacity-70 text-[14px]">Password</label>
                                     <input value={data.password} type='password' name="password" onChange={handleChange} className="border-[1px] rounded-[4px] p-[10px] mt-[5px]" placeholder="Enter Password" />
                                 </div>
-                                : null
+                                : 
+                                null
+                            }
+                        {
+                            loginType === "otp" && otpSent?
+                            <div className="flex flex-col">
+                                <label className="text-[#333333] opacity-70 text-[14px]">Enter OTP</label>
+                                        <OtpInput value={otp} valueLength={6} onChange={(e) => setOtp(e)} />
+                            </div>
+                            :
+                            null
                         }
 
 
@@ -158,11 +184,11 @@ const Login = () => {
                             onClick={(e) => {
                                 e.preventDefault()
                                 {
-                                    loginType === "password" ? handleSubmit() : sendOtp()
+                                    loginType === "password" ? handleSubmit() : loginType === "otp"&&!otpSent ? sendOtp() : verifyOtp()
                                 }
                             }}
                         >{
-                                loginType === "password" ? "Login" : "Send OTP"
+                                loginType === "password" ? "Login" : loginType === "otp"&&!otpSent ? "Send OTP" : "Verify OTP"
                             }</button>
                     </div>
 

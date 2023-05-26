@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { DoctorAPI } from '../../../apis/doctorAPI'
-import { toast } from 'react-toastify'
+import { ToastContainer, toast } from 'react-toastify'
 import { AuthAPI } from '../../../apis/authAPI'
 import CustomSelect from '../../../components/Input/Select'
 import Input from '../../../components/Input/Input'
@@ -63,17 +63,17 @@ function Settings() {
   })
   const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async() => {
-    await DoctorAPI.UpdateMe(data)
-    .then(res=>{
-      if(res.success) message.success("Profile Updated Successfully")
-    })
-    .catch(err=>{
-      console.log(err);
-      message.error("Error Updating Profile")
-    }
-    )
-  }
+  // const handleSubmit = async () => {
+  //   await DoctorAPI.UpdateMe(data)
+  //     .then(res => {
+  //       if (res.success) message.success("Profile Updated Successfully")
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //       message.error("Error Updating Profile")
+  //     }
+  //     )
+  // }
 
   const getProfileDetails = async () => {
     try {
@@ -95,41 +95,17 @@ function Settings() {
     }
   }
 
-  const updateDoctorProfile = async () => {
+  const handleSubmit = async () => {
 
     try {
       setLoading(true);
 
-      const obj = {
-        name: data?.name,
-        email: data?.email,
-        mobile: data?.mobile,
-        dob: data?.dob,
-        gender: data?.gender,
-        speciality: data?.speciality,
-        availability: data?.availability,
-        city: data?.city,
-        description: data?.description,
-        medical_registration_no: data?.registrationNumber,
-        medical_registration_council: data?.registrationCouncil,
-        medical_registration_year: data?.registrationYear,
-        educational_degree: data?.degree,
-        educational_college: data?.college,
-        educational_year: data?.year,
-        educational_certificate: data?.certificate,
-        has_establishemnt: data?.hasEstablishment,
-        establishment_degree: data?.establishmentType,
-        establishment_name: data?.establishmentName,
-        establishment_address: data?.establishmentLocality,
-        establishment_city: data?.establishmentCity,
-        profile: data?.profileType,
-        profile_image: data?.profileImage,
-      }
-
+      const obj = { ...data }
       Object.keys(obj).forEach((key) => (obj[key] == null || obj[key] == "") && delete obj[key]);
 
       const res = await AuthAPI.putUpdateDoctor(obj);
       if (res.success) {
+        toast.success(res.message);
         // setStep(step + 1);
         // localStorage.removeItem('doctorReg');
       }
@@ -160,6 +136,7 @@ function Settings() {
 
   return (
     <div className=''>
+    <ToastContainer />
       <div className='container mx-auto'>
 
         <div className='pb-[10px]'>
@@ -404,25 +381,25 @@ function Settings() {
                 />
                 <div className='col-span-3'></div>
                 <div className="col-span-1">
-                  <div className='w-[200px] aspect-sqaure'>
+                  <div className='w-[200px] h-[200px] aspect-sqaure'>
                     <img src={data?.profile_image} className='h-full w-full rounded-full' alt="" />
                   </div>
                 </div>
                 <div className="col-span-1">
 
-                <Input
-                  label="Profile Image"
-                  placeholder="Upload Profile Image"
-                  type='file'
-                  name={'profileImage'}
-                  handleChange={async(e) => {
-                    console.log('here');
-                    let a = await handleFileUpload(e, 'avatar', data._id);
-                    if (a) {
-                      setData({ ...data, profile_image: a })
-                    }
-                  }}
-                />
+                  <Input
+                    label="Profile Image"
+                    placeholder="Upload Profile Image"
+                    type='file'
+                    name={'profileImage'}
+                    handleChange={async (e) => {
+                      console.log('here');
+                      let a = await handleFileUpload(e, 'avatar', data._id);
+                      if (a) {
+                        setData({ ...data, profile_image: a })
+                      }
+                    }}
+                  />
                 </div>
 
               </div>

@@ -23,7 +23,7 @@ const DoctorsList = () => {
             const res = await DoctorAPI.getDoctors()
 
             if (res.success) {
-                setData(res.data.doctors)
+                setData(res.data.doctors?.reverse())
             }
 
         } catch (err) {
@@ -93,11 +93,14 @@ const DoctorsList = () => {
 
                 <div className='flex gap-[20px] flex-col'>
                     {
-                        data.map((item, index) => {
+                        data?.map((item, index) => {
                             return <div className='bg-[#ffff] flex p-[24px] mx-[85px] justify-between shadow-sm rounded-[14px] justify-center items-center'>
                                 <div className='flex justify-center items-center gap-5 '>
                                     <div className='text-center'>
-                                        <img className='pb-[6px]' src={DoctorProfile} alt="" />
+                                    <div className='w-[100px] border-[1px] h-[100px] object-cover rounded-full  overflow-hidden'>
+
+                                        <img className='pb-[6px] ' src={item?.profile_image || "https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=1480&t=st=1682599573~exp=1682600173~hmac=70167dd96663e16bc7d1b9ea915c69f452455a2db0362cb2b6eff25ae440acbd"} alt="" />
+                                        </div>
                                         {/* <button>View Profile</button> */}
                                     </div>
 

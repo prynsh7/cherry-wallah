@@ -24,7 +24,7 @@ const DoctorProfile = () => {
     const timeSlots = [
         {
             id: 1,
-            mode:"Morning",
+            mode: "Morning",
             slots: [
                 {
                     id: 1,
@@ -50,7 +50,7 @@ const DoctorProfile = () => {
         },
         {
             id: 2,
-            mode:"Afternoon",
+            mode: "Afternoon",
             slots: [
                 {
                     id: 6,
@@ -76,7 +76,7 @@ const DoctorProfile = () => {
         },
         {
             id: 3,
-            mode:"Evening",
+            mode: "Evening",
 
             slots: [
                 {
@@ -141,12 +141,12 @@ const DoctorProfile = () => {
 
             <Modal width={'50%'} className='bg-neutral-1' isOpen={isOpen}
                 handleSubmit={() => {
-                    if(!timeSlot) return toast.error("Please select a time slot")
+                    if (!timeSlot) return toast.error("Please select a time slot")
                     handleCloseModal()
-                    navigate(ROUTES.User.Appointment,{state:{doctor:data,timeSlot:timeSlot}})
+                    navigate(ROUTES.User.Appointment, { state: { doctor: data, timeSlot: timeSlot } })
                 }}
                 handleCancel={handleCloseModal}>
-                <TimeSlots handleTimeSlot={handleTimeSlot} timeSlot={timeSlot} timeSlots={timeSlots}/>
+                <TimeSlots handleTimeSlot={handleTimeSlot} timeSlot={timeSlot} timeSlots={timeSlots} />
             </Modal>
 
             <div className='container mx-auto py-[60px]'>
@@ -190,9 +190,12 @@ const DoctorProfile = () => {
 
                 <div className='bg-[#ffff] flex px-[28px] mx-[85px] py-[40px] rounded-[14px] justify-center items-center mt-[36px]'>
                     <div className='flex justify-center items-center gap-6 '>
-                        <div>
-                            <img className='pb-[6px]' src={DoctorProfilepic} alt="" />
+                        <div className='w-[100px] border-[1px] h-[100px] object-contain rounded-full  overflow-hidden'>
+
+                            <img className='pb-[6px] w-[100%] ' src={data?.profile_image || "https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=1480&t=st=1682599573~exp=1682600173~hmac=70167dd96663e16bc7d1b9ea915c69f452455a2db0362cb2b6eff25ae440acbd"} alt="" />
                         </div>
+                        {/* <button>View Profile</button> */}
+
 
                         <div>
                             <h3 className='text-Small/Title/Medium text-[#007E85]'>{data?.name}</h3>

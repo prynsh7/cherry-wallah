@@ -53,13 +53,16 @@ function Settings() {
     educational_college: "",
     educational_year: "",
     educational_certificate: "",
-    has_establishemnt: "",
-    establishment_degree: "",
+    has_establishment: "",
+    establishment_type: "",
     establishment_name: "",
     establishment_address: "",
     establishment_city: "",
-    profile: "",
+    profile_type: "",
+    profile_name: "",
+    profile_description: "",
     profile_image: "",
+    consultation_fee: "",
   })
   const [loading, setLoading] = useState(false)
 
@@ -172,13 +175,13 @@ function Settings() {
                   placeholder="Enter Mobile"
                   handleChange={handleChange}
                 />
-                <CustomSelect
-                  value={data?.speciality}
-                  name={'speciality'}
-                  label="Specialization"
-                  placeholder="Select Specialization"
-                  options={dummyOptions}
-                  handleChange={(e) => { handleSelect('specialization', e) }}
+                <Input
+                  name={'dob'}
+                  type='date'
+                  value={data?.dob}
+                  label="Date of Birth"
+                  placeholder="Enter Date of Birth"
+                  handleChange={handleChange}
                 />
                 <CustomSelect
                   label="Gender"
@@ -187,6 +190,14 @@ function Settings() {
                   value={data?.gender}
                   name={'gender'}
                   handleChange={(e) => { handleSelect('gender', e) }}
+                />
+                <CustomSelect
+                  value={data?.speciality}
+                  name={'speciality'}
+                  label="Specialization"
+                  placeholder="Select Specialization"
+                  options={dummyOptions}
+                  handleChange={(e) => { handleSelect('specialization', e) }}
                 />
                 <CustomSelect
                   label="City"
@@ -240,6 +251,14 @@ function Settings() {
                   name={'medical_registration_year'}
                   handleChange={(e) => { handleSelect('medical_registration_year', e) }}
                 />
+                <Input
+                  label="Medical Experiences"
+                  placeholder="Enter Year of Experiences"
+                  type='number'
+                  value={data?.medical_experience}
+                  name={'medical_experience'}
+                  handleChange={handleChange}
+                />
               </div>
             </div>
 
@@ -273,14 +292,6 @@ function Settings() {
                   handleChange={(e) => { handleSelect('educational_year', e) }}
                 />
                 <Input
-                  label="Year of Experiences"
-                  placeholder="Enter Year of Experiences"
-                  type='number'
-                  value={data?.experince}
-                  name={'experince'}
-                  handleChange={handleChange}
-                />
-                <Input
                   label="Upload Certificate"
                   placeholder="Upload"
                   type='file'
@@ -300,19 +311,19 @@ function Settings() {
                   label="Has Establishment"
                   placeholder="Search to select"
                   options={[{ label: 'Yes', value: true }, { label: 'No', value: false }]}
-                  value={data?.has_establishemnt}
+                  value={data?.has_establishment}
                   name={'hasEstablishment'}
-                  handleChange={(e) => { handleSelect('has_establishemnt', e) }}
+                  handleChange={(e) => { handleSelect('has_establishment', e) }}
                 />
                 {
-                  data?.has_establishemnt && <>
+                  data?.has_establishment && <>
                     <CustomSelect
                       label="Establishment Type"
                       placeholder="Search to select"
                       options={dummyOptions}
-                      value={data?.establishment_degree}
-                      name={'establishment_degree'}
-                      handleChange={(e) => { handleSelect('establishment_degree', e) }}
+                      value={data?.establishment_type}
+                      name={'establishment_type'}
+                      handleChange={(e) => { handleSelect('establishment_type', e) }}
                     />
                     {/* <CustomSelect label="Degree" placeholder="Select " options={dummyOptions} /> */}
                     <Input
@@ -351,22 +362,22 @@ function Settings() {
                   label="Profile Type"
                   placeholder="Select "
                   options={dummyOptions}
-                  value={data?.profile}
-                  name={'profile'}
-                  handleChange={(e) => { handleSelect('profile', e) }}
+                  value={data?.profile_type}
+                  name={'profile_type'}
+                  handleChange={(e) => { handleSelect('profile_type', e) }}
                 />
                 <Input
                   label="Profile Name"
                   placeholder="Enter Profile Name"
-                  value={data?.profileName}
-                  name={'profileName'}
+                  value={data?.profile_name}
+                  name={'profile_name'}
                   handleChange={handleChange}
                 />
                 <div className='flex flex-col col-span-3'>
                   <label className='text-[#333333] opacity-70 text-[16px] font-medium'>Profile Description <span className='text-[#FF0000]'>*</span></label>
                   <textarea className='border-[1px] p-[10px] rounded-[4px] mt-[5px] min-h-[100px]'
-                    name='profileDescription'
-                    value={data?.profileDescription}
+                    name='profile_description'
+                    value={data?.profile_description}
                     onChange={handleChange}
                   >
                   </textarea>
@@ -375,14 +386,14 @@ function Settings() {
                   label="Consultation Fee"
                   type={'number'}
                   placeholder="Enter Consultation Fee (INR)"
-                  value={data?.counsultationFee}
-                  name={'counsultationFee'}
+                  value={data?.consultation_fee}
+                  name={'consultation_fee'}
                   handleChange={handleChange}
                 />
                 <div className='col-span-3'></div>
                 <div className="col-span-1">
                   <div className='w-[200px] h-[200px] aspect-sqaure'>
-                    <img src={data?.profile_image} className='h-full w-full rounded-full' alt="" />
+                    <img src={data?.profile_image|| 'https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=1480&t=st=1682599573~exp=1682600173~hmac=70167dd96663e16bc7d1b9ea915c69f452455a2db0362cb2b6eff25ae440acbd'} className='h-full w-full rounded-full' alt="" />
                   </div>
                 </div>
                 <div className="col-span-1">

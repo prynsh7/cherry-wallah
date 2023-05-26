@@ -77,7 +77,7 @@ const NavbarPatient = ({ user, isAuth = false}) => {
 
   return (
     <div className="">
-      <div className="bg-neutral-3 shadow-md ">
+      <div className="bg-neutral-1 shadow-lg ">
         <div className="flex justify-between items-center px-[2.5rem] py-[5px]">
           <div className="h-[80px]">
             <img

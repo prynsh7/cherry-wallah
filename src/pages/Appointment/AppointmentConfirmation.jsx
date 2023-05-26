@@ -4,32 +4,34 @@ import Modal from '../../components/Modal/Modal'
 import DoctorProfile from '../../assets/images/doctorlist.png'
 import TimeSlots from '../../components/TimeSlots/TimeSlots'
 import { useLocation } from 'react-router-dom'
+import { IMAGE_CONSTANT } from '../../utils/imageConstant'
+
 
 const AppointmentConfirmation = () => {
-    const {state} = useLocation()
-    const {appointment, doctor} = state 
+    const { state } = useLocation()
+    const { appointment, doctor } = state
     const [isOpen, setIsOpen] = useState(false)
     const handleCloseModal = () => setIsOpen(false)
     const handleOpenModal = () => setIsOpen(true)
     return (
-        <div className='bg-neutral-4'>
+        <div className='bg-neutral-4 min-h-[95vh]'>
             <Modal width={'50%'} className='bg-neutral-1' isOpen={isOpen} handleSubmit={handleCloseModal} handleCancel={handleCloseModal}>
                 <TimeSlots />
             </Modal>
             <div className='container mx-auto py-[60px]'>
 
                 <div className='grid sm:grid-cols-2 gap-10 px-20'>
-                <div className='col-span-1 bg-neutral-1 p-[40px] rounded-[12px]'>
+                    <div className='col-span-1 bg-neutral-1 p-[40px] rounded-[12px]'>
                         <div className='border-b-2 py-[12px]'>
                             <span className='text-Medium+/Title/Small pt-[36px]'>Appointment on</span>
                         </div>
                         <div className='border-b-2 py-[12px] flex'>
                             <i class="bi bi-calendar-event pr-[8px] text-[#5E912E]"></i>
-                            <p>{appointment?.appointment_time}</p>
+                            <p>{state?.timeSlot?.time}</p>
                         </div>
-                        <div className='gap-4 flex pt-[20px] '>
-                            <div className='text-center'>
-                                <img className='pb-[6px] w-[100px] aspect-square rounded-full' src={doctor?.profile_image} alt="" />
+                        <div className='gap-4 flex pt-[30px] items-center '>
+                            <div className='text-center h-[150px] w-[150px] rounded-full overflow-hidden'>
+                                <img className='pb-[6px] object-cover' src={doctor?.profile_image || IMAGE_CONSTANT.DoctorPlaceholder} alt="" />
                             </div>
                             <div>
                                 <h3 className='text-Small/Title/Medium text-[#007E85]'>{doctor?.name}</h3>

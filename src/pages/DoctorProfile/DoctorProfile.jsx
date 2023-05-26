@@ -190,7 +190,7 @@ const DoctorProfile = () => {
 
                 <div className='bg-[#ffff] flex px-[28px] mx-[85px] py-[40px] rounded-[14px] items-center mt-[36px]'>
                     <div className='flex justify-center items-center gap-6 '>
-                        <div className='w-[100px] border-[1px] h-[100px] object-contain rounded-full  overflow-hidden'>
+                        <div className='w-[175px] border-[1px] h-[175px] object-contain rounded-full  overflow-hidden'>
 
                             <img className='pb-[6px] w-[100%] ' src={data?.profile_image || "https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=1480&t=st=1682599573~exp=1682600173~hmac=70167dd96663e16bc7d1b9ea915c69f452455a2db0362cb2b6eff25ae440acbd"} alt="" />
                         </div>
@@ -220,9 +220,9 @@ const DoctorProfile = () => {
                 </div>
 
                 <div className='bg-[#ffff]  mx-[85px] py-[30px] px-7 rounded-[14px] mt-[36px]'>
-                    <div className='text-Small/Title/Small text-[#007E85] mb-[14px]'>Patient Stories for Dr. Hanshika Raj</div>
+                    <div className='text-Small/Title/Small text-[#007E85] mb-[14px]'>Patient Stories for Dr. {data?.name}.</div>
                     <h6>
-                        No Stories yet,  Be the first to write a story for {data?.name}.
+                        No reviews Yet for {data?.name}.
                     </h6>
                     {/* <div className='border-y-2 px-[28px] pt-[14px] pb-[14px]'>
                         <p className='text-neutral-9 font-bold'>Jaya D M (Verified)</p>

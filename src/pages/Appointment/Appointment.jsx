@@ -5,6 +5,8 @@ import { ROUTES } from '../../routes/RouterConfig'
 import { toast } from 'react-toastify'
 import { AppointmentAPI } from '../../apis/appointmentAPI'
 import { message } from 'antd'
+import { IMAGE_CONSTANT } from '../../utils/imageConstant'
+
 const Appointment = () => {
     const navigate = useNavigate()
 
@@ -81,7 +83,7 @@ const Appointment = () => {
 
 
     return (
-        <div className='bg-neutral-4'>
+        <div className='bg-neutral-3 min-h-[95vh]'>
 
             <div className='container mx-auto py-[60px]'>
 
@@ -94,9 +96,9 @@ const Appointment = () => {
                             <i class="bi bi-calendar-event pr-[8px] text-[#5E912E]"></i>
                             <p>{state.timeSlot.time}</p>
                         </div>
-                        <div className='gap-4 flex pt-[20px] '>
-                            <div className='text-center'>
-                                <img className='pb-[6px] w-[100px] aspect-square rounded-full' src={doctor?.profile_image} alt="" />
+                        <div className='gap-4 flex pt-[30px] items-center '>
+                            <div className='text-center h-[150px] w-[150px] rounded-full overflow-hidden'>
+                                <img className='pb-[6px] object-cover' src={doctor?.profile_image || IMAGE_CONSTANT.DoctorPlaceholder} alt="" />
                             </div>
                             <div>
                                 <h3 className='text-Small/Title/Medium text-[#007E85]'>{doctor?.name}</h3>

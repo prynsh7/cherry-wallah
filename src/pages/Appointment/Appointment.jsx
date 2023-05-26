@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import DoctorProfile from '../../assets/images/doctorlist.png'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../routes/RouterConfig'
 import { toast } from 'react-toastify'
+import { AppointmentAPI } from '../../apis/appointmentAPI'
+import { message } from 'antd'
 const Appointment = () => {
     const navigate = useNavigate()
 
     const [step, setStep] = useState(1)
+
+    const {state} = useLocation()
+    console.log(state);
 
     const [phone, setPhone] = useState('')
 
@@ -16,7 +21,47 @@ const Appointment = () => {
         fullname: '',
         phone_number: '',
         email: '',
+        covidVaccination: '',
     })
+
+
+    const handleSubmit = async() => {
+        // if(appointmentfor=='other'){
+        //     if(!patientDetails.fullname || !patientDetails.phone_number || !patientDetails.email || !patientDetails.covidVaccination){
+        //         toast.error('Please fill all the fields')
+        //         return
+        //     }
+        // }
+        console.log(patientDetails);
+        const obj = {
+            patient_name: patientDetails.fullname,
+            patient_phone: phone,
+            doctor_id: state.doctor._id,
+            patient_details:{
+                fullname: patientDetails.fullname,
+                phone_number: phone,
+                email: patientDetails.email,
+                covidVaccination: patientDetails.covidVaccination,
+            },
+            stats:'pending',
+            appointment_time: state.timeSlot.time,
+        }
+
+        try{
+            const res = await AppointmentAPI.postAppointment(obj)
+            console.log(res);
+            if(res.success){
+                message.success('Appointment booked successfully')
+                navigate(ROUTES.User.AppointmentConfirmation, {state: res.data})
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
+
+
+        console.log(obj);
+    }
 
 
     return (
@@ -103,47 +148,69 @@ const Appointment = () => {
                                             <>
                                                 <div>
                                                     <p>Please provide the following information about user :</p>
-                                                    <input 
-                                                    className="border-[1px] rounded-[4px] p-[10px] w-[100%] mt-2" 
-                                                    placeholder="Full Name" 
-                                                    value={patientDetails.fullname}
-                                                    onChange={e => setPatientDetails({...patientDetails, fullname: e.target.value})}
+                                                    <input
+                                                        className="border-[1px] rounded-[4px] p-[10px] w-[100%] mt-2"
+                                                        placeholder="Full Name"
+                                                        value={patientDetails.fullname}
+                                                        onChange={e => setPatientDetails({ ...patientDetails, fullname: e.target.value })}
                                                     />
-                                                    <input 
-                                                    className="border-[1px] rounded-[4px] p-[10px] w-[100%] mt-2" 
-                                                    placeholder="Phone Number" 
-                                                    value={patientDetails.phone_number}
-                                                    onChange={e => setPatientDetails({...patientDetails, phone_number: e.target.value})}
+                                                    <input
+                                                        className="border-[1px] rounded-[4px] p-[10px] w-[100%] mt-2"
+                                                        placeholder="Phone Number"
+                                                        value={phone}
+                                                        disabled={true}
                                                     />
-                                                    <input 
-                                                    className="border-[1px] rounded-[4px] p-[10px] w-[100%] mt-2" 
-                                                    placeholder="Email Address" 
-                                                    value={patientDetails.email}
-                                                    onChange={e => setPatientDetails({...patientDetails, email: e.target.value})}
+                                                    <input
+                                                        className="border-[1px] rounded-[4px] p-[10px] w-[100%] mt-2"
+                                                        placeholder="Email Address"
+                                                        value={patientDetails.email}
+                                                        onChange={e => setPatientDetails({ ...patientDetails, email: e.target.value })}
                                                     />
                                                 </div>
                                                 <div>
                                                     <p>Has the patient taken the Covid-19 vaccination?</p>
-                                                    <div className='flex items-center'>
-                                                        <div className='bg-[none] border border-primary-6 rounded-full h-[14px] w-[14px]  '></div>
+                                                    <div className='flex items-center cursor-pointer' onClick={() => { setPatientDetails({ ...patientDetails, covidVaccination: 'yes' }) }}>
+                                                        <div className='bg-[none] border border-primary-6 rounded-full h-[14px] w-[14px]  '>
+                                                            {
+                                                                patientDetails.covidVaccination === 'yes' ?
+                                                                    <div className='w-[100%] h-[100%] border border-2 rounded-full bg-primary-6'></div>
+                                                                    :
+                                                                    null
+                                                            }
+                                                        </div>
                                                         <p className='pl-[4px]'>Yes</p>
                                                     </div>
-                                                    <div className='flex items-center'>
-                                                        <div className='bg-[none] border border-primary-6 rounded-full h-[14px] w-[14px]'></div>
+                                                    <div className='flex items-center cursor-pointer' onClick={() => { setPatientDetails({ ...patientDetails, covidVaccination: 'no' }) }}>
+                                                        <div className='bg-[none] border border-primary-6 rounded-full h-[14px] w-[14px]  '>
+                                                            {
+                                                                patientDetails.covidVaccination === 'no' ?
+                                                                    <div className='w-[100%] h-[100%] border border-2 rounded-full bg-primary-6'></div>
+                                                                    :
+                                                                    null
+                                                            }
+                                                        </div>
                                                         <p className='pl-[4px]'>No</p>
                                                     </div>
-                                                    <div className='flex items-center'>
-                                                        <div className='bg-[none] border border-primary-6 rounded-full h-[14px] w-[14px]'></div>
+                                                    <div className='flex items-center cursor-pointer' onClick={() => { setPatientDetails({ ...patientDetails, covidVaccination: 'partially' }) }}>
+                                                        <div className='bg-[none] border border-primary-6 rounded-full h-[14px] w-[14px]  '>
+                                                            {
+                                                                patientDetails.covidVaccination === 'partially' ?
+                                                                    <div className='w-[100%] h-[100%] border border-2 rounded-full bg-primary-6'></div>
+                                                                    :
+                                                                    null
+                                                            }
+                                                        </div>
                                                         <p className='pl-[4px]'>Partially</p>
                                                     </div>
                                                 </div>
+
                                             </>
                                             :
                                             null
                                     }
 
 
-                                    <button onClick={() => { navigate(ROUTES.User.AppointmentConfirmation) }} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Next</button>
+                                    <button onClick={() => {handleSubmit()}} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[100%] py-[8px] mt-[20px]">Next</button>
                                 </div>
                             </div>
                             :
@@ -152,9 +219,9 @@ const Appointment = () => {
 
                 </div>
 
-            </div>
+            </div >
 
-        </div>
+        </div >
     )
 }
 

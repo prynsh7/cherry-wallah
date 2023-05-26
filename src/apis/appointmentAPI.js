@@ -31,6 +31,9 @@ export const AppointmentAPI = {
         const response = await api.request({
             url: "appointment/book",
             method: "POST",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
             data: data,
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
@@ -40,7 +43,7 @@ export const AppointmentAPI = {
 
     patchAppointmentById: async (id, data, cancel = false) => {
         const response = await api.request({
-            url: "appointment/" + idZ,
+            url: "appointment/" + id,
             method: "PATCH",
             data: data,
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined

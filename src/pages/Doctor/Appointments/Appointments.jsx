@@ -1,68 +1,57 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '../../../components/Button/Button'
-import { Table } from 'antd';
+import { Table, message } from 'antd';
 import CustomPagination from '../../../components/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../../routes/RouterConfig'
+import { AppointmentAPI } from '../../../apis/appointmentAPI';
 
 function Appointments() {
   const [count, setCount] = React.useState({})
   const navigate = useNavigate()
-  const [appointment, setAppointment] = React.useState([
-    {
-      id: 1,
-      name: 'Aditya Anand',
-      phone: '8651439657',
-      email: 'adityaanand1245@gmail.com',
-      date_time: '22/02/22 05:30PM'
-    },
-    {
-      id: 2,
-      name: 'Aditya Anand',
-      phone: '8651439657',
-      email: 'adityaanand1245@gmail.com',
-      date_time: '22/02/22 05:30PM'
-    },
-    {
-      id: 3,
-      name: 'Aditya Anand',
-      phone: '8651439657',
-      email: 'adityaanand1245@gmail.com',
-      date_time: '22/02/22 05:30PM'
-    },
-    {
-      id: 4,
-      name: 'Aditya Anand',
-      phone: '8651439657',
-      email: 'adityaanand1245@gmail.com',
-      date_time: '22/02/22 05:30PM'
-    },
-    {
-      id: 5,
-      name: 'Aditya Anand',
-      phone: '8651439657',
-      email: 'adityaanand1245@gmail.com',
-      date_time: '22/02/22 05:30PM'
-    },
-    {
-      id: 6,
-      name: 'Aditya Anand',
-      phone: '8651439657',
-      email: 'adityaanand1245@gmail.com',
-      date_time: '22/02/22 05:30PM'
-    },
 
-  ])
+  
+
+  const [appointment, setAppointment] = React.useState([  ])
+
+  const getData = async() => {
+    try{
+      const res = await AppointmentAPI.getAppointments()
+      if(res.success){
+        const arr = []
+        for (const iterator of res.data.appointments) {
+          const obj = {
+            id: iterator._id,
+            name: iterator.patient_details.fullname,
+            phone: iterator.patient_details.phone_number,
+            email: iterator.patient_details.email,
+            date_time: iterator.appointment_time
+          }
+
+          arr.push(obj)
+        }
+        console.log('arr',arr);
+        setAppointment(arr)
+      }
+    }
+    catch(err){
+      console.log(err);
+    }
+    finally{
+      console.log('finally');
+    }
+  }
 
   const columns = [
     {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: (index) => {
+      render: (index,v) => {
         return <p className='cursor-pointer'
             onClick={(e) => {
-                navigate(ROUTES.User.AppointmentReportDetailsField)
+              console.log(index, v);
+                navigate(ROUTES.Doctor.AppointmentReport+'/'+v.id)
             }}
         >{index}</p>
     }
@@ -116,6 +105,10 @@ function Appointments() {
       },
     },
   ];
+
+  useEffect(()=>{
+    getData()
+  },[])
 
 
   return (

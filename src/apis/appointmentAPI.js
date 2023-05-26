@@ -11,6 +11,9 @@ export const AppointmentAPI = {
         const response = await api.request({
             url: "appointment",
             method: "GET",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
 
@@ -21,6 +24,9 @@ export const AppointmentAPI = {
         const response = await api.request({
             url: "appointment/" + id,
             method: "GET",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
 
@@ -46,6 +52,9 @@ export const AppointmentAPI = {
             url: "appointment/" + id,
             method: "PATCH",
             data: data,
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
 

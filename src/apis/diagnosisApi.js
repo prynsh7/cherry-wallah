@@ -5,56 +5,50 @@ import { defineCancelApiObject } from "./config/axiosUtils";
 import * as apiConst from '../utils/apiConstants'
 
 
-export const DoctorAPI = {
+export const DiagnosisAPI = {
 
-    getMe: async (cancel = false) => {
+    getDiagnosis: async (cancel = false) => {
         const response = await api.request({
-            url: "doctor/getMe",
+            url: "diagnosis",
+            method: "GET",
             headers: {
                 "x-request-token": sessionStorage.getItem('token')
             },
-            method: "GET",
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
 
         return response.data;
     },
 
-    UpdateMe: async (data,cancel = false) => {
+    getDiagnosisById: async (id, cancel = false) => {
         const response = await api.request({
-            url: "doctor/updateMe",
+            url: "diagnoses/" + id,
+            method: "GET",
             headers: {
                 "x-request-token": sessionStorage.getItem('token')
             },
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+
+        return response.data;
+    },
+
+    putDiagnosis: async (data, id,cancel = false) => {
+        const response = await api.request({
+            url: "diagnosis/"+id,
             method: "PUT",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
             data: data,
             signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
         });
 
-        return response.data;
+        return response.data
     },
 
-    getDoctors: async (cancel = false) => {
-        const response = await api.request({
-            url: "doctor",
-            method: "GET",
-            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
-        });
-
-        return response.data;
-    },
-
-    getDoctorById: async (id, cancel = false) => {
-        const response = await api.request({
-            url: "doctor/" + id,
-            method: "GET",
-            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
-        });
-
-        return response.data;
-    }
 
 
 }
 
-const cancelApiObject = defineCancelApiObject(DoctorAPI);
+const cancelApiObject = defineCancelApiObject(DiagnosisAPI);

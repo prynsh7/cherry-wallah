@@ -129,6 +129,7 @@ const Router = () => {
           <Route exact path={ROUTES.Doctor.settings} element={<Settings />}></Route>
           <Route exact path={ROUTES.Doctor.Refrral} element={<Refrral />}></Route>
           <Route exact path={ROUTES.Doctor.AppointmentHistory} element={<AppointmentHistory />}></Route>
+          <Route exact path={ROUTES.Doctor.AppointmentReport+'/:appointmentId'} element={<AppointmentReportDetailsField />}></Route>
 
           <Route path='*' element={<NotFound />} />
         </Route>

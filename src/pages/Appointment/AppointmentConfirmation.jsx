@@ -3,8 +3,11 @@ import { useState } from 'react'
 import Modal from '../../components/Modal/Modal'
 import DoctorProfile from '../../assets/images/doctorlist.png'
 import TimeSlots from '../../components/TimeSlots/TimeSlots'
+import { useLocation } from 'react-router-dom'
 
 const AppointmentConfirmation = () => {
+    const {state} = useLocation()
+    const {appointment} = state 
     const [isOpen, setIsOpen] = useState(false)
     const handleCloseModal = () => setIsOpen(false)
     const handleOpenModal = () => setIsOpen(true)
@@ -22,7 +25,7 @@ const AppointmentConfirmation = () => {
                         </div>
                         <div className='border-y-2 py-[12px] flex'>
                             <i class="bi bi-calendar-event pr-[8px] text-[#5E912E]"></i>
-                            <p>On April 23, 2023</p>
+                            <p>{appointment.appointment_time}</p>
                         </div>
                         <div className='gap-4 flex pt-[20px] '>
                             <div className='text-center'>
@@ -39,12 +42,12 @@ const AppointmentConfirmation = () => {
                     <div className='grid-col-1'>
                         <div className='flex flex-col  w-[75%] mx-[auto] my-[auto]'>
                             <h3 className='text-Medium+/Title/Small'><i class="bi bi-patch-check-fill p-[4px] text-[#5E912E]"></i>Appointment confirmed</h3>
-                            <p className='mt-[16px]'>Your appointment ID is 12345562</p>
+                            <p className='mt-[16px]'>Your appointment ID is {appointment._id}</p>
                             <p>We have sent you an SMS with details.</p>
                             <h3 className='text-primary-6 mt-[16px]'>Patient Name</h3>
-                            <h3>Parkash Kumar Singh</h3>
+                            <h3>{appointment.patient_name}</h3>
                             <h3 className='text-primary-6 mt-[12px]'>Mobile</h3>
-                            <h3>+918651439657</h3>
+                            <h3>{appointment.patient_phone}</h3>
                             <div className='flex gap-6'>
                                 <button type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[50%] py-[8px] mt-[20px]">Cancel Appointment</button>
                                 <button onClick={handleOpenModal} type="submit" className="bg-linear text-Medium+/Paragraph/Medium text-[#fff] rounded-[4px] w-[50%] py-[8px] mt-[20px]">Reschedule Appointment</button>

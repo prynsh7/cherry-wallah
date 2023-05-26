@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DoctorProfile from '../../assets/images/doctorlist.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../routes/RouterConfig'
@@ -9,6 +9,10 @@ const Appointment = () => {
     const navigate = useNavigate()
 
     const [step, setStep] = useState(1)
+
+    const user = JSON.parse(localStorage.getItem('user'))
+
+    console.log(user);
 
     const {state} = useLocation()
     console.log(state);
@@ -62,6 +66,17 @@ const Appointment = () => {
 
         console.log(obj);
     }
+
+    useEffect(()=>{
+        if(appointmentfor=='myself'){
+            setPatientDetails({
+                fullname: user.first_name+ ' ' + user.last_name,
+                phone_number: user.phone,
+                email: user.email,
+                covidVaccination: user.covidVaccination||'partially',
+            })
+        }
+    },[appointmentfor])
 
 
     return (

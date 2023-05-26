@@ -5,6 +5,8 @@ import { AuthAPI } from '../../../apis/authAPI'
 import CustomSelect from '../../../components/Input/Select'
 import Input from '../../../components/Input/Input'
 import Button from '../../../components/Button/Button'
+import { handleFileUpload } from '../../../data/upload'
+import { message } from 'antd'
 
 const dummyOptions = [
   {
@@ -61,6 +63,17 @@ function Settings() {
   })
   const [loading, setLoading] = useState(false)
 
+  const handleSubmit = async() => {
+    await DoctorAPI.UpdateMe(data)
+    .then(res=>{
+      if(res.success) message.success("Profile Updated Successfully")
+    })
+    .catch(err=>{
+      console.log(err);
+      message.error("Error Updating Profile")
+    }
+    )
+  }
 
   const getProfileDetails = async () => {
     try {
@@ -389,14 +402,28 @@ function Settings() {
                   name={'counsultationFee'}
                   handleChange={handleChange}
                 />
-                <div className='col-span-2'></div>
+                <div className='col-span-3'></div>
+                <div className="col-span-1">
+                  <div className='w-[200px] aspect-sqaure'>
+                    <img src={data?.profile_image} className='h-full w-full rounded-full' alt="" />
+                  </div>
+                </div>
+                <div className="col-span-1">
+
                 <Input
                   label="Profile Image"
                   placeholder="Upload Profile Image"
                   type='file'
                   name={'profileImage'}
-                  handleChange={handleChange}
+                  handleChange={async(e) => {
+                    console.log('here');
+                    let a = await handleFileUpload(e, 'avatar', data._id);
+                    if (a) {
+                      setData({ ...data, profile_image: a })
+                    }
+                  }}
                 />
+                </div>
 
               </div>
             </div>
@@ -404,7 +431,7 @@ function Settings() {
 
           <div class="footer border-[1px] border-primary-2 rounded-[4px] max-width-[100%] md:w-[100%] left-[14%] w-[100%] sticky bottom-0 shadow-md bg-[#fff] "><div class="flex justify-between gap-[10px] py-[10px] px-[20px]">
             <Button label='Cancel' type='outlined' />
-            <Button label='Save' type='primary' />
+            <Button onClick={handleSubmit} label='Save' type='primary' />
 
           </div></div>
 

@@ -27,28 +27,36 @@ const stepTitleMap = {
 const RegisterDoctor = () => {
 
   const [data, setData] = useState({
-    name: '',
-    specialization: '',
-    gender: '',
-    city: '',
-    description: '',
-    registrationNumber: '',
-    registrationCouncil: '',
-    registrationYear: '',
-    degree: '',
-    college: '',
-    year: '',
-    experince: '',
-    certificate: '',
-    hasEstablishment: false,
-    establishmentType: '',
-    establishmentName: '',
-    establishmentCity: '',
-    establishmentLocality: '',
-    profileType: '',
-    profileName: '',
-    profileDescription: '',
-    profileImage: '',
+    name: "",
+    email: "",
+    mobile: "",
+    dob: "",
+    gender: "",
+    speciality: "",
+    city: "",
+    description: "",
+
+    medical_registration_no: "",
+    medical_registration_council: "",
+    medical_registration_year: "",
+    medical_experience: "",
+
+    educational_degree: "",
+    educational_college: "",
+    educational_year: "",
+    educational_certificate: "",
+
+    has_establishment: false,
+    establishment_type: "",
+    establishment_name: "",
+    establishment_address: "",
+    establishment_city: "",
+
+    profile_type: "",
+    profile_name: "",
+    profile_description: "",
+    profile_image: "",
+    consultation_fee: "",
   })
 
   const [loading, setLoading] = useState(false)
@@ -103,12 +111,12 @@ const RegisterDoctor = () => {
             handleChange={handleChange}
           />
           <CustomSelect
-            value={data.specialization}
-            name={'specialization'}
-            label="Specialization"
+            value={data.speciality}
+            name={'speciality'}
+            label="speciality"
             placeholder="Select Specialization"
             options={dummyOptions}
-            handleChange={(e) => { handleSelect('specialization', e) }}
+            handleChange={(e) => { handleSelect('speciality', e) }}
           />
           <CustomSelect
             label="Gender"
@@ -143,25 +151,33 @@ const RegisterDoctor = () => {
           <Input
             label="Registration Number"
             placeholder="Enter Registration Number"
-            value={data.registrationNumber}
-            name={'registrationNumber'}
+            value={data.medical_registration_no}
+            name={'medical_registration_no'}
             handleChange={handleChange}
           />
           <CustomSelect
             label="Registration Council"
             placeholder="Select "
             options={dummyOptions}
-            value={data.registrationCouncil}
-            name={'registrationCouncil'}
-            handleChange={(e) => { handleSelect('registrationCouncil', e) }}
+            value={data.medical_registration_council}
+            name={'medical_registration_council'}
+            handleChange={(e) => { handleSelect('medical_registration_council', e) }}
           />
           <CustomSelect
             label="Registration Year"
             placeholder="Select "
             options={[...Array(50)]?.map((_, i) => ({ label: `${i + 1970}`, value: `${i + 1970}` })) || []}
-            value={data.registrationYear}
-            name={'registrationYear'}
-            handleChange={(e) => { handleSelect('registrationYear', e) }}
+            value={data.medical_registration_year}
+            name={'medical_registration_year'}
+            handleChange={(e) => { handleSelect('medical_registration_year', e) }}
+          />
+          <Input
+            label="Year of Experiences"
+            type='number'
+            placeholder="Enter Year of Experiences"
+            value={data.medical_experience}
+            name={'medical_experience'}
+            handleChange={handleChange}
           />
         </div>
 
@@ -171,38 +187,31 @@ const RegisterDoctor = () => {
             label="Degree"
             placeholder="Select "
             options={dummyOptions}
-            value={data.degree}
-            name={'degree'}
-            handleChange={(e) => { handleSelect('degree', e) }}
+            value={data.educational_degree}
+            name={'educational_degree'}
+            handleChange={(e) => { handleSelect('educational_degree', e) }}
           />
           <Input
             label="College / University"
             placeholder="Enter College / University"
-            value={data.college}
-            name={'college'}
+            value={data.educational_college}
+            name={'educational_college'}
             handleChange={handleChange}
           />
           <CustomSelect
             label="Year of Completion"
             placeholder="Select "
             options={[...Array(50)]?.map((_, i) => ({ label: `${i + 1970}`, value: `${i + 1970}` })) || []}
-            value={data.year}
-            name={'year'}
-            handleChange={(e) => { handleSelect('year', e) }}
+            value={data.educational_year}
+            name={'educational_year'}
+            handleChange={(e) => { handleSelect('educational_year', e) }}
           />
-          <Input
-            label="Year of Experiences"
-            placeholder="Enter Year of Experiences"
-            type='number'
-            value={data.experince}
-            name={'experince'}
-            handleChange={handleChange}
-          />
+
           <Input
             label="Upload Certificate"
             placeholder="Upload"
             type='file'
-            name={'certificate'}
+            name={'educational_certificate'}
             handleChange={handleChange}
           />
         </div>
@@ -212,41 +221,41 @@ const RegisterDoctor = () => {
             label="Has Establishment"
             placeholder="Search to select"
             options={[{ label: 'Yes', value: true }, { label: 'No', value: false }]}
-            value={data.hasEstablishment}
-            name={'hasEstablishment'}
-            handleChange={(e) => { handleSelect('hasEstablishment', e) }}
+            value={data.has_establishment}
+            name={'has_establishment'}
+            handleChange={(e) => { handleSelect('has_establishment', e) }}
           />
           {
-            data.hasEstablishment && <>
+            data.has_establishment && <>
               <CustomSelect
                 label="Establishment Type"
                 placeholder="Search to select"
                 options={dummyOptions}
-                value={data.establishmentType}
-                name={'establishmentType'}
-                handleChange={(e) => { handleSelect('establishmentType', e) }}
+                value={data.establishment_type}
+                name={'establishment_type'}
+                handleChange={(e) => { handleSelect('establishment_type', e) }}
               />
               {/* <CustomSelect label="Degree" placeholder="Select " options={dummyOptions} /> */}
               <Input
                 label="Establishment Name"
                 placeholder="Enter Establishment Name"
-                value={data.establishmentName}
-                name={'establishmentName'}
+                value={data.establishment_name}
+                name={'establishment_name'}
                 handleChange={handleChange}
               />
               <CustomSelect
                 label="City"
                 placeholder="Select "
                 options={dummyOptions}
-                value={data.establishmentCity}
-                name={'establishmentCity'}
-                handleChange={(e) => { handleSelect('establishmentCity', e) }}
+                value={data.establishment_city}
+                name={'establishment_city'}
+                handleChange={(e) => { handleSelect('establishment_city', e) }}
               />
               <Input
                 label="Locality"
                 placeholder="Enter Locality"
-                value={data.establishmentLocality}
-                name={'establishmentLocality'}
+                value={data.establishment_address}
+                name={'establishment_address'}
                 handleChange={handleChange}
               />
             </>
@@ -258,22 +267,22 @@ const RegisterDoctor = () => {
             label="Profile Type"
             placeholder="Select "
             options={dummyOptions}
-            value={data.profileType}
-            name={'profileType'}
-            handleChange={(e) => { handleSelect('profileType', e) }}
+            value={data.profile_type}
+            name={'profile_type'}
+            handleChange={(e) => { handleSelect('profile_type', e) }}
           />
           <Input
             label="Profile Name"
             placeholder="Enter Profile Name"
-            value={data.profileName}
-            name={'profileName'}
+            value={data.profile_name}
+            name={'profile_name'}
             handleChange={handleChange}
           />
           <div className='flex flex-col'>
             <label className='text-[#333333] opacity-70 text-[14px]'>Profile Description <span className='text-[#FF0000]'>*</span></label>
             <textarea className='border-[1px] p-[10px] rounded-[4px] mt-[5px] min-h-[100px]'
-              name='profileDescription'
-              value={data.profileDescription}
+              name='profile_description'
+              value={data.profile_description}
               onChange={handleChange}
             >
             </textarea>
@@ -282,15 +291,15 @@ const RegisterDoctor = () => {
             label="Consultation Fee"
             type={'number'}
             placeholder="Enter Consultation Fee (INR)"
-            value={data.counsultationFee}
-            name={'counsultationFee'}
+            value={data.consultation_fee}
+            name={'consultation_fee'}
             handleChange={handleChange}
           />
           <Input
             label="Profile Image"
             placeholder="Upload Profile Image"
             type='file'
-            name={'profileImage'}
+            name={'profile_image'}
             handleChange={handleChange}
           />
         </div>
@@ -358,49 +367,48 @@ const RegisterDoctor = () => {
     if (step == 0) {
       if (
         !data.name ||
-        !data?.specialization ||
+        !data?.speciality ||
         !data?.gender ||
         !data?.city ||
         !data?.description) {
         return toast.error("Please enter basic details")
       }
     }
-    
+
     if (step == 1) {
       if (
-        !data.registrationNumber ||
-        !data?.registrationCouncil||
-        !data?.registrationYear )
-         {
+        !data.medical_registration_no ||
+        !data?.medical_registration_council ||
+        !data?.medical_registration_year ||
+        !data?.medical_experience
+      ) {
         return toast.error("Please enter registration details")
       }
     }
     if (step == 2) {
       if (
-        !data.degree ||
-        !data?.college||
-        !data?.year||
-        !data?.experince)
-         {
+        !data.educational_degree ||
+        !data?.educational_college ||
+        !data?.educational_year) {
         return toast.error("Please enter educational details")
       }
     }
     if (step == 3) {
-      if ( data?.hasEstablishment && (!data.establishmentType ||
-        !data?.establishmentName||
-        !data?.establishmentCity||
-        !data?.establishmentLocality) )
-         {
+      if (data?.has_establishment && (!data.establishment_type ||
+        !data?.establishment_name ||
+        !data?.establishment_city ||
+        !data?.establishment_address)) {
         return toast.error("Please enter establishment details")
       }
     }
-    
+
     if (step == 4) {
       if (
-        !data.profileType ||
-        !data?.profileName||
-        !data?.profileDescription )
-         {
+        !data.profile_type ||
+        !data?.profile_name ||
+        !data?.profile_description ||
+        !data?.consultation_fee
+      ) {
         return toast.error("Please enter profile details")
       }
     }
@@ -408,6 +416,7 @@ const RegisterDoctor = () => {
       updateDoctorProfile();
       return;
     }
+
     setStep(step + 1);
 
     localStorage.setItem('doctorReg', JSON.stringify({ data: data, step: step + 1 }));

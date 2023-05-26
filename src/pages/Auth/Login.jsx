@@ -73,10 +73,8 @@ const Login = () => {
             setLoading(true)
             const res = await AuthAPI.postSendOtp({ phone: data.phone })
             if (res.success) {
-                // toast.success('OTP Sent Successfully')
-                toast.success('Some Error Occured while Sending OTP')
+                toast.success('OTP Sent Successfully')
                 setOtpSent(true)
-                console.log(res)
                 setOtpReqId(res.data.requestId)
             }
         }
@@ -104,7 +102,8 @@ const Login = () => {
                 sessionStorage.setItem('refreshToken', res.data.refreshToken)
                 localStorage.setItem('user', JSON.stringify(res.data.user))
                 if (res.data.user.role === 'doctor') {
-                    if (res.data.doctor.profile_completed) navigate(ROUTES.Doctor.root)
+                    console.log(res.data.doctor);
+                    if (res.data.doctor?.profile_completed) navigate(ROUTES.Doctor.root)
                     else navigate(ROUTES.DoctorRegister)
                 }
                 if (res.data.user.role === 'patient') navigate(ROUTES.Home)

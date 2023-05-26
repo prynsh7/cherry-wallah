@@ -46,14 +46,18 @@ function Settings() {
     availability: "",
     city: "",
     description: "",
+
     medical_registration_no: "",
     medical_registration_council: "",
     medical_registration_year: "",
+    medical_experience: "",
+
     educational_degree: "",
     educational_college: "",
     educational_year: "",
     educational_certificate: "",
-    has_establishment: "",
+
+    has_establishment: false,
     establishment_type: "",
     establishment_name: "",
     establishment_address: "",
@@ -197,7 +201,7 @@ function Settings() {
                   label="Specialization"
                   placeholder="Select Specialization"
                   options={dummyOptions}
-                  handleChange={(e) => { handleSelect('specialization', e) }}
+                  handleChange={(e) => { handleSelect('speciality', e) }}
                 />
                 <CustomSelect
                   label="City"
@@ -358,6 +362,26 @@ function Settings() {
                 <h2>Profile Section</h2>
               </div>
               <div className='grid grid-cols-3 gap-[20px] p-[20px]'>
+              <div className="col-span-1">
+                  <div className='w-[100px] h-[100px] object-cover flex  mb-[10px] border-[1px] aspect-sqaure'>
+                    <img className="object-cover" src={data?.profile_image|| 'https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=1480&t=st=1682599573~exp=1682600173~hmac=70167dd96663e16bc7d1b9ea915c69f452455a2db0362cb2b6eff25ae440acbd'}  alt="" />
+                  </div>
+                  <Input
+                    label="Profile Image"
+                    placeholder="Upload Profile Image"
+                    type='file'
+                    name={'profileImage'}
+                    handleChange={async (e) => {
+                      console.log('here');
+                      let a = await handleFileUpload(e, 'avatar', data._id);
+                      if (a) {
+                        setData({ ...data, profile_image: a })
+                      }
+                    }}
+                  />
+                </div>
+               
+                <div className='col-span-2'></div>
                 <CustomSelect
                   label="Profile Type"
                   placeholder="Select "
@@ -383,7 +407,7 @@ function Settings() {
                   </textarea>
                 </div>
                 <Input
-                  label="Consultation Fee"
+                  label="Consultation Fee ( INR )"
                   type={'number'}
                   placeholder="Enter Consultation Fee (INR)"
                   value={data?.consultation_fee}
@@ -391,27 +415,7 @@ function Settings() {
                   handleChange={handleChange}
                 />
                 <div className='col-span-3'></div>
-                <div className="col-span-1">
-                  <div className='w-[200px] h-[200px] aspect-sqaure'>
-                    <img src={data?.profile_image|| 'https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=1480&t=st=1682599573~exp=1682600173~hmac=70167dd96663e16bc7d1b9ea915c69f452455a2db0362cb2b6eff25ae440acbd'} className='h-full w-full rounded-full' alt="" />
-                  </div>
-                </div>
-                <div className="col-span-1">
-
-                  <Input
-                    label="Profile Image"
-                    placeholder="Upload Profile Image"
-                    type='file'
-                    name={'profileImage'}
-                    handleChange={async (e) => {
-                      console.log('here');
-                      let a = await handleFileUpload(e, 'avatar', data._id);
-                      if (a) {
-                        setData({ ...data, profile_image: a })
-                      }
-                    }}
-                  />
-                </div>
+                
 
               </div>
             </div>

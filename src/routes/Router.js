@@ -34,6 +34,7 @@ import UserSettings from '../pages/User/UserSettings';
 import NavbarPatient from '../components/Navbar/NavbarPatient';
 import Refrral from '../pages/Doctor/Refrral/Refrral';
 import AppointmentHistory from '../pages/Doctor/AppointmentHistory/AppointmentHistory';
+import PatientAppointmentDetails from './../pages/UpcomingAppointment/AppointmentDetails'
 
 
 // admin
@@ -104,6 +105,7 @@ const Router = () => {
           <Route path={ROUTES.User.DoctorsList} element={<DoctorsList />} />
           <Route exact path={ROUTES.User.DoctorProfile} element={<DoctorProfile />} /> */}
           <Route exact path={ROUTES.User.UpcomingAppointment} element={<UpcomingAppointment />} />
+          <Route exact path={ROUTES.User.AppintmentInfo+'/:appointmentId'} element={<PatientAppointmentDetails />} />
           <Route exact path={ROUTES.User.CompletedAppoinment} element={<CompletedAppoinment />} />
           <Route exact path={ROUTES.User.Appointment} element={<Appointment />} />
           <Route exact path={ROUTES.User.AppointmentPD} element={<AppointmentPD />} />

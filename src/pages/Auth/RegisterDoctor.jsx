@@ -8,6 +8,7 @@ import Loader from "../../components/Loader";
 import { ROUTES } from '../../routes/RouterConfig';
 import { useNavigate } from 'react-router-dom';
 import Submission from '../../assets/images/Submission.png';
+import { DEGREE_DATA, SPECIAISATION_DATA } from '../../data/Doctor';
 
 
 
@@ -107,7 +108,7 @@ const RegisterDoctor = () => {
             name={'specialization'}
             label="Specialization"
             placeholder="Select Specialization"
-            options={dummyOptions}
+            options={SPECIAISATION_DATA}
             handleChange={(e) => { handleSelect('specialization', e) }}
           />
           <CustomSelect
@@ -170,7 +171,7 @@ const RegisterDoctor = () => {
           <CustomSelect
             label="Degree"
             placeholder="Select "
-            options={dummyOptions}
+            options={DEGREE_DATA}
             value={data.degree}
             name={'degree'}
             handleChange={(e) => { handleSelect('degree', e) }}

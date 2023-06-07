@@ -10,14 +10,14 @@ function Appointments() {
   const [count, setCount] = React.useState({})
   const navigate = useNavigate()
 
-  
 
-  const [appointment, setAppointment] = React.useState([  ])
 
-  const getData = async() => {
-    try{
+  const [appointment, setAppointment] = React.useState([])
+
+  const getData = async () => {
+    try {
       const res = await AppointmentAPI.getAppointments()
-      if(res.success){
+      if (res.success) {
         const arr = []
         for (const iterator of res.data.appointments) {
           const obj = {
@@ -25,19 +25,20 @@ function Appointments() {
             name: iterator.patient_details.fullname,
             phone: iterator.patient_details.phone_number,
             email: iterator.patient_details.email,
-            date_time: iterator.appointment_time
+            date_time: iterator.appointment_time,
+            status: iterator.status
           }
 
           arr.push(obj)
         }
-        console.log('arr',arr);
+        console.log('arr', arr);
         setAppointment(arr)
       }
     }
-    catch(err){
+    catch (err) {
       console.log(err);
     }
-    finally{
+    finally {
       console.log('finally');
     }
   }
@@ -47,14 +48,14 @@ function Appointments() {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
-      render: (index,v) => {
+      render: (index, v) => {
         return <p className='cursor-pointer'
-            onClick={(e) => {
-              console.log(index, v);
-                navigate(ROUTES.Doctor.AppointmentReport+'/'+v.id)
-            }}
+          onClick={(e) => {
+            console.log(index, v);
+            navigate(ROUTES.Doctor.AppointmentReport + '/' + v.id)
+          }}
         >{index}</p>
-    }
+      }
     },
     {
       title: 'Phone',
@@ -82,7 +83,7 @@ function Appointments() {
           //   localStorage.setItem('job', JSON.stringify(record))
           //   gaHelper.dashboardClickViewApplicants()
           // }} 
-          >Completed</button>
+          >{record.status}</button>
         </div>
         </>
       },
@@ -106,9 +107,9 @@ function Appointments() {
     },
   ];
 
-  useEffect(()=>{
+  useEffect(() => {
     getData()
-  },[])
+  }, [])
 
 
   return (

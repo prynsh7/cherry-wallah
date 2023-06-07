@@ -32,6 +32,7 @@ export const ROUTES = {
         CompletedAppointmentDetails: '/user/CompletedAppointmentDetails',
         AppointmentReportDetailsField: '/user/AppointmentReportDetailsField',
         UserSettings: '/user/UserSettings',
+        AppintmentInfo: '/user/AppintmentInfo',
     },
     Admin: {
         root: '/admin',

@@ -8,6 +8,7 @@ import Loader from "../../components/Loader";
 import { ROUTES } from '../../routes/RouterConfig';
 import { useNavigate } from 'react-router-dom';
 import Submission from '../../assets/images/Submission.png';
+import { DEGREE_DATA, SPECIAISATION_DATA } from '../../data/Doctor';
 
 
 

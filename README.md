@@ -4,9 +4,23 @@ TODOS
 [] - 
 
 
+PATIENTS
+
+[] - Appointment FLOW to be cleared
+[] - Download diagnosis report and prescription
+[] - Chat integration + UI
+
 
 DOCTOR
 
-[] - Registration add a field to capture consultation fee
-[] - Create a doctor with all fields and verify
+[] - Show Verification status in settings Page
+[] - Referral ( QR code for doctor profile)
+[] - Patient Integration
+[] - Availability Integration
 [] - 
+
+
+ADMIN
+
+- Integration Login page different (with email password)
+- All Modules add in ADMIN

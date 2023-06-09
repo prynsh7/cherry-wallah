@@ -23,7 +23,7 @@ const AppointmentReportDetailsField = () => {
     ])
 
     const getData = async () => {
-        await AppointmentAPI.getAppointmentById(appointmentId).then((res) => {
+        await DiagnosisAPI.getDiagnosisByAppointmentId(appointmentId).then((res) => {
             console.log(res);
             setData(res.data.appointment)
         }

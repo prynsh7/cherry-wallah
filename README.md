@@ -15,9 +15,9 @@ DOCTOR
 
 [] - Show Verification status in settings Page
 [] - Referral ( QR code for doctor profile)
-[] - Patient Integration
+[] - Patient Integration (done)
 [] - Availability Integration
-[] - 
+[] - Diagnosis and appointment integration (done from frontedn error from backend)
 
 
 ADMIN

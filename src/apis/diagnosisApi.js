@@ -35,7 +35,7 @@ export const DiagnosisAPI = {
 
     getDiagnosisByAppointmentId: async (id, cancel = false) => {
         const response = await api.request({
-            url: "diagnoses/appointment/" + id,
+            url: "diagnosis/appointment/" + id,
             method: "GET",
             headers: {
                 "x-request-token": sessionStorage.getItem('token')

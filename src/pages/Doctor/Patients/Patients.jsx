@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Button from '../../../components/Button/Button'
 import { Select, Table, Radio } from 'antd';
 import Modal from '../../../components/Modal/Modal'
 import CustomPagination from '../../../components/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../../routes/RouterConfig'
+import { DoctorAPI } from '../../../apis/doctorAPI';
+import { toast } from 'react-toastify';
 
 function Patients() {
   const [isOpen, setIsOpen] = useState(false)
@@ -59,6 +61,30 @@ function Patients() {
     },
   ])
 
+  const getData = async () => {
+    try{
+      const res= await DoctorAPI.getPatients()
+      if(res.success){
+        const arr=[]
+        for(const iterator of res.data.patients){
+          const obj={
+            id: iterator._id,
+            name: iterator.name,
+            phone: iterator.phone,
+            email: iterator.email,
+            date_time: iterator.date_time,
+            status: iterator.status
+          }
+          arr.push(obj)
+        }
+        setAppointment(arr)
+      }
+    }
+    catch(err){
+      toast.error(err.message || 'Something went wrong')
+    };
+  }
+
   const columns = [
     {
       title: 'Name',
@@ -111,6 +137,10 @@ function Patients() {
     console.log('radio checked', e.target.value);
     setValue(e.target.value);
   };
+
+  useEffect(()=>{
+    getData()
+  },[])
   return (
     <div className='flex flex-col'>
       <Modal width={'80%'} className='bg-neutral-1' isOpen={isOpen} handleSubmit={handleCloseModal} handleCancel={handleCloseModal}>

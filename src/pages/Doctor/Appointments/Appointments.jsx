@@ -19,12 +19,13 @@ function Appointments() {
       const res = await AppointmentAPI.getAppointments()
       if (res.success) {
         const arr = []
+        console.log(res.data);
         for (const iterator of res.data.appointments) {
           const obj = {
             id: iterator._id,
-            name: iterator.patient_details.fullname,
-            phone: iterator.patient_details.phone_number,
-            email: iterator.patient_details.email,
+            name: iterator.patient.first_name + ' ' + iterator.patient.last_name,
+            phone: iterator.patient.phone,
+            email: iterator.patient.email,
             date_time: iterator.appointment_time,
             status: iterator.status
           }

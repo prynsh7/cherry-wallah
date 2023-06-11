@@ -43,6 +43,20 @@ export const DoctorAPI = {
 
         return response.data;
     },
+    
+    getPatients: async (cancel = false) => {
+        const response = await api.request({
+            url: "doctor/patients",
+            method: "GET",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+
+        return response.data;
+    },
+
 
     getDoctorById: async (id, cancel = false) => {
         const response = await api.request({

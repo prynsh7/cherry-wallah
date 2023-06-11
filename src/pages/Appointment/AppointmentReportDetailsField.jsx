@@ -23,9 +23,23 @@ const AppointmentReportDetailsField = () => {
     ])
 
     const getData = async () => {
-        await AppointmentAPI.getAppointmentById(appointmentId).then((res) => {
+        await DiagnosisAPI.getDiagnosisByAppointmentId(appointmentId).then((res) => {
             console.log(res);
             setData(res.data.appointment)
+            const obj = {
+                weight: res?.data?.vital_signs?.weight,
+                height: res?.data?.vital_signs?.height,
+                dbp: res?.data?.vital_signs?.bp?.diastole,
+                sbp: res?.data?.vital_signs?.bp?.systole,
+                pulse: res?.data?.vital_signs?.pulse,
+                temperature: res?.data?.vital_signs?.temperature,
+                instruction: res?.data?.clinical_notes?.instruction,
+                complaint: res?.data?.clinical_notes?.complaint,
+            }
+            setPrescription(res?.data?.prescription?.prescribedMedicines)
+            setLabOrders(res?.data?.lab_order?.assignedLabOrders)
+            setTreatmentPlans(res?.data?.treatment_plan?.assignedPlans)
+            setDiagnosis(obj)
         }
         )
             .catch((err) => {
@@ -240,7 +254,7 @@ const AppointmentReportDetailsField = () => {
                             </div>
 
                             {
-                                prescription.map((item, index) => (
+                                prescription?.map((item, index) => (
                                     <div className='flex'>
 
                                         <div className='flex gap-2 flex-col py-[12px] px-[20px] text-primary-7'>
@@ -326,7 +340,7 @@ const AppointmentReportDetailsField = () => {
                             </div>
 
                                 {
-                                    TreatmentPlans.map((item, index) => (
+                                    TreatmentPlans?.map((item, index) => (
                                         <div className="flex">
 
                                             <div className='flex gap-2 flex-col py-[12px] px-[20px] text-primary-7'>
@@ -394,7 +408,7 @@ const AppointmentReportDetailsField = () => {
                                 <h2 className='mx-[16px]'>Lab Orders</h2>
                             </div>
                             {
-                                labOrders.map((item, index) => (
+                                labOrders?.map((item, index) => (
                                     <div className='flex'>
                                         <div className='flex gap-2 flex-col py-[12px] px-[20px] text-primary-7'>
                                             <p>Lab Test</p>

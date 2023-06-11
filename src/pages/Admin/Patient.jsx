@@ -1,56 +1,44 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Select } from 'antd';
 import { Table } from 'antd';
 import CustomPagination from '../../components/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/RouterConfig';
+import { AdminAPI } from '../../apis/adminAPI';
 
 
 function Patient() {
 
-   
+
 
     const navigate = useNavigate()
 
-    const [appointment] = React.useState([
-        {
-            id:1,
-            name:'Aditya Anand',
-            phone:'+91 8651439657',
-            email:'adityaanand1245@gmail.com',
-            last_appointment:'22-02-22',
-        },
-        {
-            id:2,
-            name:'Aditya Anand',
-            phone:'+91 8651439657',
-            email:'adityaanand1245@gmail.com',
-            last_appointment:'22-02-22',
-        },
-        {
-            id:3,
-            name:'Aditya Anand',
-            phone:'+91 8651439657',
-            email:'adityaanand1245@gmail.com',
-            last_appointment:'22-02-22',
-        },
-        {
-            id:4,
-            name:'Aditya Anand',
-            phone:'+91 8651439657',
-            email:'adityaanand1245@gmail.com',
-            last_appointment:'22-02-22',
-        },
-        {
-            id:5,
-            name:'Aditya Anand',
-            phone:'+91 8651439657',
-            email:'adityaanand1245@gmail.com',
-            last_appointment:'22-02-22',
-        },
-        
-    ])
-    
+    const [patients, setPatients] = React.useState([])
+
+    const getData = async () => {
+        const res = await AdminAPI.getPatients();
+        if (res.success) {
+            console.log(res);
+            const arr = [];
+            for (const i of res.data.patients) {
+                const obj = {
+                    id: i._id,
+                    name: i.name,
+                    phone: i.phone,
+                    email: i.email,
+                    last_appointment: '22-02-22',
+                }
+                arr.push(obj)
+            }
+            setPatients(arr)
+        }
+    }
+
+
+    useEffect(() => {
+        getData()
+    }, [])
+
 
     const columns = [
         {
@@ -58,10 +46,10 @@ function Patient() {
             dataIndex: 'name',
             key: 'name',
             render: (index) => {
-                return <p className='cursor-pointer' 
-                onClick={(e) => {
-                    navigate(ROUTES.Admin.PatientDetails)
-                }}
+                return <p className='cursor-pointer'
+                    onClick={(e) => {
+                        navigate(ROUTES.Admin.PatientDetails)
+                    }}
                 >{index}</p>
             }
         },
@@ -109,7 +97,7 @@ function Patient() {
                             e.preventDefault()
                         }}
                     ><i class="bi bi-three-dots-vertical text-black"></i></button>
-                    
+
                 </div>
                 </>
             },
@@ -156,7 +144,7 @@ function Patient() {
             </div>
 
             <div className='mt-[30px]'>
-                <Table columns={columns} dataSource={appointment} />
+                <Table columns={columns} dataSource={patients} />
                 <CustomPagination currentPage={1} />
             </div>
 

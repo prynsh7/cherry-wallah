@@ -443,10 +443,48 @@ export const AdminAPI = {
         });
 
         return response.data;
-    }
+    },
+    getPatients: async (cancel = false) => {
+        const response = await api.request({
+            url: "admin/patients",
+            method: "GET",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
 
+        return response.data;
+    },
+
+    getDoctors: async (cancel = false) => {
+        const response = await api.request({
+            url: "admin/doctors",
+            method: "GET",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+        return response.data;
+    },
+
+    getAppointments: async (cancel = false) => {
+        console.log(sessionStorage.getItem('token'))
+        const response = await api.request({
+            url: "admin/appointments",
+            method: "GET",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+        return response.data;
+    },
 
 
 
 
 }
+
+const cancelApiObject = defineCancelApiObject(AdminAPI);

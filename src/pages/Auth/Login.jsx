@@ -45,6 +45,7 @@ const Login = () => {
         try {
             setLoading(true)
             const res = await AuthAPI.postLogin(data)
+            console.log(res);
             if (res.success) {
                 toast.success('Registered Successfully')
                 sessionStorage.setItem('token', res.data.token)
@@ -55,6 +56,10 @@ const Login = () => {
                     else navigate(ROUTES.DoctorRegister)
                 }
                 if (res.data.user.role === 'patient') navigate(ROUTES.Home)
+                if (res.data.user.role === 'admin') {
+                    navigate(ROUTES.Admin.root)
+                    console.log('here');
+                }
             }
         }
         catch (err) {

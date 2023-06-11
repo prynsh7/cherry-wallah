@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from 'antd';
 import { Select, Space } from 'antd';
 import { Table } from 'antd';
 import CustomPagination from '../../components/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../routes/RouterConfig';
+import { AdminAPI } from '../../apis/adminAPI';
 
 
 function Doctor() {
@@ -13,37 +14,31 @@ function Doctor() {
 
     const navigate = useNavigate()
 
-    const [appointment, setAppointment] = React.useState([
-        {
-            id:1,
-            name:'Aditya Anand',
-            phone:'+91 8651439657',
-            email:'adityaanand1245@gmail.com',
-            specialization:'Eye specialist',
-        },
-        {
-            id:2,
-            name:'Aditya Anand',
-            phone:'+91 8651439657',
-            email:'adityaanand1245@gmail.com',
-            specialization:'Eye specialist',
-        },
-        {
-            id:3,
-            name:'Aditya Anand',
-            phone:'+91 8651439657',
-            email:'adityaanand1245@gmail.com',
-            specialization:'Eye specialist',
-        },
-        {
-            id:4,
-            name:'Aditya Anand',
-            phone:'+91 8651439657',
-            email:'adityaanand1245@gmail.com',
-            specialization:'Eye specialist',
-        },
-    ])
-    
+    const [doctors, setDoctors] = React.useState([])
+
+    const getData = async () => {
+        const res = await AdminAPI.getDoctors();
+        if (res.success) {
+            console.log(res);
+            const arr = [];
+            for (const i of res.data.doctors) {
+                const obj = {
+                    id: i._id,
+                    name: i.name,
+                    phone: i.phone,
+                    email: i.email,
+                    specialization: 'Eye Specialist',
+                }
+                arr.push(obj)
+            }
+            setDoctors(arr)
+        }
+    }
+
+    useEffect(() => {
+        getData()
+    }, [])
+
 
     const columns = [
         {
@@ -51,10 +46,10 @@ function Doctor() {
             dataIndex: 'name',
             key: 'name',
             render: (index) => {
-                return <p className='cursor-pointer' 
-                onClick={(e) => {
-                    navigate(ROUTES.Admin.DoctorDetails)
-                }}
+                return <p className='cursor-pointer'
+                    onClick={(e) => {
+                        navigate(ROUTES.Admin.DoctorDetails)
+                    }}
                 >{index}</p>
             }
         },
@@ -102,7 +97,7 @@ function Doctor() {
                             e.preventDefault()
                         }}
                     ><i class="bi bi-three-dots-vertical text-black"></i></button>
-                    
+
                 </div>
                 </>
             },
@@ -149,7 +144,7 @@ function Doctor() {
             </div>
 
             <div className='mt-[30px]'>
-                <Table columns={columns} dataSource={appointment} />
+                <Table columns={columns} dataSource={doctors} />
                 <CustomPagination currentPage={1} />
             </div>
 

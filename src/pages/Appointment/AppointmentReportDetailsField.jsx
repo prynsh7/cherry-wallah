@@ -25,7 +25,6 @@ const AppointmentReportDetailsField = () => {
     const getData = async () => {
         await DiagnosisAPI.getDiagnosisByAppointmentId(appointmentId).then((res) => {
             console.log(res);
-            setData(res.data.appointment)
             const obj = {
                 weight: res?.data?.vital_signs?.weight,
                 height: res?.data?.vital_signs?.height,
@@ -46,6 +45,19 @@ const AppointmentReportDetailsField = () => {
                 console.log(err);
             }
             )
+    }
+
+    const getAppointment = async () => {
+        try{
+            const res =await AppointmentAPI.getAppointmentById(appointmentId)
+            if(res.success){
+                setData(res.data.appointment)
+                console.log(res);
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     const [diagnosis, setDiagnosis] = useState()
@@ -101,6 +113,7 @@ const AppointmentReportDetailsField = () => {
 
     useEffect(() => {
         getData()
+        getAppointment()
     }, [])
     return (
         <div className='bg-neutral-4'>
@@ -119,11 +132,11 @@ const AppointmentReportDetailsField = () => {
                                 <img className='pb-[6px]' src={DoctorProfile} alt="" />
                             </div>
                             <div>
-                                <h3 className='text-Small/Title/Medium text-[#007E85]'>{data?.patient_details?.full_name}</h3>
+                                <h3 className='text-Small/Title/Medium text-[#007E85]'>{data?.patient_details?.fullname}</h3>
                                 <p className='text-Small/Title/xSmall text-neutral-8'>{data?.patient_details?.phone_number}</p>
                                 <p className='text-Small/Title/xSmall text-neutral-8'>{data?.patient_details?.email}</p>
                                 <div className='border-2 flex justify-center items-center p-[4px] rounded mt-2'>
-                                    <span>{data?.appointment_date + "-" + data?.appointment_time}</span>
+                                    <span>{data?.appointment_time}</span>
                                 </div>
                                 <div className='felx mt-2'>
                                     <i class="bi bi-star-fill p-[2px] text-[#6EAB36]"></i>

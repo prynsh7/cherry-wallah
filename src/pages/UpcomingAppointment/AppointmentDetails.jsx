@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import DoctorProfile from '../../assets/images/doctorlist.png'
 import { Table } from 'antd';
 import CustomPagination from '../../components/Pagination/Pagination';
@@ -9,6 +9,9 @@ import Loader from '../../components/Loader';
 import { AppointmentAPI } from '../../apis/appointmentAPI';
 import { toast } from 'react-toastify';
 import avatar from './../../assets/images/avatars/avatar.avif'
+import { DiagnosisAPI } from '../../apis/diagnosisApi';
+import { useReactToPrint } from 'react-to-print';
+
 
 const AppointmentDetails = () => {
     const navigate = useNavigate()
@@ -19,11 +22,31 @@ const AppointmentDetails = () => {
 
     const { appointmentId } = useParams()
 
+    const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+
+    const getDiagnosis = async () => {
+       
+            await DiagnosisAPI.getDiagnosisByAppointmentId(appointmentId).then((res) => {
+                console.log(res);
+                setDiagnosis(res.data)
+            }
+            )
+                .catch((err) => {
+                    console.log(err);
+                }
+                )
+    }
+
     const getData = async () => {
         try {
             setLoading(true)
             const res = await AppointmentAPI.getAppointmentById(appointmentId)
             if (res.success) {
+                console.log(res.data);
                 setAppointment(res.data.appointment)
                 console.log(res.data.appointment);
             }
@@ -39,6 +62,7 @@ const AppointmentDetails = () => {
 
     useEffect(() => {
         getData()
+        getDiagnosis()
     }, [appointmentId])
     return (
         <div>
@@ -46,7 +70,7 @@ const AppointmentDetails = () => {
                 loading ? <Loader /> : null
             }
 
-            <div className='container mx-auto px-[12px]'>
+            <div className='container mx-auto px-[12px]' ref={componentRef}>
                 <div className='pt-[32px]'>
                     <div className='mt-[24px]'>
                         <p className='mb-[32px] text-Medium+/Label/Large-Strong'>Patient Details</p>
@@ -87,8 +111,9 @@ const AppointmentDetails = () => {
 
                 <div className='py-[32px]'>
                     <div className='gap-6 bg-[#ffff] flex flex-col rounded-[10px]'>
-                        <div className='mt-[20px] flex justify-between'>
-                            <h3 className='text-Medium+/Label/Large-Strong text-[black]'>Diagnosis Report</h3>
+                        <div className='mt-[20px] flex justify-between px-5'>
+                            <h3 className='text-Medium+/Label/Large-Strong text-[black] '>Diagnosis Report</h3>
+                            <Button type="outlined" onClick={handlePrint} label={"Export"}/>
                         </div>
                         <div className=' border-2 border-primary-2 rounded'>
                             <div className='text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
@@ -111,8 +136,8 @@ const AppointmentDetails = () => {
                             </div>
 
                             <div className='flex py-[12px] gap-20 px-[30px] text-primary-7'>
-                                <p>{diagnosis?.clinical_notes?.instruction}</p>
-                                <p>{diagnosis?.clinical_notes?.complaint}</p>
+                                <p>Instructions <br />{diagnosis?.clinical_notes?.instruction}</p>
+                                <p>Complaints <br />{diagnosis?.clinical_notes?.complaint}</p>
                             </div>
                         </div>
 

@@ -12,7 +12,7 @@ PATIENTS
 DOCTOR
 
 [][p1] - Show Verification status in settings Page
-[][p1] - Referral ( QR code for doctor profile)
+[done][p1] - Referral ( QR code for doctor profile)
 [done] - Patient Integration
 [] - Availability Integration
 [done] - Diagnosis and appointment integration (done from frontend error from backend)

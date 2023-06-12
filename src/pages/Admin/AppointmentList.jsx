@@ -1,46 +1,37 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Button from '../../components/Button/Button';
 import { Table } from 'antd';
 import CustomPagination from '../../components/Pagination/Pagination';
 import { useNavigate } from 'react-router-dom'
 import { ROUTES } from '../../routes/RouterConfig'
+import { AdminAPI } from '../../apis/adminAPI';
 
 
 function AppointmentList() {
   const [count, setCount] = React.useState({})
   const navigate = useNavigate()
-  const [appointment, setAppointment] = React.useState([
-    {
-      id: 1,
-      appointment: '#75245432589',
-      date_time: '22/02/22 5:01PM',
-      total_revenue: '₹2456',
-    },
-    {
-      id: 2,
-      appointment: '#75245432589',
-      date_time: '22/02/22 5:01PM',
-      total_revenue: '₹2456',
-    },
-    {
-      id: 3,
-      appointment: '#75245432589',
-      date_time: '22/02/22 5:01PM',
-      total_revenue: '₹2456',
-    },
-    {
-      id: 4,
-      appointment: '#75245432589',
-      date_time: '22/02/22 5:01PM',
-      total_revenue: '₹2456',
-    },
-    {
-      id: 5,
-      appointment: '#75245432589',
-      date_time: '22/02/22 5:01PM',
-      total_revenue: '₹2456',
-    },
-  ])
+  const [appointments, setAppointments] = React.useState([])
+
+  const getData = async () => {
+    const res = await AdminAPI.getAppointments();
+    if (res.success) {
+      console.log(res);
+      const arr = [];
+      for (const i of res.data.appointments) {
+        const obj = {
+          appointment: i._id,
+          date_time: i.date+" - "+i.time,
+        }
+        arr.push(obj)
+      }
+      setAppointments(arr)
+
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
 
   const columns = [
     {
@@ -48,13 +39,13 @@ function AppointmentList() {
       dataIndex: 'appointment',
       key: 'appointment',
       render: (index) => {
-          return <p className='cursor-pointer'
-              onClick={(e) => {
-                  navigate(ROUTES.Admin.AppointmentDetails)
-              }}
-          >{index}</p>
+        return <p className='cursor-pointer'
+          onClick={(e) => {
+            navigate(ROUTES.Admin.AppointmentDetails)
+          }}
+        >{index}</p>
       }
-  },
+    },
 
     {
       title: 'Status',
@@ -76,13 +67,13 @@ function AppointmentList() {
       title: 'Date & Time',
       dataIndex: 'date_time',
       key: 'date_time',
-      render: (text) => <p>{text.split("T")[0]} </p>,
+      render: (text) => <p>{text?.split("T")[0]} </p>,
     },
     {
       title: 'Total Revenue',
       dataIndex: 'total_revenue',
       key: 'total_revenue',
-      render: (text) => <p>{text.split("T")[0]} </p>,
+      render: (text) => <p>{text?.split("T")[0]} </p>,
     },
     {
       title: 'Action',
@@ -120,7 +111,7 @@ function AppointmentList() {
       </div>
 
       <div className='mt-[30px]'>
-        <Table columns={columns} dataSource={appointment} />
+        <Table columns={columns} dataSource={appointments} />
         <CustomPagination currentPage={1} />
       </div>
 

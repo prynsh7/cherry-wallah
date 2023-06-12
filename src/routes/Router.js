@@ -33,6 +33,7 @@ import AppointmentReportDetailsField from '../pages/Appointment/AppointmentRepor
 import UserSettings from '../pages/User/UserSettings';
 import NavbarPatient from '../components/Navbar/NavbarPatient';
 import Refrral from '../pages/Doctor/Refrral/Refrral';
+import Timeslot from '../pages/Doctor/Timeslot';
 import AppointmentHistory from '../pages/Doctor/AppointmentHistory/AppointmentHistory';
 import PatientAppointmentDetails from './../pages/UpcomingAppointment/AppointmentDetails'
 
@@ -130,6 +131,7 @@ const Router = () => {
           <Route exact path={ROUTES.Doctor.calender} element={<Calender />}></Route>
           <Route exact path={ROUTES.Doctor.settings} element={<Settings />}></Route>
           <Route exact path={ROUTES.Doctor.Refrral} element={<Refrral />}></Route>
+          <Route exact path={ROUTES.Doctor.Timeslot} element={<Timeslot />}></Route>
           <Route exact path={ROUTES.Doctor.AppointmentHistory} element={<AppointmentHistory />}></Route>
           <Route exact path={ROUTES.Doctor.AppointmentReport+'/:appointmentId'} element={<AppointmentReportDetailsField />}></Route>
 

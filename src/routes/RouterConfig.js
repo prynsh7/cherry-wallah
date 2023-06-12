@@ -15,6 +15,7 @@ export const ROUTES = {
         calender: '/doctor/calender',
         settings: '/doctor/settings',
         Refrral: '/doctor/Refrral',
+        Timeslot: '/doctor/Timeslot',
         AppointmentHistory: '/doctor/AppointmentHistory',
         AppointmentReport: '/doctor/AppointmentReport',
         AppointmentReportDetailsField: '/doctor/AppointmentReportDetailsField',

@@ -8,6 +8,7 @@ import Button from '../../../components/Button/Button'
 import { handleFileUpload } from '../../../data/upload'
 import { message } from 'antd'
 import avatar from '../../../assets/images/avatars/avatar.avif'
+import { DEGREE_DATA, SPECIAISATION_DATA } from '../../../data/Doctor'
 
 const dummyOptions = [
   {
@@ -201,7 +202,7 @@ function Settings() {
                   name={'speciality'}
                   label="Specialization"
                   placeholder="Select Specialization"
-                  options={dummyOptions}
+                  options={SPECIAISATION_DATA}
                   handleChange={(e) => { handleSelect('speciality', e) }}
                 />
                 <CustomSelect
@@ -276,7 +277,7 @@ function Settings() {
                 <CustomSelect
                   label="Degree"
                   placeholder="Select "
-                  options={dummyOptions}
+                  options={DEGREE_DATA}
                   value={data?.educational_degree}
                   name={'educational_degree'}
                   handleChange={(e) => { handleSelect('educational_degree', e) }}

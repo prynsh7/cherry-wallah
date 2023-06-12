@@ -1,7 +1,7 @@
 TODOS
 
 [] - On Doctor Details page (route - doctors/detail/645f771d6cf1dd438b38d6e4) in Appointment Modal Week Slider to be implemented and correct slots to be given
-[] -
+
 
 PATIENTS
 
@@ -17,11 +17,12 @@ DOCTOR
 [] - Availability Integration
 [done] - Diagnosis and appointment integration (done from frontend error from backend)
 
-ADMIN
+### ADMIN
 
 [] - Patients show
 [] - Doctors Show
 [] - Appointment show
-[] -
+[] - Patient Details + all appointment
+[] - Doctor Details + all appointment
+[] - Appointment Details
 [] - Integration Login page different (with email password)
-[] - All Modules add in ADMIN

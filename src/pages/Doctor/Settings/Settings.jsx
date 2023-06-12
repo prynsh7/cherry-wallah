@@ -7,6 +7,7 @@ import Input from '../../../components/Input/Input'
 import Button from '../../../components/Button/Button'
 import { handleFileUpload } from '../../../data/upload'
 import { message } from 'antd'
+import avatar from '../../../assets/images/avatars/avatar.avif'
 
 const dummyOptions = [
   {
@@ -364,7 +365,7 @@ function Settings() {
               <div className='grid grid-cols-3 gap-[20px] p-[20px]'>
               <div className="col-span-1">
                   <div className='w-[100px] h-[100px] object-cover flex  mb-[10px] border-[1px] aspect-sqaure'>
-                    <img className="object-cover" src={data?.profile_image|| 'https://img.freepik.com/free-vector/illustration-businessman_53876-5856.jpg?w=1480&t=st=1682599573~exp=1682600173~hmac=70167dd96663e16bc7d1b9ea915c69f452455a2db0362cb2b6eff25ae440acbd'}  alt="" />
+                    <img className="object-cover" src={data?.profile_image|| avatar}  alt="" />
                   </div>
                   <Input
                     label="Profile Image"

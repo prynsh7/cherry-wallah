@@ -34,15 +34,25 @@ const TimeSlots = ({
     timeSlots,
     handleTimeSlot,
     timeSlot,
-    data
+    data,
+    day,
+    setDay,
+    indexVal,
+    setIndexVal
 }) => {
 
     const [week, setWeek] = useState({});
 
     const [weekUtc, setWeekUtc] = useState({});
 
-
-
+    const  getNthDayAfterDate = (dateString, n) => {
+        var date = new Date(dateString);
+        date.setDate(date.getDate() + n);
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, '0');
+        var day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      }
 
     const currentWeek = () => {
         var curr = new Date(); // get current date
@@ -108,12 +118,19 @@ const TimeSlots = ({
                 </div>
                 {[1, 2, 3, 4, 5, 6, 7].map((item, index) => (
                     <div
-                        className="col col-span-1 flex flex-col justify-center items-center"
+                        className={`col col-span-1 flex flex-col justify-center items-center cursor-pointer ${indexVal===index ? "bg-primary-3 text-white rounded-lg" : ''}`}
                         key={index + "day"}
+                        onClick={()=>{
+                            setDay(getNthDayAfterDate(week?.firstday, index));
+                            setIndexVal(index);
+                        }}
                     >
                         <p className="text-[14px]">{dayArray[index].slice(0, 3)} </p>
                         <p className="text-[14px]">
-                            {Number(week?.firstday?.split("-")[2]) + index}
+                        {week?.firstday && getNthDayAfterDate(week?.firstday, index)?.split('-')[2]}
+                        </p>
+                        <p >
+                        {monthArray[Number(week?.firstday && getNthDayAfterDate(week?.firstday, index)?.split('-')[1])-1]}
                         </p>
                     </div>
                 ))}
@@ -133,7 +150,7 @@ const TimeSlots = ({
                             <div className='grid grid-cols-8 gap-4 mt-2 mb-4'>
                                 {
                                     i.slots.map((slot, index) => (
-                                        <button className={`col-span-1 border border-2 rounded p-[2px] text-center ${timeSlot?.id == slot?.id ? ' bg-primary-6 text-neutral-2' : 'text-primary-6'}`} onClick={() => handleTimeSlot(slot)}>{slot.time}</button>
+                                        <button className={`col-span-1 border border-2 rounded p-[2px] text-center ${timeSlot?.id == slot?.id && getNthDayAfterDate(week?.firstday, indexVal)==day ? ' bg-primary-6 text-neutral-2' : 'text-primary-6'}`} onClick={() => handleTimeSlot(slot)}>{slot.time}</button>
                                     ))
                                 }
                             </div>

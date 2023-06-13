@@ -18,6 +18,8 @@ import Chat from '../pages/Doctor/Chat/Chat';
 import Calender from '../pages/Doctor/Calender/Calender';
 import Settings from '../pages/Doctor/Settings/Settings';
 import About from '../pages/About/About';
+import Services from '../pages/Services/Services';
+import Contact from '../pages/Contact/Contact';
 import Navbar from '../components/Navbar/Navbar';
 import Footer from '../components/Footer';
 import NavbarLogin from '../components/Navbar/NavbarLogin';
@@ -94,6 +96,8 @@ const Router = () => {
         <Route exact path={ROUTES.Home} element={<RouteWithoutRole />}>
           <Route index element={<Home />}></Route>
           <Route exact path={ROUTES.About} element={<About />}></Route>
+          <Route exact path={ROUTES.Services} element={<Services />}></Route>
+          <Route exact path={ROUTES.Contact} element={<Contact />}></Route>
           <Route exact path={ROUTES.Doctors} element={<DoctorsList />}></Route>
           <Route exact path={ROUTES.DoctorDetails} element={<DoctorProfile />}></Route>
           <Route exact path={"*"} element={<NotFound />}></Route>
@@ -145,7 +149,7 @@ const Router = () => {
           <Route index path={ROUTES.Admin.Doctor} element={<Doctor />}></Route>
           <Route index path={ROUTES.Admin.DoctorDetails} element={<DoctorDetails />}></Route>
           <Route index path={ROUTES.Admin.PatientDetails} element={<PatientDetails />}></Route>
-          <Route index path={ROUTES.Admin.AppointmentDetails} element={<AppointmentDetails />}></Route>
+          <Route index path={ROUTES.Admin.AppointmentDetails+"/:appointmentId"} element={<AppointmentDetails />}></Route>
           <Route index path={ROUTES.Admin.Patient} element={<Patient />}></Route>
           <Route index path={ROUTES.Admin.AppointmentList} element={<AppointmentList />}></Route>
 

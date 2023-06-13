@@ -41,7 +41,7 @@ function AppointmentList() {
       render: (index) => {
         return <p className='cursor-pointer'
           onClick={(e) => {
-            navigate(ROUTES.Admin.AppointmentDetails)
+            navigate(ROUTES.Admin.AppointmentDetails+"/"+index)
           }}
         >{index}</p>
       }

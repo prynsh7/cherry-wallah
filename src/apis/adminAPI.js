@@ -482,6 +482,18 @@ export const AdminAPI = {
         return response.data;
     },
 
+    getAppointmentDetails: async (id,cancel = false) => {
+        console.log(sessionStorage.getItem('token'))
+        const response = await api.request({
+            url: "admin/appointments/"+id,
+            method: "GET",
+            headers: {
+                "x-request-token": sessionStorage.getItem('token')
+            },
+            signal: cancel ? cancelApiObject[this.get.name].handleRequestCancellation().signal : undefined
+        });
+        return response.data;
+    },
 
 
 

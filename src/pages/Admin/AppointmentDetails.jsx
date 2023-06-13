@@ -1,103 +1,29 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DoctorProfile from '../../assets/images/doctorlist.png'
 import { Table } from 'antd';
 import CustomPagination from '../../components/Pagination/Pagination';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { ROUTES } from '../../routes/RouterConfig'
 import Button from '../../components/Button/Button'
+import { AdminAPI } from '../../apis/adminAPI';
 
 const AppointmentDetails = () => {
-    const navigate = useNavigate()
-    const [appointment] = React.useState([
-        {
-            id: 1,
-            appointment: '#75245432589',
-            date: '22/02/22 5:01PM',
-            total_revenue: '₹2456',
-        },
-        {
-            id: 2,
-            appointment: '#75245432589',
-            date: '22/02/22 5:01PM',
-            total_revenue: '₹2456',
-        },
-        {
-            id: 3,
-            appointment: '#75245432589',
-            date: '22/02/22 5:01PM',
-            total_revenue: '₹2456',
-        },
-        {
-            id: 4,
-            appointment: '#75245432589',
-            date: '22/02/22 5:01PM',
-            total_revenue: '₹2456',
-        },
-        {
-            id: 5,
-            appointment: '#75245432589',
-            date: '22/02/22 5:01PM',
-            total_revenue: '₹2456',
-        },
-    ])
 
-    const columns = [
-        {
-            title: 'Appointment',
-            dataIndex: 'appointment',
-            key: 'appointment',
-            render: (index) => {
-                return <p className='cursor-pointer'
-                    onClick={(e) => {
-                        navigate(ROUTES.Admin.PatientDetails)
-                    }}
-                >{index}</p>
-            }
-        },
-        {
-            title: 'Status',
-            key: 'status',
-            render: (_, record) => {
-                console.log(record)
-                return <>   <div className="flex flex-row items-center">
-                    <button className="bg-[#5BB84C] text-[12px] whitespace-nowrap text-neutral-1 rounded-full py-[6px] px-[16px] font-semibold"
-                    // onClick={(e) => {
-                    //   localStorage.setItem('job', JSON.stringify(record))
-                    //   gaHelper.dashboardClickViewApplicants()
-                    // }} 
-                    >Completed</button>
-                </div>
-                </>
-            },
-        },
-        {
-            title: 'Date',
-            dataIndex: 'date',
-            key: 'date',
-        },
-        {
-            title: 'Total Revenue',
-            dataIndex: 'total_revenue',
-            key: 'total_revenue',
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (_, record) => {
-                console.log(record)
-                return <>   <div className="flex gap-[10px] flex-row items-center">
-                    <button className="text-white py-[5px] h-[100%] px-[10px]"
-                        title='option'
-                        onClick={(e) => {
-                            e.preventDefault()
-                        }}
-                    ><i class="bi bi-three-dots-vertical text-black"></i></button>
+    const {appointmentId} = useParams()
+    
+    
+    
+    const getData= async ()=>{
+        const res = await AdminAPI.getAppointmentDetails(appointmentId)
+        if (res.success) {
+            console.log(res);
+        }
+    } 
+    useEffect(() => {
+        getData()
+    }, [])
 
-                </div>
-                </>
-            },
-        },
-    ];
+    
     return (
         <div>
 

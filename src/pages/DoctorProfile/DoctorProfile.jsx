@@ -14,6 +14,9 @@ const DoctorProfile = () => {
     const handleCloseModal = () => setIsOpen(false)
     const handleOpenModal = () => setIsOpen(true)
 
+    const [day, setDay] = useState()
+    const [indexVal, setIndexVal] = useState(0)
+
     const [data, setData] = useState()
     const [loading, setLoading] = useState(false)
 
@@ -143,10 +146,19 @@ const DoctorProfile = () => {
                 handleSubmit={() => {
                     if (!timeSlot) return toast.error("Please select a time slot")
                     handleCloseModal()
-                    navigate(ROUTES.User.Appointment, { state: { doctor: data, timeSlot: timeSlot } })
+                    navigate(ROUTES.User.Appointment, { state: { doctor: data, timeSlot: timeSlot, date: day } })
                 }}
                 handleCancel={handleCloseModal}>
-                <TimeSlots handleTimeSlot={handleTimeSlot} timeSlot={timeSlot} timeSlots={timeSlots} data={data}/>
+                <TimeSlots 
+                handleTimeSlot={handleTimeSlot} 
+                timeSlot={timeSlot} 
+                timeSlots={timeSlots} 
+                data={data}
+                day={day}
+                setDay={setDay}
+                indexVal={indexVal}
+                setIndexVal={setIndexVal}
+                />
             </Modal>
 
             <div className='container mx-auto py-[60px]'>

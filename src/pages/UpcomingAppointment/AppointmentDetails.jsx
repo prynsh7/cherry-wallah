@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import avatar from './../../assets/images/avatars/avatar.avif'
 import { DiagnosisAPI } from '../../apis/diagnosisApi';
 import { useReactToPrint } from 'react-to-print';
+import { IMAGE_CONSTANT } from '../../utils/imageConstant';
 
 
 const AppointmentDetails = () => {
@@ -47,8 +48,8 @@ const AppointmentDetails = () => {
             const res = await AppointmentAPI.getAppointmentById(appointmentId)
             if (res.success) {
                 console.log(res.data);
-                setAppointment(res.data.appointment)
-                console.log(res.data.appointment);
+                setAppointment(res.appointment)
+                console.log(res.appointment);
             }
         }
         catch (err) {
@@ -77,7 +78,7 @@ const AppointmentDetails = () => {
                         <div className='bg-[#ffff] border-primary-2 border-2 flex p-[20px] rounded-[10px]'>
                             <div className='flex items-center gap-6 '>
                                 <div className='text-center'>
-                                    <img className='w-[150px] aspect-square rounded-full' src={avatar} alt="" />
+                                    <img className='w-[150px] aspect-square rounded-full' src={appointment?.patient?.avatar || IMAGE_CONSTANT.DoctorPlaceholder} alt="" />
                                 </div>
                                 <div className='font-semibold flex gap-28 px-[30px] text-primary-7'>
                                     <h3>Full Name <br />{appointment?.patient_details?.fullname}</h3>
@@ -94,14 +95,14 @@ const AppointmentDetails = () => {
                         <div className='bg-[#ffff] border-primary-2 border-2 flex p-[20px] rounded-[10px]'>
                             <div className='flex items-center gap-6 '>
                                 <div className='text-center'>
-                                    <img className='w-[150px] aspect-square rounded-full' src={appointment?.doctor?.profile_image || avatar} alt="" />
+                                    <img className='w-[150px] aspect-square rounded-full' src={appointment?.doctor?.profile_image || IMAGE_CONSTANT.DoctorPlaceholder} alt="" />
                                 </div>
                                 <div className='font-semibold flex gap-28 px-[30px] text-primary-7'>
                                     <h3>Full Name <br />{appointment?.doctor?.name}</h3>
                                     <h3>Specialization <br />{appointment?.doctor?.speciality}</h3>
                                     <h3>Gender <br />{appointment?.doctor?.gender}</h3>
                                     <h3>City <br />{appointment?.doctor?.city}</h3>
-                                    <h3> Fees <br />{appointment?.consultation_fee}</h3>
+                                    <h3> Fees <br />{appointment?.doctor?.consultation_fee}</h3>
                                 </div>
                             </div>
 

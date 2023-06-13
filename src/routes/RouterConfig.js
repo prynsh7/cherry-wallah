@@ -1,6 +1,8 @@
 export const ROUTES = {
     Home: '/',
     About: '/about',
+    Services: '/services',
+    Contact: '/contact',
     Doctors: '/doctors',
     DoctorDetails: '/doctors/detail/:id',
     Login: '/auth/login',
@@ -42,7 +44,7 @@ export const ROUTES = {
         Doctor: '/admin/Doctor',
         DoctorDetails: '/admin/Doctor/id',
         PatientDetails: '/admin/Patient/id',
-        AppointmentDetails: '/admin/AppointmentDetails/id',
+        AppointmentDetails: '/admin/AppointmentDetails',
         AppointmentList: '/admin/AppointmentList',
         Patient: '/admin/Patient'
     }

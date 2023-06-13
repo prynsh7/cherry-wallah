@@ -52,6 +52,7 @@ const Appointment = () => {
             },
             stats:'pending',
             appointment_time: state.timeSlot.time,
+            appointment_date: state.date,
         }
 
         try{
@@ -94,7 +95,7 @@ const Appointment = () => {
                         </div>
                         <div className='border-b-2 py-[12px] flex'>
                             <i class="bi bi-calendar-event pr-[8px] text-[#5E912E]"></i>
-                            <p>{state.timeSlot.time}</p>
+                            <p>{state?.date} &nbsp;&nbsp;&nbsp; {state.timeSlot.time}</p>
                         </div>
                         <div className='gap-4 flex pt-[30px] items-center '>
                             <div className='text-center h-[150px] w-[150px] rounded-full overflow-hidden'>

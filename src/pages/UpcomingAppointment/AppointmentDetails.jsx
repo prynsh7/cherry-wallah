@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import DoctorProfile from '../../assets/images/doctorlist.png'
 import { Table } from 'antd';
 import CustomPagination from '../../components/Pagination/Pagination';
@@ -9,6 +9,10 @@ import Loader from '../../components/Loader';
 import { AppointmentAPI } from '../../apis/appointmentAPI';
 import { toast } from 'react-toastify';
 import avatar from './../../assets/images/avatars/avatar.avif'
+import { DiagnosisAPI } from '../../apis/diagnosisApi';
+import { useReactToPrint } from 'react-to-print';
+import { IMAGE_CONSTANT } from '../../utils/imageConstant';
+
 
 const AppointmentDetails = () => {
     const navigate = useNavigate()
@@ -19,13 +23,33 @@ const AppointmentDetails = () => {
 
     const { appointmentId } = useParams()
 
+    const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
+
+
+    const getDiagnosis = async () => {
+       
+            await DiagnosisAPI.getDiagnosisByAppointmentId(appointmentId).then((res) => {
+                console.log(res);
+                setDiagnosis(res.data)
+            }
+            )
+                .catch((err) => {
+                    console.log(err);
+                }
+                )
+    }
+
     const getData = async () => {
         try {
             setLoading(true)
             const res = await AppointmentAPI.getAppointmentById(appointmentId)
             if (res.success) {
-                setAppointment(res.data.appointment)
-                console.log(res.data.appointment);
+                console.log(res.data);
+                setAppointment(res.appointment)
+                console.log(res.appointment);
             }
         }
         catch (err) {
@@ -39,6 +63,7 @@ const AppointmentDetails = () => {
 
     useEffect(() => {
         getData()
+        getDiagnosis()
     }, [appointmentId])
     return (
         <div>
@@ -46,14 +71,14 @@ const AppointmentDetails = () => {
                 loading ? <Loader /> : null
             }
 
-            <div className='container mx-auto px-[12px]'>
+            <div className='container mx-auto px-[12px]' ref={componentRef}>
                 <div className='pt-[32px]'>
                     <div className='mt-[24px]'>
                         <p className='mb-[32px] text-Medium+/Label/Large-Strong'>Patient Details</p>
                         <div className='bg-[#ffff] border-primary-2 border-2 flex p-[20px] rounded-[10px]'>
                             <div className='flex items-center gap-6 '>
                                 <div className='text-center'>
-                                    <img className='w-[150px] aspect-square rounded-full' src={avatar} alt="" />
+                                    <img className='w-[150px] aspect-square rounded-full' src={appointment?.patient?.avatar || IMAGE_CONSTANT.DoctorPlaceholder} alt="" />
                                 </div>
                                 <div className='font-semibold flex gap-28 px-[30px] text-primary-7'>
                                     <h3>Full Name <br />{appointment?.patient_details?.fullname}</h3>
@@ -70,14 +95,14 @@ const AppointmentDetails = () => {
                         <div className='bg-[#ffff] border-primary-2 border-2 flex p-[20px] rounded-[10px]'>
                             <div className='flex items-center gap-6 '>
                                 <div className='text-center'>
-                                    <img className='w-[150px] aspect-square rounded-full' src={appointment?.doctor?.profile_image || avatar} alt="" />
+                                    <img className='w-[150px] aspect-square rounded-full' src={appointment?.doctor?.profile_image || IMAGE_CONSTANT.DoctorPlaceholder} alt="" />
                                 </div>
                                 <div className='font-semibold flex gap-28 px-[30px] text-primary-7'>
                                     <h3>Full Name <br />{appointment?.doctor?.name}</h3>
                                     <h3>Specialization <br />{appointment?.doctor?.speciality}</h3>
                                     <h3>Gender <br />{appointment?.doctor?.gender}</h3>
                                     <h3>City <br />{appointment?.doctor?.city}</h3>
-                                    <h3> Fees <br />{appointment?.consultation_fee}</h3>
+                                    <h3> Fees <br />{appointment?.doctor?.consultation_fee}</h3>
                                 </div>
                             </div>
 
@@ -87,8 +112,9 @@ const AppointmentDetails = () => {
 
                 <div className='py-[32px]'>
                     <div className='gap-6 bg-[#ffff] flex flex-col rounded-[10px]'>
-                        <div className='mt-[20px] flex justify-between'>
-                            <h3 className='text-Medium+/Label/Large-Strong text-[black]'>Diagnosis Report</h3>
+                        <div className='mt-[20px] flex justify-between px-5'>
+                            <h3 className='text-Medium+/Label/Large-Strong text-[black] '>Diagnosis Report</h3>
+                            <Button type="outlined" onClick={handlePrint} label={"Export"}/>
                         </div>
                         <div className=' border-2 border-primary-2 rounded'>
                             <div className='text-Small/Title/xSmall p-[12px] bg-primary-2 text-neutral-9'>
@@ -111,8 +137,8 @@ const AppointmentDetails = () => {
                             </div>
 
                             <div className='flex py-[12px] gap-20 px-[30px] text-primary-7'>
-                                <p>{diagnosis?.clinical_notes?.instruction}</p>
-                                <p>{diagnosis?.clinical_notes?.complaint}</p>
+                                <p>Instructions <br />{diagnosis?.clinical_notes?.instruction}</p>
+                                <p>Complaints <br />{diagnosis?.clinical_notes?.complaint}</p>
                             </div>
                         </div>
 

@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { AppointmentAPI } from '../../apis/appointmentAPI';
 import { DiagnosisAPI } from '../../apis/diagnosisApi';
 import { message } from 'antd';
+import { IMAGE_CONSTANT } from '../../utils/imageConstant';
 const AppointmentReportDetailsField = () => {
     const { appointmentId } = useParams()
     console.log(appointmentId);
@@ -25,7 +26,6 @@ const AppointmentReportDetailsField = () => {
     const getData = async () => {
         await DiagnosisAPI.getDiagnosisByAppointmentId(appointmentId).then((res) => {
             console.log(res);
-            setData(res.data.appointment)
             const obj = {
                 weight: res?.data?.vital_signs?.weight,
                 height: res?.data?.vital_signs?.height,
@@ -36,9 +36,9 @@ const AppointmentReportDetailsField = () => {
                 instruction: res?.data?.clinical_notes?.instruction,
                 complaint: res?.data?.clinical_notes?.complaint,
             }
-            setPrescription(res?.data?.prescription?.prescribedMedicines)
-            setLabOrders(res?.data?.lab_order?.assignedLabOrders)
-            setTreatmentPlans(res?.data?.treatment_plan?.assignedPlans)
+            setPrescription(res?.data?.prescription?.prescribedMedicines||[{ medicine: '', dosage: '', duration: '', remarks: '' }])
+            setLabOrders(res?.data?.lab_order?.assignedLabOrders||[ { lab_test: '', discount: '' }])
+            setTreatmentPlans(res?.data?.treatment_plan?.assignedPlans||[ { treatment_plan: '', discount: '', cost: '' }])
             setDiagnosis(obj)
         }
         )
@@ -46,6 +46,19 @@ const AppointmentReportDetailsField = () => {
                 console.log(err);
             }
             )
+    }
+
+    const getAppointment = async () => {
+        try{
+            const res =await AppointmentAPI.getAppointmentById(appointmentId)
+            if(res.success){
+                setData(res.appointment)
+                console.log(res);
+            }
+        }
+        catch(err){
+            console.log(err);
+        }
     }
 
     const [diagnosis, setDiagnosis] = useState()
@@ -101,6 +114,7 @@ const AppointmentReportDetailsField = () => {
 
     useEffect(() => {
         getData()
+        getAppointment()
     }, [])
     return (
         <div className='bg-neutral-4'>
@@ -108,7 +122,7 @@ const AppointmentReportDetailsField = () => {
 
                 <div className='py-[32px]'>
                     <div className='bg-[#CFE1DF] py-2 px-6 rounded-lg flex justify-between items-center'>
-                        <h4 className='font-semibold text-[black]'>Appointment<a href="#" className='pl-[6px] font-semibold text-primary-6'>#543636</a></h4>
+                        <h4 className='font-semibold text-[black]'>Appointment<a href="#" className='pl-[6px] font-semibold text-primary-6'>#{data?._id}</a></h4>
                     </div>
                 </div>
 
@@ -116,14 +130,14 @@ const AppointmentReportDetailsField = () => {
                     <div className='bg-[#ffff] flex p-[24px] mx-[32px] rounded-[10px] justify-between items-center'>
                         <div className='flex justify-center items-center gap-6 '>
                             <div className='text-center'>
-                                <img className='pb-[6px]' src={DoctorProfile} alt="" />
+                                <img className='pb-[6px] w-[100px] aspect-square rounded-full' src={data?.patient?.avatar || IMAGE_CONSTANT.DoctorPlaceholder} alt="" />
                             </div>
                             <div>
-                                <h3 className='text-Small/Title/Medium text-[#007E85]'>{data?.patient_details?.full_name}</h3>
+                                <h3 className='text-Small/Title/Medium text-[#007E85]'>{data?.patient_details?.fullname}</h3>
                                 <p className='text-Small/Title/xSmall text-neutral-8'>{data?.patient_details?.phone_number}</p>
                                 <p className='text-Small/Title/xSmall text-neutral-8'>{data?.patient_details?.email}</p>
                                 <div className='border-2 flex justify-center items-center p-[4px] rounded mt-2'>
-                                    <span>{data?.appointment_date + "-" + data?.appointment_time}</span>
+                                    <span>{data?.appointment_date}&nbsp;&nbsp;&nbsp;{data?.appointment_time}</span>
                                 </div>
                                 <div className='felx mt-2'>
                                     <i class="bi bi-star-fill p-[2px] text-[#6EAB36]"></i>

@@ -1,8 +1,11 @@
 import React from 'react'
 import Qr from '../../../assets/images/qr1.png'
 import Button from '../../../components/Button/Button'
+import QRCode from 'react-qr-code'
+import {FRONTENT_URL } from '../../../utils/apiConstants'
 
 const Refrral = () => {
+    const user = JSON.parse(localStorage.getItem('user'))
     return (
         <div className='flex flex-col'>
             <p className='text-Medium+/Label/Large-Strong '>Referral</p>
@@ -21,7 +24,10 @@ const Refrral = () => {
                     </div>
                 </div>
                <div className="col-span-1 flex justify-end">
-                 <img src={Qr} alt="" />
+                {
+                    user?._id&&
+                    <QRCode value={`${FRONTENT_URL}/doctors/detail/${user?._id}`}/>
+                }
                </div>
             </div>
 

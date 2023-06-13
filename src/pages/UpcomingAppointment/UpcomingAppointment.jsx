@@ -70,7 +70,7 @@ const UpcomingAppointment = () => {
                     return <div className='bg-[#ffff] flex p-[24px] mx-[32px] mt-[18px] rounded-[10px] justify-between items-center' onClick={()=>{navigate(ROUTES.User.AppintmentInfo+'/'+item._id)}}>
                         <div className='flex justify-center items-center gap-6 '>
                             <div className='text-center'>
-                                <img className='pb-[6px] max-w-[200px] aspect-square rounded-full' src={item?.doctor?.profile_image || avatar} alt="" />
+                                <img className='pb-[6px] max-w-[200px] aspect-square rounded-full' src={item?.doctor?.profile_image ? item?.doctor?.profile_image : avatar} alt="" />
                             </div>
                             <div>
                                 <h3 className='text-Small/Title/Medium text-[#007E85]'>{item?.doctor?.name}</h3>
